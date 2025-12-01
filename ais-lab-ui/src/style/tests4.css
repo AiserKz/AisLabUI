@@ -54,3 +54,153 @@
     transform: scale(5);
   }
 }
+
+/* Text svg */
+
+.text-svg {
+  animation: textContainer linear both;
+  animation-timeline: view(80% 10%);
+}
+
+@keyframes textContainer {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+.text-svg path {
+  fill: transparent;
+  stroke: var(--color-base-content);
+  stroke-width: 7px;
+  animation: textAnimation both;
+  animation-timeline: view(50% 10%);
+}
+
+@keyframes textAnimation {
+  0% {
+    stroke-dashoffset: 120;
+    stroke-dasharray: 100;
+  }
+
+  60% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: var(--color-base-content);
+    stroke-dashoffset: 10;
+    stroke-dasharray: 10;
+    stroke-width: 0;
+  }
+}
+
+/* Text reveal */
+.reveal-text {
+  display: inline-flex;
+  gap: 0.05em;
+}
+
+.reveal-text span {
+  display: inline-block;
+  transform: translateX(-10px) scale(1.2);
+  filter: blur(5px);
+  opacity: 0;
+
+  animation: letterReveal both;
+  animation-timeline: view(5% 0%);
+  animation-duration: 2s;
+}
+
+/* Задержка для эффекта “по буквам” */
+.reveal-text span:nth-child(1) {
+  animation-delay: 0s;
+}
+.reveal-text span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.reveal-text span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.reveal-text span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.reveal-text span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.reveal-text span:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.reveal-text span:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.reveal-text span:nth-child(8) {
+  animation-delay: 0.7s;
+}
+
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px) scale(1.2);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(10px) scale(0.9);
+    filter: blur(5px);
+  }
+}
+
+/* bg-full */
+.bg-container {
+  position: relative;
+  width: 100dvw;
+  height: 400vh;
+  display: flex;
+  justify-content: center;
+}
+
+.bg-cone {
+  position: sticky;
+  top: 0;
+  width: 200dvw;
+  height: 100vh;
+
+  border-radius: 100% 100%;
+  animation: expandCone linear both;
+  animation-timeline: view(300% 0%);
+  color: transparent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes expandCone {
+  0% {
+    width: 50dvw;
+    border-radius: 100% 100% 0 0 / 200% 200% 0 0;
+    color: transparent;
+  }
+  50% {
+    width: 100dvw;
+    border-radius: 0% 0%;
+    color: transparent;
+  }
+  100% {
+    width: 200dvw;
+    border-radius: 0% 0%;
+    color: var(--color-base-content);
+  }
+}

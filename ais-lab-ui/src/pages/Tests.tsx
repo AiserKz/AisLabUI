@@ -11,6 +11,7 @@ import { Button } from "@/components/ui";
 import { ArrowDown, Settings } from "lucide-react";
 
 import { AnimatePresence, motion } from "framer-motion";
+import TextLabelSvg from "@/components/TextLabelSvg";
 
 export default function Tests() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -114,6 +115,18 @@ export default function Tests() {
                   />
                 </div>
 
+                <div className="flex justify-around gap-4 w-full h-[120dvh]">
+                  <div className="stack-group">
+                    {[...Array(4).keys()].map((_, i) => (
+                      <img
+                        className="stack-card rounded-box object-cover"
+                        key={i}
+                        src={images[i + 1]}
+                      />
+                    ))}
+                  </div>
+                </div>
+
                 <div className="flex justify-around gap-4 w-full text-black">
                   <div className="stack-test-2 ">
                     <div className="stack-card-2 bg-purple-300">1</div>
@@ -146,7 +159,7 @@ export default function Tests() {
                 </div>
 
                 <div className="flex w-full justify-center">
-                  <div className="test-stack w-100 h-100 p-10">
+                  <div className="test-stack w-100 h-65 p-10 overflow-hidden">
                     <div className="bg-info w-50 h-50 rounded-box card-stack">
                       1
                     </div>
@@ -289,7 +302,7 @@ export default function Tests() {
                 </div>
 
                 {/* Tests 3: Scroll-Driven Effects */}
-                <div className="w-full space-y-20 py-20 ">
+                <div className="w-full space-y-96 py-20 ">
                   <div className="text-center space-y-4">
                     <h2 className="text-4xl font-bold mb-10">
                       Scroll-Driven Effects (Tests 3)
@@ -313,19 +326,19 @@ export default function Tests() {
                       </div>
                     </div>
                     {/* 3. Expanding Width Card */}
-                    <div className="expanding-card bg-linear-90 from-primary/80 to-info/80">
+                    <div className="expanding-card bg-linear-90 from-primary/80 to-info/80 mt-50 mx-auto">
                       Expand on Scroll
                     </div>
 
                     {/* 4. Scroll Rotation Gear */}
-                    <div className="scroll-gear">
+                    <div className="scroll-gear mt-50 mx-auto">
                       <div className="w-full h-full border-4 border-dashed border-primary rounded-full flex items-center justify-center">
                         <Settings size={100} />
                       </div>
                     </div>
 
                     {/* 5. Sticky Stack Effect */}
-                    <div className="sticky-stack-wrapper">
+                    <div className="sticky-stack-wrapper my-50">
                       <div className="sticky-card">Card 1</div>
                       <div className="sticky-card">Card 2</div>
                       <div className="sticky-card">Card 3</div>
@@ -333,14 +346,16 @@ export default function Tests() {
                     </div>
 
                     {/* 6. Blur to Focus Text */}
-                    <div className="blur-focus-text">FOCUS</div>
+                    <div className="blur-focus-text my-100">FOCUS</div>
 
                     {/* 7. Perspective Tilt Scroll */}
-                    <div className="perspective-tilt-card">3D Tilt</div>
+                    <div className="perspective-tilt-card my-100 mx-auto">
+                      3D Tilt
+                    </div>
 
                     {/* 8. Horizontal Scroll Simulation */}
                     <div className="">
-                      <div className="horizontal-scroll-sim">
+                      <div className="horizontal-scroll-sim my-100">
                         <div className="h-card">Item 1</div>
                         <div className="h-card">Item 2</div>
                         <div className="h-card">Item 3</div>
@@ -362,16 +377,46 @@ export default function Tests() {
                     </div>
 
                     {/* Zoom in on scroll */}
-                    <div className="zoom-card-container mt-30">
+                    <div className="zoom-card-container mt-100">
                       <div className="zoom-card">Zoom In On Scroll</div>
                     </div>
+                  </div>
 
-                    {/* Text Svg visable */}
-                    <div></div>
+                  {/* Text Svg visable */}
+                  <div className="flex justify-center items-center mt-200 min-h-screen ">
+                    <div className="text-svg justify-center flex flex-col items-center w-full">
+                      <h1 className="text-4xl font-bold text-center">
+                        SVG Text
+                      </h1>
+                      <TextLabelSvg />
+                    </div>
+                  </div>
+
+                  {/* Text on blur */}
+                  <div className="flex justify-center items-center">
+                    <div className="text-center text-8xl reveal-text ">
+                      <span>N</span>
+                      <span>a</span>
+                      <span>t</span>
+                      <span>i</span>
+                      <span>v</span>
+                      <span>e </span>
+                      <span>U</span>
+                      <span>I</span>
+                    </div>
+                  </div>
+
+                  {/* BG Animation FUll */}
+                  <div className="flex justify-center mt-200">
+                    <div className="bg-container">
+                      <div className="bg-cone bg-linear-90 from-base-200 to-base-300 text-9xl border-t-2 shadow-[0_-20px_40px] border-primary shadow-primary/25">
+                        END
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="h-200"></div>
+              {/* <div className="h-200"></div> */}
             </motion.div>
           ) : (
             <motion.div
