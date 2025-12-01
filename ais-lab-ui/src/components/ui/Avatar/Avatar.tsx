@@ -42,7 +42,7 @@ export default function Avatar({
       <div
         className={`mask
         ${indicator && (online ? "avatar-online" : "avatar-offline")}
-        ${rounded ? "rounded-full" : "rounded"}
+        ${rounded ? "rounded-full" : "rounded-field"}
         ${masks[mask]} 
         ${sizes[size]}
         ${className}

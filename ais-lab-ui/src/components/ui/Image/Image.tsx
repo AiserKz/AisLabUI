@@ -40,7 +40,7 @@ const Image: ImageComponent = ({
           (e.target as HTMLImageElement).src = fallbackSrc || "None";
         }}
         alt={alt}
-        className={`rounded  
+        className={`rounded-box
             ${className} 
             ${objectFitVariants[objectFit]}
             ${aspectRatioVarinats[aspectRatio]}

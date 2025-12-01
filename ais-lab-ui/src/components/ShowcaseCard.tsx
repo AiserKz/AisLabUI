@@ -1,68 +1,92 @@
 import { motion } from "framer-motion";
+import { SparklesIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface ShowcaseCardProps {
-    title: string;
-    description: string;
-    preview: ReactNode;
-    category?: string;
+  icon?: ReactNode;
+  title: string;
+  description: string;
+  preview: ReactNode;
+  category?: string;
+  className?: string;
 }
 
+const categoryColors = {
+  Медиа: "badge-error",
+  "Обратная связь": "badge-info",
+  Контейнеры: "badge-warning",
+  Формы: "badge-success",
+  Кнопки: "badge-primary",
+  Эффекты: "badge-accent",
+};
+
 export default function ShowcaseCard({
-    title,
-    description,
-    preview,
-    category,
+  icon: Icon,
+  title,
+  description,
+  preview,
+  category,
+  className,
 }: ShowcaseCardProps) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -4, scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-            className="group"
-        >
-            <div className="card bg-base-100/80 backdrop-blur-md border border-base-300 hover:border-primary/50 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full">
-                {/* Category Badge */}
-                {category && (
-                    <div className="absolute top-4 right-4 z-10">
-                        <div className="badge badge-primary badge-sm shadow-md">
-                            {category}
-                        </div>
-                    </div>
-                )}
-
-                {/* Preview Area */}
-                <div className="relative h-56 bg-gradient-to-br from-base-200/50 to-base-300/50 backdrop-blur-sm overflow-hidden border-b border-base-300/50">
-                    {/* Glass overlay */}
-                    <div className="absolute inset-0 bg-base-100/5 backdrop-blur-[1px]" />
-
-                    {/* Preview Content */}
-                    <div className="relative z-10 h-full flex items-center justify-center p-6">
-                        {preview}
-                    </div>
-
-                    {/* Animated gradient on hover */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 0.1 }}
-                        className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent"
-                    />
-                </div>
-
-                {/* Content */}
-                <div className="card-body p-6">
-                    <h3 className="card-title text-lg font-bold group-hover:text-primary transition-colors">
-                        {title}
-                    </h3>
-                    <p className="text-sm text-base-content/70 line-clamp-2">
-                        {description}
-                    </p>
-
-                    {/* Bottom glow effect */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4, scale: 1.02 }}
+      transition={{ duration: 0.3 }}
+      className={`group ${className}`}
+    >
+      <div className="card bg-base-100/80 border border-base-300 hover:border-primary/50 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full">
+        {/* Category Badge */}
+        {category && (
+          <div className="absolute top-4 right-4 z-50">
+            <div
+              className={`badge badge-sm shadow-md ${
+                categoryColors[category as keyof typeof categoryColors] ||
+                "badge-primary"
+              }`}
+            >
+              {category}
             </div>
-        </motion.div>
-    );
+          </div>
+        )}
+
+        {/* Preview Area */}
+        <div className="relative h-56 bg-linear-to-br from-base-200/50 to-base-300/50  overflow-hidden border-b border-base-300/50">
+          {/* Glass overlay */}
+          <div className="absolute inset-0 bg-base-100/5 backdrop-blur-[1px]" />
+
+          {/* Preview Content */}
+          <div className="relative z-10 h-full flex items-center justify-center p-6">
+            {preview}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 0.1 }}
+            className="absolute inset-0 bg-linear-to-br from-primary via-secondary to-accent"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="card-body p-6">
+          <div className="flex space-x-3 items-start">
+            <div className="flex items-center justify-center bg-base-200/60 rounded-field p-3">
+              {Icon || <SparklesIcon />}
+            </div>
+            <div>
+              <h3 className="card-title text-lg font-bold group-hover:text-primary transition-colors">
+                {title}
+              </h3>
+              <p className="text-sm text-base-content/70 line-clamp-2">
+                {description}
+              </p>
+            </div>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-info via-primary to-primary opacity-0 group-hover:opacity-100 transition-all duration-300" />
+        </div>
+      </div>
+    </motion.div>
+  );
 }

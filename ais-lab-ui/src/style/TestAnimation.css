@@ -1,0 +1,136 @@
+@keyframes flip {
+  0%,
+  100% {
+    transform: translateY(0) translateZ(0);
+    z-index: 1;
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(120%) translateZ(-20px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(105%) translateX(100px) translateZ(-100px);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(0) translateX(90px) translateZ(-80px);
+    z-index: -1;
+    opacity: 0.8;
+  }
+}
+
+@keyframes itemFide {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+    border: 1px solid transparent;
+  }
+  30% {
+    border: 1px solid transparent;
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+    border: 1px solid var(--color-primary);
+  }
+  60% {
+    border: 1px solid transparent;
+  }
+
+  100% {
+    border: 1px solid transparent;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes blurFade {
+  0% {
+    filter: blur(10px);
+  }
+  35%,
+  45% {
+    filter: blur(0px);
+  }
+
+  90% {
+    filter: blur(10px);
+  }
+
+  100% {
+    filter: blur(0px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes imageReveal {
+  from {
+    filter: saturate(0) contrast(4) blur(5px);
+    scale: 0.95;
+    translate: 0 4rem;
+    opacity: 0;
+  }
+  to {
+    filter: none;
+    scale: 1;
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes text-appear {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes AutoRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes SideLook {
+  from {
+    transform: perspective(600px) rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+  }
+  to {
+    transform: perspective(300px) rotateY(-180deg) rotateX(0deg);
+  }
+}
+
+@keyframes spread {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(var(--target-x)) translateY(var(--target-y)) rotate(var(--target-r));
+  }
+}

@@ -76,7 +76,7 @@ export function Card({
       >
         {src && (
           <div
-            className={`absolute inset-0 ${overlayVariants[overlay]} rounded-2xl pointer-events-none`}
+            className={`absolute inset-0 ${overlayVariants[overlay]} rounded-box pointer-events-none`}
           />
         )}
 
@@ -89,7 +89,7 @@ export function Card({
     <>
       {hover3d ? (
         <div className="hover-3d w-full">
-          <figure className="rounded-2xl">{renderCard()}</figure>
+          <figure className="rounded-box">{renderCard()}</figure>
 
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i}></div>

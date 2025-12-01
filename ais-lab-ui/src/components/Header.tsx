@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ThemeSwithcer } from "./ThemeSwithcer";
 import useTitle from "../utils/hooks/useTitle";
+import { useScroll, useTransform, motion } from "motion/react";
 
 const pages: Record<string, string> = {
   "/": "Главная",
@@ -22,6 +23,12 @@ export function Header() {
     pages[location.pathname] || "Главная"
   );
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+
+  const { scrollY } = useScroll();
+  const width = useTransform(scrollY, [0, 200], ["75%", "70%"]);
+  const fade = useTransform(scrollY, [0, 200], [1, 0.92]);
+  const offset = useTransform(scrollY, [0, 200], [0, -2]);
+
   useEffect(() => {
     setCurrentPage(pages[location.pathname || "/"]);
     setTitle(pages[location.pathname || "/"]);
@@ -52,10 +59,11 @@ export function Header() {
   }, [mobileOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-30 px-6 pt-4">
-      <nav
-        className="max-w-7xl mx-auto bg-base-200 rounded-2xl border-t border-l border-base-content/20 backdrop-blur-md
-      hover:border-blue-400 hover:shadow-[-5px_-5px_10px] shadow-blue-400/30 transition-all duration-500"
+    <header className="fixed top-0 left-0 right-0 flex z-10 pt-4 justify-center">
+      <motion.nav
+        style={{ width: width, opacity: fade, y: offset }}
+        className="max-w-8xl w-[75%] bg-base-200 rounded-box border-t border-l border-base-content/20 backdrop-blur-md
+      hover:border-blue-400 hover:shadow-[-5px_-5px_10px] shadow-blue-400/30 transition-all duration-500 delay-100"
       >
         <div className="flex items-center justify-between px-6 h-16">
           <div className="flex items-center gap-4 md:gap-8">
@@ -125,7 +133,7 @@ export function Header() {
         </div>
 
         {/* mobile slide-over menu */}
-      </nav>
+      </motion.nav>
       {typeof document !== "undefined" &&
         createPortal(
           <div

@@ -7,6 +7,9 @@ const images: string[] = [
   "https://img.freepik.com/premium-photo/anime-girl-with-butterfly-hair-blue-eyes-front-window-generative-ai_900833-10168.jpg",
   "https://cdn.cgdream.ai/_next/image?url=https%3A%2F%2Fapi.cgdream.ai%2Frails%2Factive_storage%2Fblobs%2Fredirect%2FeyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNUQ3bmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ%3D%3D--bb67b3cac6d13c03293fdf65b86f66992efa7be0%2Fdeeed019-f380-4e3a-a967-d080c959bf8a_2.png&w=1080&q=95",
   "https://avatars.mds.yandex.net/i?id=bb88e2a2238e323ebedca93c5743b5e3455bec3b-4863507-images-thumbs&n=13",
+  "https://images.wallpaperscraft.ru/image/single/siluet_krug_svechenie_141558_1920x1080.jpg",
+  "https://images.wallpaperscraft.ru/image/single/devushka_kotenok_tsvetok_141058_1920x1080.jpg",
+  "images/2151394707.jpg",
 ];
 
 export { images };

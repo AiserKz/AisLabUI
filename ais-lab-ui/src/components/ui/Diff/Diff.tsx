@@ -34,7 +34,7 @@ function Image({
 }: DiffImageProps) {
   const filterValue = filtered[filter](size);
   return (
-    <figure className={`diff ${className} rounded`} tabIndex={0}>
+    <figure className={`diff ${className} rounded-box`} tabIndex={0}>
       <div className="diff-item-1" role="img" tabIndex={0}>
         <img
           alt={label}
@@ -72,7 +72,7 @@ const Diff: DiffComponents = ({
   size = 3,
 }: DiffTextProps) => {
   return (
-    <figure className={`diff ${className} rounded`} tabIndex={0}>
+    <figure className={`diff ${className} rounded-box`} tabIndex={0}>
       <div className="diff-item-1" role="img" tabIndex={0}>
         <div
           className={`bg-primary text-primary-content grid place-content-center font-black ${itemClassName}`}

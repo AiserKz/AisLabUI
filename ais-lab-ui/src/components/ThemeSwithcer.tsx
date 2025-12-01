@@ -18,7 +18,7 @@ export function ThemeSwithcer() {
 
   return (
     <button
-      className="p-2 rounded-lg bg-base-content/5 border border-base-content/40 hover:bg-base-content/10 hover:border-base-content/60 transition-all"
+      className="p-2 rounded-field bg-base-content/5 border border-base-content/40 hover:bg-base-content/10 hover:border-base-content/60 transition-all"
       onClick={toggleTheme}
     >
       {isLight ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}

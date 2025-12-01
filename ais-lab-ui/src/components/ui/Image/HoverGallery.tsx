@@ -9,7 +9,7 @@ export default function HoverGallery({
   ...props
 }: HoverGalleryProps) {
   return (
-    <figure {...props} className={`hover-gallery ${className}`}>
+    <figure {...props} className={`hover-gallery rounded-box ${className}`}>
       {children}
     </figure>
   );

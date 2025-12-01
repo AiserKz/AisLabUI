@@ -21,28 +21,35 @@ import Tags from "@/components/ui/Tags/Tags";
 import Progress from "@/components/ui/Progress/Proggres";
 import Counter from "@/components/ui/Counter/Counter";
 
-
 const components = [
   {
     id: "buttons",
     title: "Кнопки",
-    description: "Интерактивные кнопки с различными стилями, размерами и состояниями загрузки",
+    description:
+      "Интерактивные кнопки с различными стилями, размерами и состояниями загрузки",
     category: "Интерактивные",
     icon: MousePointerClick,
     path: "/native#buttons",
     color: "primary",
     preview: (
       <div className="flex gap-2 flex-wrap justify-center">
-        <Button variant="primary" size="sm">Primary</Button>
-        <Button variant="success" size="sm">Success</Button>
-        <Button variant="warning" size="sm" outlined>Outlined</Button>
+        <Button variant="primary" size="sm">
+          Primary
+        </Button>
+        <Button variant="success" size="sm">
+          Success
+        </Button>
+        <Button variant="warning" size="sm" outlined>
+          Outlined
+        </Button>
       </div>
     ),
   },
   {
     id: "inputs",
     title: "Поля ввода",
-    description: "Текстовые поля, селекты, чекбоксы, radio и другие элементы форм",
+    description:
+      "Текстовые поля, селекты, чекбоксы, radio и другие элементы форм",
     category: "Формы",
     icon: PenTool,
     path: "/native#inputs",
@@ -57,22 +64,28 @@ const components = [
   {
     id: "cards",
     title: "Карточки",
-    description: "Универсальные контейнеры для контента с glass эффектом и 3D трансформацией",
+    description:
+      "Универсальные контейнеры для контента с glass эффектом и 3D трансформацией",
     category: "Контейнеры",
     icon: Layers,
     path: "/native#cards",
     color: "success",
     preview: (
       <div className="flex gap-2">
-        <Card padding="sm" className="text-xs">Card</Card>
-        <Card padding="sm" glass className="text-xs">Glass</Card>
+        <Card padding="sm" className="text-xs">
+          Card
+        </Card>
+        <Card padding="sm" glass className="text-xs">
+          Glass
+        </Card>
       </div>
     ),
   },
   {
     id: "status",
     title: "Статусы",
-    description: "Индикаторы загрузки, бейджи, алерты и уведомления для обратной связи",
+    description:
+      "Индикаторы загрузки, бейджи, алерты и уведомления для обратной связи",
     category: "Обратная связь",
     icon: Gauge,
     path: "/native#status",
@@ -88,7 +101,8 @@ const components = [
   {
     id: "media",
     title: "Медиа",
-    description: "Компоненты для работы с изображениями, галереями и каруселями",
+    description:
+      "Компоненты для работы с изображениями, галереями и каруселями",
     category: "Медиа",
     icon: ImageIcon,
     path: "/native#media",
@@ -120,7 +134,15 @@ const components = [
   },
 ];
 
-const categories = ["Все", "Интерактивные", "Формы", "Контейнеры", "Обратная связь", "Медиа", "Эффекты"];
+const categories = [
+  "Все",
+  "Интерактивные",
+  "Формы",
+  "Контейнеры",
+  "Обратная связь",
+  "Медиа",
+  "Эффекты",
+];
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -138,7 +160,6 @@ export default function Home() {
 
   return (
     <div className="w-full flex min-h-screen">
-
       <motion.aside
         initial={{ x: -300 }}
         animate={{ x: 0 }}
@@ -178,10 +199,11 @@ export default function Home() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all text-sm ${selectedCategory === category
-                    ? "bg-primary text-primary-content font-medium"
-                    : "hover:bg-base-200 text-base-content/80"
-                    }`}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all text-sm ${
+                    selectedCategory === category
+                      ? "bg-primary text-primary-content font-medium"
+                      : "hover:bg-base-200 text-base-content/80"
+                  }`}
                 >
                   {category}
                 </button>
@@ -217,7 +239,10 @@ export default function Home() {
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold">Фильтры</h2>
-              <button onClick={() => setSidebarOpen(false)} className="btn btn-ghost btn-sm btn-circle">
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="btn btn-ghost btn-sm btn-circle"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -248,10 +273,11 @@ export default function Home() {
                         setSelectedCategory(category);
                         setSidebarOpen(false);
                       }}
-                      className={`w-full text-left px-4 py-3 rounded-lg transition-all ${selectedCategory === category
-                        ? "bg-primary text-primary-content font-medium"
-                        : "hover:bg-base-200"
-                        }`}
+                      className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
+                        selectedCategory === category
+                          ? "bg-primary text-primary-content font-medium"
+                          : "hover:bg-base-200"
+                      }`}
                     >
                       {category}
                     </button>
@@ -282,7 +308,10 @@ export default function Home() {
               className="mb-6"
             >
               <p className="text-sm text-base-content/60">
-                Найдено: <span className="font-semibold text-base-content">{filteredComponents.length}</span>
+                Найдено:{" "}
+                <span className="font-semibold text-base-content">
+                  {filteredComponents.length}
+                </span>
               </p>
             </motion.div>
           )}
@@ -313,7 +342,14 @@ export default function Home() {
               <p className="text-base-content/60 mb-4">
                 Попробуйте изменить поисковый запрос или фильтры
               </p>
-              <Button variant="primary" size="sm" onClick={() => { setSearchQuery(""); setSelectedCategory("Все"); }}>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedCategory("Все");
+                }}
+              >
                 Сбросить фильтры
               </Button>
             </motion.div>

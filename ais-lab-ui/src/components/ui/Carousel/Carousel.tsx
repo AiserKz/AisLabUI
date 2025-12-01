@@ -23,7 +23,7 @@ export default function Carousel({
 }: CarouselProps) {
   return (
     <div
-      className={`carousel rounded ${
+      className={`carousel rounded-box ${
         vertical ? "carousel-vertical" : "carousel-horizontal"
       } ${className}`}
       {...props}

@@ -40,7 +40,7 @@ export default function CodeMockup({
       {copy && (
         <button
           onClick={handleCopy}
-          className="absolute right-2 top-2 text-xs cursor-pointer p-2 rounded-md hover:bg-base-200/50 transition-all duration-300 hover:scale-110"
+          className="absolute right-2 top-2 text-xs cursor-pointer p-2 rounded-field hover:bg-base-200/50 transition-all duration-300 hover:scale-110"
         >
           {isCopied ? "Copied!" : "Copy"}
         </button>
