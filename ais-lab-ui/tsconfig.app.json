@@ -31,7 +31,8 @@
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
-      "@ui/*": ["src/components/ui/*"]
+      "@ui/*": ["src/components/ui/*"],
+      "@motion/*": ["src/components/uiMotion/*"]
     }
 
   },

@@ -78,8 +78,9 @@ export default function BorderBeam({
         className="absolute h-[115%] flex items-center justify-center"
         style={{
           transformOrigin: "center",
-          animation: `rotate360 ${duration}s linear infinite ${delay}s ${reverse ? "reverse" : ""
-            }`,
+          animation: `rotate360 ${duration}s linear infinite ${delay}s ${
+            reverse ? "reverse" : ""
+          }`,
           background: "transparent",
           filter: "blur(30px)",
         }}
@@ -103,7 +104,7 @@ export default function BorderBeam({
   };
 
   return (
-    <div className={`relative p-px ${className}`}>
+    <div className={`relative ${className} overflow-hidden p-1`}>
       {children}
 
       {!disabled && (

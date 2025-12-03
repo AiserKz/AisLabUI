@@ -29,17 +29,13 @@ export default function ShowcaseCard({
   className,
 }: ShowcaseCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      transition={{ duration: 0.3 }}
-      className={`group ${className}`}
+    <div
+      className={`group ${className} hover:scale-105 transition-all duration-300`}
     >
       <div className="card bg-base-100/80 border border-base-300 hover:border-primary/50 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full">
         {/* Category Badge */}
         {category && (
-          <div className="absolute top-4 right-4 z-50">
+          <div className="absolute top-4 right-4 z-20">
             <div
               className={`badge badge-sm shadow-md ${
                 categoryColors[category as keyof typeof categoryColors] ||
@@ -87,6 +83,6 @@ export default function ShowcaseCard({
           <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-info via-primary to-primary opacity-0 group-hover:opacity-100 transition-all duration-300" />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -59,11 +59,11 @@ export function Header() {
   }, [mobileOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 flex z-10 pt-4 justify-center">
+    <header className="fixed top-0 left-0 right-0 flex pt-4 justify-center z-50">
       <motion.nav
         style={{ width: width, opacity: fade, y: offset }}
         className="max-w-8xl w-[75%] bg-base-200 rounded-box border-t border-l border-base-content/20 backdrop-blur-md
-      hover:border-blue-400 hover:shadow-[-5px_-5px_10px] shadow-blue-400/30 transition-all duration-500 delay-100"
+      hover:border-blue-400 hover:shadow-[-5px_-5px_10px] shadow-blue-400/30 transition-all duration-500 delay-100 "
       >
         <div className="flex items-center justify-between px-6 h-16">
           <div className="flex items-center gap-4 md:gap-8">

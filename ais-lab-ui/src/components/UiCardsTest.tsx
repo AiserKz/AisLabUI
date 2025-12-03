@@ -15,7 +15,7 @@ export default function UiCardsTest({
     <div
       className={`bg-base-200 rounded-box p-6 space-y-2 space-x-2 border border-white/10 break-inside-avoid
         hover:border-blue-400/60 hover:shadow-[0_0_10px] hover:shadow-blue-400/20 transition-all duration-500 
-        hover:inset-shadow-blue-400/60 hover:inset-shadow-[0_0_5px]
+        hover:inset-shadow-blue-400/60 hover:inset-shadow-[0_0_5px] min-h-40
         ${className} `}
       style={
         src

@@ -2,7 +2,12 @@
 @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
 @import url("https://fonts.cdnfonts.com/css/inter");
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: dark --default, light, cupcake, dark, cyberpunk, valentine, halloween,
+    garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury,
+    dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim,
+    nord, sunset, bumblebee, emerald, corporate, synthwave, retro;
+}
 
 @plugin "daisyui/theme" {
   name: "dark";

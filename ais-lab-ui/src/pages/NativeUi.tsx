@@ -1,6 +1,4 @@
-import { Suspense } from "react";
-import { motion } from "framer-motion";
-
+import React, { Suspense, useCallback } from "react";
 import { Divider, Loading } from "@ui/index";
 
 import TitlePage from "@/components/TitlePage";
@@ -41,6 +39,36 @@ const helpMap: Record<string, string> = {
     "Эффекты: анимации должны быть ненавязчивыми и не мешать восприятию.",
 };
 
+const ShowcaseItem = React.memo(function ShowcaseItem({ c }: { c: any }) {
+  const PreviewComponent = c.preview;
+
+  return (
+    <ShowcaseCard
+      title={c.title}
+      description={c.description}
+      category={c.category}
+      className="h-full"
+      icon={c.icon}
+      preview={
+        <Suspense
+          fallback={
+            <Loading
+              className="h-120"
+              type="spinner"
+              size="xl"
+              variant="primary"
+            >
+              Загрузка...
+            </Loading>
+          }
+        >
+          <PreviewComponent />
+        </Suspense>
+      }
+    />
+  );
+});
+
 export default function NativeUi() {
   const { aciveSection } = useSectionObserver(
     sectionsMeta.map((s) => s.id),
@@ -56,47 +84,15 @@ export default function NativeUi() {
     window.scrollTo({ top: top - offset, behavior: "smooth" });
   };
 
-  const renderArray = (array: any[]) => {
+  const renderArray = useCallback((array: any[]) => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {array.map((c, i) => (
-          <motion.div
-            key={`${c.title}-${i}`}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 1 }}
-            transition={{ duration: 0.3, delay: i * 0.2 }}
-            className={`transform transition-transform duration-300 transform-gpu hover:-translate-y-1`}
-          >
-            <ShowcaseCard
-              title={c.title}
-              description={c.description}
-              category={c.category}
-              className="h-full"
-              icon={c.icon}
-              preview={
-                <Suspense
-                  fallback={
-                    <Loading
-                      className="h-120"
-                      type="spinner"
-                      size="xl"
-                      variant="primary"
-                    >
-                      Загрузка...
-                    </Loading>
-                  }
-                >
-                  {c.preview()}
-                </Suspense>
-              }
-            />
-          </motion.div>
+          <ShowcaseItem key={i} c={c} />
         ))}
       </div>
     );
-  };
+  }, []);
 
   return (
     <div className="w-full justify-center flex flex-col lg:flex-row relative gap-6 px-4 md:px-8">

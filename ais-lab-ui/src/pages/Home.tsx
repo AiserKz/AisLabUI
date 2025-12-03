@@ -1,361 +1,214 @@
-import { useState } from "react";
-import ComponentCard from "@/components/ComponentCard";
-import TitlePage from "@/components/TitlePage";
+import "@/style/Home.css";
 import { motion } from "framer-motion";
-import {
-  MousePointerClick,
-  PenTool,
-  Layers,
-  Sparkles,
-  Gauge,
-  Image as ImageIcon,
-  Search,
-  X,
-  Menu,
-} from "lucide-react";
-import { Button, Card, Input } from "@/components/ui";
-import Status from "@/components/ui/Status/Status";
-import Badge from "@/components/ui/Status/Badge";
-import ToggleSwitch from "@/components/ui/Inputs/Toggle";
-import Tags from "@/components/ui/Tags/Tags";
-import Progress from "@/components/ui/Progress/Proggres";
-import Counter from "@/components/ui/Counter/Counter";
-
-const components = [
-  {
-    id: "buttons",
-    title: "Кнопки",
-    description:
-      "Интерактивные кнопки с различными стилями, размерами и состояниями загрузки",
-    category: "Интерактивные",
-    icon: MousePointerClick,
-    path: "/native#buttons",
-    color: "primary",
-    preview: (
-      <div className="flex gap-2 flex-wrap justify-center">
-        <Button variant="primary" size="sm">
-          Primary
-        </Button>
-        <Button variant="success" size="sm">
-          Success
-        </Button>
-        <Button variant="warning" size="sm" outlined>
-          Outlined
-        </Button>
-      </div>
-    ),
-  },
-  {
-    id: "inputs",
-    title: "Поля ввода",
-    description:
-      "Текстовые поля, селекты, чекбоксы, radio и другие элементы форм",
-    category: "Формы",
-    icon: PenTool,
-    path: "/native#inputs",
-    color: "info",
-    preview: (
-      <div className="w-full space-y-2 px-4">
-        <Input placeholder="Email..." sizes="sm" variant="info" />
-        <ToggleSwitch variant="success" sizes="sm" />
-      </div>
-    ),
-  },
-  {
-    id: "cards",
-    title: "Карточки",
-    description:
-      "Универсальные контейнеры для контента с glass эффектом и 3D трансформацией",
-    category: "Контейнеры",
-    icon: Layers,
-    path: "/native#cards",
-    color: "success",
-    preview: (
-      <div className="flex gap-2">
-        <Card padding="sm" className="text-xs">
-          Card
-        </Card>
-        <Card padding="sm" glass className="text-xs">
-          Glass
-        </Card>
-      </div>
-    ),
-  },
-  {
-    id: "status",
-    title: "Статусы",
-    description:
-      "Индикаторы загрузки, бейджи, алерты и уведомления для обратной связи",
-    category: "Обратная связь",
-    icon: Gauge,
-    path: "/native#status",
-    color: "warning",
-    preview: (
-      <div className="flex gap-2 items-center flex-wrap justify-center">
-        <Status variant="success" size="sm" animation />
-        <Badge label="New" variant="warning" size="sm" />
-        <Progress variant="primary" value={60} className="w-20" />
-      </div>
-    ),
-  },
-  {
-    id: "media",
-    title: "Медиа",
-    description:
-      "Компоненты для работы с изображениями, галереями и каруселями",
-    category: "Медиа",
-    icon: ImageIcon,
-    path: "/native#media",
-    color: "accent",
-    preview: (
-      <div className="flex gap-2">
-        <div className="avatar">
-          <div className="w-10 rounded-full bg-primary/20"></div>
-        </div>
-        <div className="avatar">
-          <div className="w-10 rounded-full bg-success/20"></div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: "effects",
-    title: "Эффекты",
-    description: "Анимации, переходы и визуальные эффекты для улучшения UX",
-    category: "Эффекты",
-    icon: Sparkles,
-    path: "/native#effects",
-    color: "secondary",
-    preview: (
-      <div className="flex gap-2 items-center">
-        <Counter value={42} size="xl" variant="primary" />
-      </div>
-    ),
-  },
-];
-
-const categories = [
-  "Все",
-  "Интерактивные",
-  "Формы",
-  "Контейнеры",
-  "Обратная связь",
-  "Медиа",
-  "Эффекты",
-];
+import { ArrowRight, Code, Zap, Layers, Palette, Terminal, CheckCircle, AlertTriangle, Bell } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Все");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const filteredComponents = components.filter((component) => {
-    const matchesSearch =
-      component.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      component.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "Все" || component.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
   return (
-    <div className="w-full flex min-h-screen">
-      <motion.aside
-        initial={{ x: -300 }}
-        animate={{ x: 0 }}
-        className="hidden lg:block w-64 sticky top-0 h-screen overflow-y-auto p-6 pt-8"
-      >
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold text-xs uppercase tracking-wider mb-3 text-base-content/50">
-              Поиск
-            </h3>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-base-content/40" />
-              <input
-                type="text"
-                placeholder="Найти..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="input input-bordered input-sm w-full pl-10 pr-8"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 btn btn-ghost btn-xs btn-circle"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              )}
-            </div>
-          </div>
+    <div className="min-h-screen overflow-x-clip bg-base-100 text-base-content">
+      
+      {/* 1. Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-clip">
+        {/* Background Shapes */}
+        <div className="parallax-bg-shape bg-primary/20 w-96 h-96 top-20 left-20 blur-[100px]"></div>
+        <div className="parallax-bg-shape bg-secondary/20 w-[500px] h-[500px] bottom-20 right-20 blur-[120px] animation-delay-2000"></div>
 
-          <div>
-            <h3 className="font-semibold text-xs uppercase tracking-wider mb-3 text-base-content/50">
-              Категории
-            </h3>
-            <div className="space-y-1">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all text-sm ${
-                    selectedCategory === category
-                      ? "bg-primary text-primary-content font-medium"
-                      : "hover:bg-base-200 text-base-content/80"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.aside>
-
-      {/* Mobile Sidebar Toggle */}
-      <div className="lg:hidden fixed bottom-6 right-6 z-50">
-        <Button
-          variant="primary"
-          className="btn-circle shadow-xl"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-        >
-          <Menu className="w-6 h-6" />
-        </Button>
-      </div>
-
-      {/* Mobile Sidebar */}
-      {sidebarOpen && (
-        <>
-          <div
-            className="lg:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
-            onClick={() => setSidebarOpen(false)}
-          />
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            className="lg:hidden fixed inset-y-0 right-0 z-50 w-80 bg-base-100 shadow-2xl p-6 overflow-y-auto"
+        <div className="container mx-auto px-4 z-10 text-center hero-3d-container">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6"
           >
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold">Фильтры</h2>
-              <button
-                onClick={() => setSidebarOpen(false)}
-                className="btn btn-ghost btn-sm btn-circle"
-              >
-                <X className="w-5 h-5" />
-              </button>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-base-200/50 backdrop-blur-sm border border-base-content/10 mb-4">
+              <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+              <span className="text-sm font-medium">v1.0.0 Доступно сейчас</span>
             </div>
 
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold text-xs uppercase tracking-wider mb-3 text-base-content/50">
-                  Поиск
-                </h3>
-                <input
-                  type="text"
-                  placeholder="Найти..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="input input-bordered w-full"
-                />
-              </div>
+            <h1 className="text-7xl md:text-9xl font-black tracking-tighter hero-title hero-3d-element">
+              AisLabUi
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-base-content/70 max-w-2xl mx-auto leading-relaxed">
+              Ультимативная обертка над <span className="text-primary font-bold">Tailwind + DaisyUI</span>. 
+              Создавайте премиальные интерфейсы быстрее, не переписывая один и тот же код.
+            </p>
 
-              <div>
-                <h3 className="font-semibold text-xs uppercase tracking-wider mb-3 text-base-content/50">
-                  Категории
-                </h3>
-                <div className="space-y-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => {
-                        setSelectedCategory(category);
-                        setSidebarOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
-                        selectedCategory === category
-                          ? "bg-primary text-primary-content font-medium"
-                          : "hover:bg-base-200"
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+              <Link to="/native" className="btn btn-primary btn-lg gap-2 group">
+                Начать работу
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link to="/themes" className="btn btn-outline btn-lg gap-2">
+                <Palette size={20} />
+                Выбрать тему
+              </Link>
             </div>
           </motion.div>
-        </>
-      )}
 
-      {/* Main Content */}
-      <div className="flex-1 p-6 lg:p-10">
-        <div className="max-w-7xl">
-          {/* Title */}
-          <div className="mb-10">
-            <TitlePage
-              title="Библиотека компонентов"
-              description="Коллекция современных UI компонентов для React с поддержкой DaisyUI и Framer Motion"
+          {/* Floating 3D Elements Mockup */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="mt-20 relative max-w-4xl mx-auto perspective-1000"
+          >
+             <div className="mockup-window border border-base-content/10 bg-base-200/50 backdrop-blur-md shadow-2xl transform rotate-x-12 hover:rotate-x-0 transition-transform duration-700">
+                <div className="flex justify-center px-4 py-16 bg-base-100/80">
+                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl">
+                      <div className="skeleton h-32 w-full rounded-box"></div>
+                      <div className="skeleton h-32 w-full rounded-box"></div>
+                      <div className="skeleton h-32 w-full rounded-box"></div>
+                   </div>
+                </div>
+             </div>
+          </motion.div>
+        </div>
+
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hero-scroll-indicator opacity-50">
+          <div className="w-6 h-10 border-2 border-base-content rounded-full flex justify-center p-1">
+            <div className="w-1 h-2 bg-base-content rounded-full animate-bounce"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. About Section (Scroll Highlight) */}
+      <section className="py-32 bg-base-100 relative">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-8">О проекте</h2>
+          <p className="text-4xl md:text-5xl font-bold leading-tight">
+            <span className="scroll-text-highlight">
+              Мы верим в простоту и скорость. AisLabUi создан, чтобы стать мостом между "сырыми" утилитами и готовыми функциональными компонентами.
+              Хватит изобретать велосипед. Начните создавать красивые, отзывчивые и доступные интерфейсы одной строкой кода.
+              Готов к будущему и создан для современного веба.
+            </span>
+          </p>
+        </div>
+      </section>
+
+      {/* 3. 3D Component Demo Section */}
+      <section className="py-32 bg-base-200/30 overflow-clip component-demo-perspective">
+        <div className="container mx-auto px-4">
+           <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Готовые компоненты</h2>
+              <p className="text-base-content/60">Все, что нужно для вашего следующего приложения</p>
+           </div>
+
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {/* Card 1 */}
+              <div className="component-card-3d component-float-delay-1 p-6 rounded-2xl bg-base-100 shadow-xl border border-base-content/5">
+                 <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                       <CheckCircle size={20} />
+                    </div>
+                    <span className="font-bold">Уведомления</span>
+                 </div>
+                 <div className="alert alert-success shadow-sm">
+                    <span>Операция выполнена успешно!</span>
+                 </div>
+                 <div className="alert alert-warning mt-2 shadow-sm">
+                    <span>Внимание: проверьте данные.</span>
+                 </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="component-card-3d component-float-delay-2 p-6 rounded-2xl bg-base-100 shadow-xl border border-base-content/5">
+                 <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
+                       <Bell size={20} />
+                    </div>
+                    <span className="font-bold">Интерактивность</span>
+                 </div>
+                 <button className="btn btn-primary w-full mb-2">Нажми меня</button>
+                 <button className="btn btn-outline btn-secondary w-full">Или меня</button>
+              </div>
+
+              {/* Card 3 */}
+              <div className="component-card-3d component-float-delay-3 p-6 rounded-2xl bg-base-100 shadow-xl border border-base-content/5">
+                 <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent">
+                       <AlertTriangle size={20} />
+                    </div>
+                    <span className="font-bold">Формы</span>
+                 </div>
+                 <input type="text" placeholder="Введите email" className="input input-bordered w-full mb-2" />
+                 <div className="flex gap-2">
+                    <input type="checkbox" className="toggle toggle-primary" defaultChecked />
+                    <span className="text-sm opacity-70">Активно</span>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* 4. Features Section (Scroll Reveal) */}
+      <section className="py-32 bg-base-200/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold mb-4">Почему AisLabUi?</h2>
+            <p className="text-base-content/60 max-w-xl mx-auto">
+              Все необходимое для создания приложений мирового класса, упакованное в один мощный пакет.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <FeatureCard 
+              icon={<Zap size={40} className="text-yellow-400" />}
+              title="Молниеносно быстро"
+              description="Построено на базе Vite и Tailwind, обеспечивая нулевые накладные расходы и мгновенный HMR."
+              delay="0s"
+            />
+            <FeatureCard 
+              icon={<Layers size={40} className="text-blue-400" />}
+              title="Богатая библиотека"
+              description="Более 50+ готовых компонентов: от простых кнопок до сложных таблиц данных."
+              delay="0.2s"
+            />
+            <FeatureCard 
+              icon={<Code size={40} className="text-green-400" />}
+              title="Для разработчиков"
+              description="Полная типизация TypeScript. Интуитивно понятный API, который сразу имеет смысл."
+              delay="0.4s"
             />
           </div>
-
-          {/* Results Count */}
-          {(searchQuery || selectedCategory !== "Все") && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mb-6"
-            >
-              <p className="text-sm text-base-content/60">
-                Найдено:{" "}
-                <span className="font-semibold text-base-content">
-                  {filteredComponents.length}
-                </span>
-              </p>
-            </motion.div>
-          )}
-
-          {/* Component Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredComponents.map((component, index) => (
-              <motion.div
-                key={component.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <ComponentCard {...component} />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Empty State */}
-          {filteredComponents.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
-              <Search className="w-16 h-16 mx-auto mb-4 text-base-content/20" />
-              <h3 className="text-xl font-semibold mb-2">Ничего не найдено</h3>
-              <p className="text-base-content/60 mb-4">
-                Попробуйте изменить поисковый запрос или фильтры
-              </p>
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={() => {
-                  setSearchQuery("");
-                  setSelectedCategory("Все");
-                }}
-              >
-                Сбросить фильтры
-              </Button>
-            </motion.div>
-          )}
         </div>
+      </section>
+
+      {/* 5. CTA Section */}
+      <section className="py-32 relative overflow-clip">
+         <div className="absolute inset-0 bg-primary/5"></div>
+         <div className="container mx-auto px-4 text-center relative z-10">
+            <h2 className="text-5xl font-black mb-8">Готовы к запуску?</h2>
+            <p className="text-xl mb-10 opacity-80">Присоединяйтесь к будущему UI-разработки уже сегодня.</p>
+            <div className="flex justify-center gap-4">
+               <Link to="/native" className="btn btn-primary btn-lg px-12 shadow-xl hover:shadow-primary/50 transition-shadow">
+                  Смотреть компоненты
+               </Link>
+               <a href="https://github.com" target="_blank" rel="noreferrer" className="btn btn-ghost btn-lg gap-2">
+                  <Terminal size={20} />
+                  GitHub
+               </a>
+            </div>
+         </div>
+      </section>
+
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, description, delay }: { icon: React.ReactNode, title: string, description: string, delay: string }) {
+  return (
+    <div 
+      className="feature-card p-8 rounded-3xl bg-base-100 border border-base-content/5 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+      style={{ animationDelay: delay }}
+    >
+      <div className="mb-6 p-4 bg-base-200 rounded-2xl w-fit">
+        {icon}
       </div>
+      <h3 className="text-2xl font-bold mb-4">{title}</h3>
+      <p className="text-base-content/70 leading-relaxed">
+        {description}
+      </p>
     </div>
   );
 }
