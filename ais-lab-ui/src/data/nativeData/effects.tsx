@@ -44,14 +44,7 @@ const effects: ShowcaseItem[] = [
     category: "Эффекты",
     icon: <Zap className="text-error" />,
     preview: () => (
-      <BorderBeam
-        duration={10}
-        size={10}
-        thickness={2}
-        glow
-        variant="error"
-        blur
-      >
+      <BorderBeam duration={10} size={50} glow variant="error">
         <div className="p-4 font-bold bg-base-100">Border Beam</div>
       </BorderBeam>
     ),

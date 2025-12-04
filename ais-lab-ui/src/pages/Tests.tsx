@@ -1,10 +1,10 @@
 import { images } from "@/data/testData";
-import { Activity, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import UiCardsTest from "@/components/UiCardsTest";
 import TitlePage from "@/components/TitlePage";
 import Background from "@/components/ui/Bg/Background";
-import { Button } from "@/components/ui";
+import { BorderBeam, Button, Card } from "@/components/ui";
 
 import { AnimatePresence, motion } from "framer-motion";
 import FadeIn, {
@@ -16,9 +16,11 @@ import {
   Flip,
   Float,
   Pulse,
-  Rotate,
   Shake,
 } from "@/components/uiMotion/Transform/Transform";
+import LetterGlitch from "@/components/uiMotion/BG/LetterGlitch";
+import Test from "@/components/uiMotion/BG/Test";
+import MaskImage from "@/components/uiMotion/Image/MaskImage";
 
 // <motion.div
 //   key="dev"
@@ -94,36 +96,22 @@ export default function Tests() {
         </div>
         <AnimatePresence>
           {dev ? (
-            <div>
+            <div className="pb-2000">
               {!loading && (
-                <div className="mt-4 columns-1 md:columns-3 gap-4 pb-10 space-y-4">
-                  <FadeIn>
-                    <UiCardsTest title="FadeIn">FadeIn</UiCardsTest>
-                  </FadeIn>
-                  <FadeInMove>
-                    <UiCardsTest title="FadeInMove">FadeInMove</UiCardsTest>
-                  </FadeInMove>
-                  <FadeInScale>
-                    <UiCardsTest title="FadeInScale"></UiCardsTest>
-                  </FadeInScale>
-                  <Pulse>
-                    <UiCardsTest title="Pulse">Pulse</UiCardsTest>
-                  </Pulse>
-                  <Bounce>
-                    <UiCardsTest title="Bounce">Bounce</UiCardsTest>
-                  </Bounce>
-                  {/* <Rotate>
-                    <UiCardsTest title="Rotate">Rotate</UiCardsTest>
-                  </Rotate> */}
-                  <Float>
-                    <UiCardsTest title="Float">Float</UiCardsTest>
-                  </Float>
-                  <Shake>
-                    <UiCardsTest title="Shake">Shake</UiCardsTest>
-                  </Shake>
-                  <Flip>
-                    <UiCardsTest title="Flip">Flip</UiCardsTest>
-                  </Flip>
+                <div className="space-y-10 flex flex-col justify-center">
+                  {/* <Test /> */}
+
+                  <MaskImage src={images[3]} className="w-200 h-200" />
+
+                  <BorderBeam
+                    className="w-fit h-fit rounded-box"
+                    size={40}
+                    glow
+                  >
+                    <Card className="w-200 h-100" variant="default">
+                      AisLAb
+                    </Card>
+                  </BorderBeam>
                 </div>
               )}
             </div>
@@ -136,6 +124,52 @@ export default function Tests() {
               exit={{ opacity: 0, filter: "blur(10px)", x: 40 }}
               className="mt-4 columns-1 md:columns-3 gap-4 pb-10 space-y-4"
             >
+              <FadeIn>
+                <UiCardsTest title="FadeIn">FadeIn</UiCardsTest>
+              </FadeIn>
+              <FadeInMove>
+                <UiCardsTest title="FadeInMove">FadeInMove</UiCardsTest>
+              </FadeInMove>
+              <FadeInScale>
+                <UiCardsTest title="FadeInScale"></UiCardsTest>
+              </FadeInScale>
+              <Pulse>
+                <UiCardsTest title="Pulse">Pulse</UiCardsTest>
+              </Pulse>
+              <Bounce>
+                <UiCardsTest title="Bounce">Bounce</UiCardsTest>
+              </Bounce>
+              {/* <Rotate>
+                    <UiCardsTest title="Rotate">Rotate</UiCardsTest>
+                  </Rotate> */}
+              <Float>
+                <UiCardsTest title="Float">Float</UiCardsTest>
+              </Float>
+              <Shake>
+                <UiCardsTest title="Shake">Shake</UiCardsTest>
+              </Shake>
+              <Flip>
+                <UiCardsTest title="Flip">Flip</UiCardsTest>
+              </Flip>
+              <UiCardsTest title="LetterGlitch">
+                <LetterGlitch
+                  glitchColors={["#2b4539", "#61dca3", "#61b3dc"]}
+                  characters="AisLabUi"
+                  glitchSpeed={100}
+                  outerVignette
+                />
+              </UiCardsTest>
+              <UiCardsTest title="Test" className="relative overflow-hidden">
+                <motion.div
+                  className="absolute w-full h-full bg-linear-to-r from-purple-500 via-pink-500 to-red-500"
+                  animate={{ x: ["0%", "100%", "0%"] }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+              </UiCardsTest>
               <UiCardsTest
                 title="Background - Wave Ring"
                 className="overflow-hidden min-h-80 relative bg-transparent"

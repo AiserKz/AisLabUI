@@ -9,7 +9,6 @@
 }
 
 @keyframes pulse {
-
   0%,
   100% {
     opacity: 0;
@@ -56,7 +55,6 @@
 }
 
 @keyframes pulseGlow {
-
   0%,
   100% {
     transform: scale(0.9);
@@ -195,6 +193,45 @@
 }
 
 .parallax-layer {
-  transform: translate(calc(var(--parallax-x) * var(--parallax-shift, 20px)),
-      calc(var(--parallax-y) * var(--parallax-shift, 20px)));
+  transform: translate(
+    calc(var(--parallax-x) * var(--parallax-shift, 20px)),
+    calc(var(--parallax-y) * var(--parallax-shift, 20px))
+  );
+}
+
+/* Анимированный градиент */
+@property --deg {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.animated-border::before,
+.animated-border::after {
+  content: "";
+  position: absolute;
+
+  top: var(--border_size);
+  left: var(--border_size);
+  right: var(--border_size);
+  bottom: var(--border_size);
+  background: var(--background-gradient);
+  border-radius: inherit;
+  z-index: -2;
+  filter: blur(var(--blur-border));
+}
+
+.animated-border::after {
+  filter: blur(15px);
+  opacity: var(--glow-opacity);
+}
+
+.animated-border.no-glow::after {
+  opacity: 0;
+}
+
+@keyframes autoRotate {
+  to {
+    --deg: 360deg;
+  }
 }

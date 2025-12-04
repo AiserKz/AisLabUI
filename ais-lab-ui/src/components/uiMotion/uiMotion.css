@@ -1,0 +1,23 @@
+.masked-image {
+  position: relative;
+  display: inline-block;
+}
+
+.masked-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  filter: none;
+  -webkit-mask-image: radial-gradient(
+    circle var(--radius) at var(--x) var(--y),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--radius) at var(--x) var(--y),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+}

@@ -118,7 +118,7 @@ export function Float({
   ease = "linear",
   repeatType = "reverse",
   disabled = false,
-  trigger = "hover",
+  trigger = "load",
   repeat = true,
   className,
 }: PulseProps) {

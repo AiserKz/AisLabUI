@@ -38,7 +38,7 @@ const overlayVariants = {
 export function Card({
   variant = "default",
   children,
-  className = "bg-base-300",
+  className,
   shadow = true,
   padding = "md",
   dashed = false,
@@ -55,7 +55,7 @@ export function Card({
 
     return (
       <div
-        className={`card
+        className={`card bg-base-200
               ${shadow ? "shadow-md" : ""} 
               ${bgClass}
               ${textBgContent[variant]}
