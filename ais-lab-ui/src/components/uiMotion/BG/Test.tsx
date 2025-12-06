@@ -1,120 +1,30 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-function mapProgress(raw: number, start: number, end: number) {
-  return Math.min(1, Math.max(0, (raw - start) / (end - start)));
+interface TestProps {
+  images?: string[];
+  className?: string;
 }
 
-export default function Test({
-  src = "",
-  height = 400,
-  count = 3,
-  children = [],
-  className = "",
-}) {
+export default function Test({ images = [], className = "" }: TestProps) {
   const ref = useRef<HTMLDivElement>(null);
-
-  const [progress, setProgress] = useState<number>(0);
-
-  useEffect(() => {
-    function handleScroll() {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-
-      const viewportH = window.innerHeight;
-      const containerH = rect.height;
-
-      const animationRange = containerH - viewportH;
-
-      const raw = Math.min(1, Math.max(0, -rect.top / animationRange));
-      const p = mapProgress(raw, 0, 0.7); // от 0% до 80%
-      setProgress(p);
-    }
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Отслежование прокрутки
-  const splitOffset = Math.max(0, progress - 0.2) * 30;
-  const scale =
-    progress < 0.2
-      ? 1.1 - (progress / 0.2) * 0.1 // progress 0 → 0.2, scale 1.15 → 1
-      : 1;
-  const rotate = Math.max(0, progress - 0.5) * 360;
-
-  const center = (count - 1) / 2; // центральная карточка
 
   return (
     <div
       ref={ref}
-      className={`relative w-full bg-base-200 rounded-box h-[500dvh] ${className} bg-accent`}
+      className={`relative w-full bg-base-200 rounded-box ${className} `}
     >
-      <div className="sticky top-50">
-        {/* Три части */}
-        <div
-          className="absolute inset-0 flex items-start justify-center transition-all duration-500 ease-linear"
-          style={{ transform: `scale(${scale})` }}
-        >
-          <div className="flex">
-            {Array.from({ length: count }).map((_, i) => {
-              const styleBorder =
-                splitOffset > 10
-                  ? "10px"
-                  : i === 0
-                  ? "10px 0 0 10px"
-                  : i === count - 1
-                  ? "0 10px 10px 0"
-                  : "0";
-              const offsetX = (i - center) * splitOffset;
-
-              const cardWidth = height / 1.69;
-
-              const bgPositionX = -i * cardWidth + "px";
-
-              return (
-                <motion.div
-                  key={i}
-                  style={{
-                    rotateY: rotate,
-                    transformStyle: "preserve-3d",
-                    backfaceVisibility: "hidden",
-                  }}
-                  className="relative"
-                >
-                  <div
-                    className=" bg-cover bg-center transition-all duration-300 object-cover"
-                    style={{
-                      backgroundImage: `url(${src})`,
-                      width: height / 1.69,
-                      height,
-                      backgroundPosition: `${bgPositionX} 0px`,
-                      backgroundSize: `${
-                        cardWidth * count + (count === 2 ? 300 : 0)
-                      }px auto`,
-                      transform: `translateX(${offsetX}px)`,
-                      backfaceVisibility: "hidden",
-                      borderRadius: styleBorder,
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0 bg-base-300 flex items-center justify-center transition-all duration-300"
-                    style={{
-                      width: height / 1.68,
-                      height,
-                      transform: `rotateY(180deg) translateX(${offsetX}px)`,
-                      backfaceVisibility: "hidden",
-                      borderRadius: styleBorder,
-                    }}
-                  >
-                    {/* Контент сзади: можно написать что хочешь */}
-                    <p className="text-lg font-bold">Текст сзади {i + 1}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+      <div className="motion-carousel">
+        <div className="group-test">
+          {[...images, ...images].map((image, i) => (
+            <div key={i} className="card-test overflow-hidden">
+              <img
+                src={image}
+                alt=""
+                className="w-full h-full object-cover rounded-box"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

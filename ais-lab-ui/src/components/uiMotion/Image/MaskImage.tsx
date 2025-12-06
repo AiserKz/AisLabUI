@@ -19,7 +19,7 @@ const variants = {
 export default function MaskImage({
   src,
   variant = "saturate",
-  radius = 250,
+  radius = 200,
   className,
 }: MaskImageProps) {
   const mouseX = useMotionValue(0);
@@ -49,7 +49,7 @@ export default function MaskImage({
 
   return (
     <div
-      className={`relative rounded-box overflow-hidden h-fit ${className} group`}
+      className={`relative rounded-box overflow-hidden ${className} group`}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         mouseX.set(e.clientX - rect.left);

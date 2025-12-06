@@ -1,7 +1,7 @@
 import { BoxesIcon, SearchCode, Settings, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeSwithcer } from "./ThemeSwithcer";
 import useTitle from "../utils/hooks/useTitle";
 import { useScroll, useTransform, motion } from "motion/react";
@@ -81,9 +81,9 @@ export function Header() {
             {/* Desktop nav: hidden on small screens */}
             <div className="hidden md:flex items-center gap-1">
               {Object.entries(pages).map(([page, name]) => (
-                <button
+                <Link
                   key={page}
-                  onClick={() => navigate(page)}
+                  to={page}
                   className={`px-4 py-2 rounded-lg text-sm transition-all duration-200 cursor-pointer border 
                     ${
                       name === currentPage
@@ -92,7 +92,7 @@ export function Header() {
                     }`}
                 >
                   {name}
-                </button>
+                </Link>
               ))}
             </div>
           </div>

@@ -23,6 +23,10 @@ import LetterGlitch from "@/components/uiMotion/BG/LetterGlitch";
 import MaskImage from "@/components/uiMotion/Image/MaskImage";
 import Test from "@/components/uiMotion/BG/Test";
 import SpliteImageCard from "@/components/uiMotion/Image/SpliteImageCard";
+import InfinityCarousel from "@/components/uiMotion/Image/InfiniteCarousel";
+import TextLabelSvg from "@/components/TextLabelSvg";
+import SvgTextAnimation from "@/components/uiMotion/Text/SvgTextAnimation";
+import TextAnimationCounter from "@/components/uiMotion/Text/TextAnimationCounter";
 
 // <motion.div
 //   key="dev"
@@ -102,35 +106,40 @@ export default function Tests() {
               {!loading && (
                 <div className="space-y-10 flex flex-col justify-center">
                   {/* <Test /> */}
-
-                  <MaskImage src={images[3]} className="w-200 h-200" />
-
-                  <BorderBeam
-                    className="w-fit h-fit rounded-box"
-                    size={40}
-                    glow
-                  >
-                    <Card
-                      className="w-200 h-100 flex justify-center items-center text-6xl"
-                      variant="default"
+                  <div className="flex justify-center">
+                    <MaskImage src={images[3]} className="w-100" radius={150} />
+                  </div>
+                  <div className=" flex justify-center items-center">
+                    <BorderBeam
+                      className="w-fit h-fit rounded-box"
+                      size={40}
+                      glow
                     >
-                      AisLabUi
-                    </Card>
-                  </BorderBeam>
+                      <Card
+                        className="w-200 h-100 flex justify-center items-center text-6xl"
+                        variant="default"
+                      >
+                        AisLabUi
+                      </Card>
+                    </BorderBeam>
+                  </div>
 
-                  {/* <div className="rounded-box overflow-clip">
-                    <img
-                      src={images[10]}
-                      alt=""
-                      className="object-cover  transition-all duration-500"
-                    />
-                  </div> */}
-
-                  <SpliteImageCard
-                    src={images[10]}
-                    height={400}
-                    item1={<div>Test11</div>}
+                  <div className="overflow-hid">
+                    <SpliteImageCard src={images[10]} height={450} />
+                  </div>
+                  <InfinityCarousel
+                    images={images}
+                    className="h-200 w-100"
+                    vertical
                   />
+                  <InfinityCarousel images={images} />
+
+                  <div className="flex justify-center">
+                    <SvgTextAnimation svg={<TextLabelSvg />} />
+                  </div>
+                  <div className="flex justify-center mt-100">
+                    <TextAnimationCounter text="Aiser Lab Native Ui" />
+                  </div>
                 </div>
               )}
             </div>

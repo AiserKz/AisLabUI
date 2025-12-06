@@ -8,6 +8,7 @@ function mapProgress(raw: number, start: number, end: number) {
 interface SpliteImageCardProps {
   src: string;
   height?: number;
+  top?: number;
   count?: 2 | 3 | 4 | 5;
   className?: string;
   item1?: React.ReactNode;
@@ -21,6 +22,7 @@ export default function SpliteImageCard({
   src = "",
   height = 400,
   count: _count = 3,
+  top = 200,
   className = "",
 
   item1,
@@ -69,9 +71,9 @@ export default function SpliteImageCard({
   return (
     <div
       ref={ref}
-      className={`relative w-full bg-base-200 rounded-box h-[500dvh] ${className} bg-accent`}
+      className={`relative h-[400dvh] w-full ${className} overflow-clip`}
     >
-      <div className="sticky top-50">
+      <div className="sticky" style={{ top: `${top}px` }}>
         {/* Три части */}
         <motion.div
           className="absolute inset-0 flex items-start justify-center transition-all duration-500 ease-linear"
