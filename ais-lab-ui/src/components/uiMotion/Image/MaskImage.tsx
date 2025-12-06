@@ -19,7 +19,7 @@ const variants = {
 export default function MaskImage({
   src,
   variant = "saturate",
-  radius = 400,
+  radius = 250,
   className,
 }: MaskImageProps) {
   const mouseX = useMotionValue(0);
@@ -49,7 +49,7 @@ export default function MaskImage({
 
   return (
     <div
-      className={`relative rounded-box overflow-hidden h-fit ${className}`}
+      className={`relative rounded-box overflow-hidden h-fit ${className} group`}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         mouseX.set(e.clientX - rect.left);
@@ -67,7 +67,7 @@ export default function MaskImage({
           WebkitMaskImage: maskStyle,
           maskImage: maskStyle,
         }}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full pointer-events-none group-hover:opacity-100 opacity-0 transition-all duration-600"
       >
         <img src={src} className="w-full h-auto" alt="" />
       </div>

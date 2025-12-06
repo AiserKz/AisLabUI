@@ -19,8 +19,10 @@ import {
   Shake,
 } from "@/components/uiMotion/Transform/Transform";
 import LetterGlitch from "@/components/uiMotion/BG/LetterGlitch";
-import Test from "@/components/uiMotion/BG/Test";
+
 import MaskImage from "@/components/uiMotion/Image/MaskImage";
+import Test from "@/components/uiMotion/BG/Test";
+import SpliteImageCard from "@/components/uiMotion/Image/SpliteImageCard";
 
 // <motion.div
 //   key="dev"
@@ -108,10 +110,27 @@ export default function Tests() {
                     size={40}
                     glow
                   >
-                    <Card className="w-200 h-100" variant="default">
-                      AisLAb
+                    <Card
+                      className="w-200 h-100 flex justify-center items-center text-6xl"
+                      variant="default"
+                    >
+                      AisLabUi
                     </Card>
                   </BorderBeam>
+
+                  {/* <div className="rounded-box overflow-clip">
+                    <img
+                      src={images[10]}
+                      alt=""
+                      className="object-cover  transition-all duration-500"
+                    />
+                  </div> */}
+
+                  <SpliteImageCard
+                    src={images[10]}
+                    height={400}
+                    item1={<div>Test11</div>}
+                  />
                 </div>
               )}
             </div>

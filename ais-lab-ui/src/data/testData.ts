@@ -1,7 +1,7 @@
 const images: string[] = [
   "https://icdn.lenta.ru/images/2025/03/10/18/20250310183817287/square_1280_ef1c887b3780ec1c05b7ff1e5998a94f.jpg",
   "https://drawinspire.com/img/anime/anime62.png",
-  "https://avatars.mds.yandex.net/i?id=51ccd7ed89c8cb617c47804321d57d82f89f043e-4482581-images-thumbs&n=13",
+  "https://cs12.pikabu.ru/post_img/big/2022/01/25/7/1643107556152549593.png",
   "https://cdn.pixabay.com/photo/2024/03/03/12/42/ai-generated-8610368_1280.png",
   "https://img.freepik.com/premium-photo/anime-girl-with-long-white-hair-blue-butterfly-hair-clip-generative-ai_958192-23990.jpg",
   "https://img.freepik.com/premium-photo/anime-girl-with-butterfly-hair-blue-eyes-front-window-generative-ai_900833-10168.jpg",
