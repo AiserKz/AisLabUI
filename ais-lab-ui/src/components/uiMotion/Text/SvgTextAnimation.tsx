@@ -1,22 +1,29 @@
-interface SvgTextAnimationProps {
+import type { BaseViewProps } from "../motion-index";
+
+interface SvgTextAnimationProps extends BaseViewProps {
   svg: React.ReactNode;
-  viewPercentage?: number;
-  startPercentage?: number;
-  className?: string;
+  glow?: boolean;
 }
 
 export default function SvgTextAnimation({
   svg,
-  viewPercentage = 80,
-  startPercentage = 5,
+  viewPercentage = 70,
+  startPercentage = 0,
+  glow = false,
   className,
 }: SvgTextAnimationProps) {
   return (
     <div
       className={`motion-text-svg ${className} `}
-      style={{
-        animationTimeline: `view(${viewPercentage}% ${startPercentage}%)`,
-      }}
+      style={
+        {
+          "--filter-svg": glow
+            ? "drop-shadow(0 0 2px var(--color-base-content))"
+            : "",
+          "--view-option": `view(${viewPercentage}% ${startPercentage}%)`,
+          animationTimeline: `view(${viewPercentage}% ${startPercentage}%)`,
+        } as React.CSSProperties
+      }
     >
       {svg}
     </div>

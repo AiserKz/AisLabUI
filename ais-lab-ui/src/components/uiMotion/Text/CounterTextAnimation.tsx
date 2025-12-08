@@ -1,10 +1,13 @@
-type TextAnimationCounterProps = {
+import type { BaseViewProps } from "../motion-index";
+
+interface TextAnimationCounterProps extends BaseViewProps {
   text: string;
-  className?: string;
-};
+}
 
 export default function TextAnimationCounter({
   text,
+  viewPercentage = 0,
+  startPercentage = 0,
   className,
 }: TextAnimationCounterProps) {
   return (
@@ -14,10 +17,11 @@ export default function TextAnimationCounter({
           key={index}
           className="inline-block motion-reveal-text-content"
           style={{
+            animationTimeline: `view(${viewPercentage}% ${startPercentage}%)`,
             animationDelay: `${index * 0.1}s`,
           }}
         >
-          {char}
+          {char === " " ? "\u00A0" : char}
         </span>
       ))}
     </div>

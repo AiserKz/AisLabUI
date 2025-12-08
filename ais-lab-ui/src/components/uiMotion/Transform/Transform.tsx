@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { getMotionProps, type BaseMotionProps } from "..";
+import { getMotionProps, type BaseMotionProps } from "../motion-index";
 
 interface PulseProps extends BaseMotionProps {
   children?: React.ReactNode;

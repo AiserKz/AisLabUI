@@ -21,12 +21,18 @@ import {
 import LetterGlitch from "@/components/uiMotion/BG/LetterGlitch";
 
 import MaskImage from "@/components/uiMotion/Image/MaskImage";
-import Test from "@/components/uiMotion/BG/Test";
 import SpliteImageCard from "@/components/uiMotion/Image/SpliteImageCard";
 import InfinityCarousel from "@/components/uiMotion/Image/InfiniteCarousel";
 import TextLabelSvg from "@/components/TextLabelSvg";
 import SvgTextAnimation from "@/components/uiMotion/Text/SvgTextAnimation";
-import TextAnimationCounter from "@/components/uiMotion/Text/TextAnimationCounter";
+import TextAnimationCounter from "@/components/uiMotion/Text/CounterTextAnimation";
+import FocusToScrollAnimation from "@/components/uiMotion/Container/FocusToScrollAnimation";
+import CardTilt from "@/components/uiMotion/Container/CardTilt";
+import HorizontalScrollSim from "@/components/uiMotion/Container/HorizontalScrollSim";
+import CardZoomToScroll from "@/components/uiMotion/Container/CardZoomToScroll";
+import CardStackFour from "@/components/uiMotion/Container/CardStackFour";
+import BlurTextScrollAnimation from "@/components/uiMotion/Text/BlurTextScrollAnimation";
+import FooterCardScale from "@/components/uiMotion/Container/FooterCardScale";
 
 // <motion.div
 //   key="dev"
@@ -123,6 +129,35 @@ export default function Tests() {
                       </Card>
                     </BorderBeam>
                   </div>
+                  <div className="flex justify-center my-100">
+                    <CardStackFour>
+                      {[1, 2, 3, 4].map((item, index) => (
+                        <CardStackFour.Card
+                          key={index}
+                          className="w-55 h-90 text-6xl bg-base-300"
+                        >
+                          {item}
+                        </CardStackFour.Card>
+                      ))}
+                    </CardStackFour>
+                  </div>
+                  <div className="flex flex-col space-y-10 items-center justify-center my-100">
+                    <BlurTextScrollAnimation>
+                      {[
+                        "Aiser",
+                        "Lab",
+                        "UI",
+
+                        "Animation",
+                        "Blur",
+                        "NativeUi",
+                      ].map((item, _) => (
+                        <BlurTextScrollAnimation.Text>
+                          {item}
+                        </BlurTextScrollAnimation.Text>
+                      ))}
+                    </BlurTextScrollAnimation>
+                  </div>
 
                   <div className="overflow-hid">
                     <SpliteImageCard src={images[10]} height={450} />
@@ -137,8 +172,53 @@ export default function Tests() {
                   <div className="flex justify-center">
                     <SvgTextAnimation svg={<TextLabelSvg />} />
                   </div>
+
+                  <div className="h-[300dvh] mt-100">
+                    <div className="flex justify-center sticky top-100">
+                      <TextAnimationCounter text="AisLab" />
+                    </div>
+                  </div>
+                  <div className="h-[300dvh] mt-100">
+                    <div className="flex justify-center sticky top-100">
+                      <TextAnimationCounter
+                        text="Native UI"
+                        viewPercentage={70}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-center my-100">
+                    <FocusToScrollAnimation>
+                      <span className="text-8xl font-bold">MotionUI</span>
+                    </FocusToScrollAnimation>
+                  </div>
+                  <div className="flex justify-center">
+                    <CardTilt className="h-100 w-70 bg-primary flex justify-center items-center">
+                      <span className="text-3xl font-bold">MotionUI</span>
+                    </CardTilt>
+                  </div>
                   <div className="flex justify-center mt-100">
-                    <TextAnimationCounter text="Aiser Lab Native Ui" />
+                    <HorizontalScrollSim>
+                      {[1, 2, 3, 4, 5, 6].map((item) => (
+                        <div
+                          key={item}
+                          className="p-5 rounded-box text-2xl bg-linear-to-l to-info from-info/70"
+                        >
+                          Item {item}
+                        </div>
+                      ))}
+                    </HorizontalScrollSim>
+                  </div>
+                  <div className="flex my-100">
+                    <div className="h-[400dvh] bg-base-200 w-full">
+                      <CardZoomToScroll className="sticky top-80">
+                        <span className="text-3xl font-bold">MotionUI</span>
+                      </CardZoomToScroll>
+                    </div>
+                  </div>
+                  <div className="mt-100 flex items-center justify-center">
+                    <FooterCardScale>
+                      <div>End</div>
+                    </FooterCardScale>
                   </div>
                 </div>
               )}

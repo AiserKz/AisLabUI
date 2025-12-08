@@ -28,6 +28,25 @@ interface MotionHelperOptions {
   disabled?: boolean;
 }
 
+interface BaseViewProps {
+  viewPercentage?: number;
+  startPercentage?: number;
+  className?: string;
+}
+
+const bgVariants = {
+  default: "",
+  primary: "bg-primary",
+  secondary: "bg-secondary",
+  accent: "bg-accent",
+  info: "bg-info",
+  success: "bg-success",
+  warning: "bg-warning",
+  error: "bg-error",
+  ghost: "bg-transparent",
+  neutral: "bg-neutral",
+};
+
 export function getMotionProps({
   trigger = "load",
   animationProps = {},
@@ -72,4 +91,4 @@ export function getMotionProps({
   }
 }
 
-export type { BaseMotionProps };
+export type { BaseMotionProps, BaseViewProps, bgVariants };

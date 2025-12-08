@@ -1,4 +1,4 @@
-import type { BaseMotionProps } from "..";
+import type { BaseMotionProps } from "../motion-index";
 import "../uiMotion.css";
 
 interface InfinityCarouselProps extends Omit<BaseMotionProps, "ease"> {

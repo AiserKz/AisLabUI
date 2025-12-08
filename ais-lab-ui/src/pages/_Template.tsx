@@ -258,7 +258,9 @@ export default function Template() {
             <div className="blur-focus-text my-100">FOCUS</div>
 
             {/* 7. Perspective Tilt Scroll */}
-            <div className="perspective-tilt-card my-100 mx-auto">3D Tilt</div>
+            <div className="perspective-tilt-card my-100 mx-auto">
+              3D Tiltdwad
+            </div>
 
             {/* 8. Horizontal Scroll Simulation */}
             <div className="">

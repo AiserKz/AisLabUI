@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import type { BaseMotionProps } from "..";
+import type { BaseMotionProps } from "../motion-index";
 
 interface FadeInProps extends BaseMotionProps {
   children?: React.ReactNode;
