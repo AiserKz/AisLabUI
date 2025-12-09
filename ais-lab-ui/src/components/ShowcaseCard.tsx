@@ -8,6 +8,7 @@ interface ShowcaseCardProps {
   description: string;
   preview: ReactNode;
   category?: string;
+  padding?: boolean;
   className?: string;
 }
 
@@ -26,6 +27,7 @@ export default function ShowcaseCard({
   description,
   preview,
   category,
+  padding = true,
   className,
 }: ShowcaseCardProps) {
   return (
@@ -53,7 +55,7 @@ export default function ShowcaseCard({
           <div className="absolute inset-0 bg-base-100/5 backdrop-blur-[1px]" />
 
           {/* Preview Content */}
-          <div className="relative z-10 h-full flex items-center justify-center p-6">
+          <div className={padding ? "relative z-10 h-full flex items-center justify-center p-6" : "relative z-10 h-full flex items-center justify-center"}>
             {preview}
           </div>
 

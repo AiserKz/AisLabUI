@@ -86,12 +86,7 @@ export default function Themes() {
 
         {/* Theme Generator CTA */}
         <BorderBeam className="mt-20 rounded-box" blur size={50}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="p-8 rounded-box bg-linear-90 from-base-200 to-base-300 text-center relative overflow-hidden group"
-          >
+          <div className="p-8 rounded-box bg-linear-90 from-base-200 to-base-300 text-center relative overflow-hidden group">
             <div className="relative z-10 max-w-2xl mx-auto space-y-6">
               <h3 className="text-3xl font-bold">Не нашли идеальную тему?</h3>
               <p className="text-base-content/70 text-lg">
@@ -109,7 +104,7 @@ export default function Themes() {
                 Открыть конструктор тем
               </a>
             </div>
-          </motion.div>
+          </div>
         </BorderBeam>
       </div>
     </div>

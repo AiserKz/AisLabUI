@@ -12,7 +12,8 @@
   filter: none;
   -webkit-mask-image: radial-gradient(
     circle var(--radius) at var(--x) var(--y),
-    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 1
+     ) 50%,
     rgba(0, 0, 0, 0) 100%
   );
   mask-image: radial-gradient(
@@ -227,13 +228,13 @@
 
 @keyframes motion-zoomInScroll {
   0% {
-    transform: scale(1);
+    transform: scale(0.8);
   }
   50% {
-    transform: scale(3);
+    transform: scale(5);
   }
   100% {
-    transform: scale(3);
+    transform: scale(5);
   }
 }
 

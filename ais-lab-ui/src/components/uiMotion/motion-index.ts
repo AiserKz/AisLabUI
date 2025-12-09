@@ -35,7 +35,7 @@ interface BaseViewProps {
 }
 
 const bgVariants = {
-  default: "",
+  default: "bg-base-200",
   primary: "bg-primary",
   secondary: "bg-secondary",
   accent: "bg-accent",
@@ -90,5 +90,6 @@ export function getMotionProps({
       };
   }
 }
+export { bgVariants };
 
-export type { BaseMotionProps, BaseViewProps, bgVariants };
+export type { BaseMotionProps, BaseViewProps };

@@ -158,7 +158,7 @@ const Background: BackgroundComponentProps = ({
   paralax = false,
   shift = 20, // сила смещения слоя в пикселях
 
-  className,
+  className = "z-[-1]",
 }) => {
   const [patternUrl, setPatternUrl] = useState<string | null>(null);
 
@@ -260,7 +260,7 @@ const Background: BackgroundComponentProps = ({
   };
 
   return (
-    <div className={`absolute -inset-1 overflow-hidden z-[-1] ${className}`}>
+    <div className={`absolute -inset-1 overflow-hidden  ${className}`}>
       <div
         className="w-full h-full"
         style={{

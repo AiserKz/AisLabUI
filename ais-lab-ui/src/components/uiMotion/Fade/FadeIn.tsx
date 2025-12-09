@@ -1,8 +1,9 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import type { BaseMotionProps } from "../motion-index";
 
 interface FadeInProps extends BaseMotionProps {
   children?: React.ReactNode;
+  innerClassName?: string;
   power?: number;
 }
 
@@ -12,20 +13,28 @@ interface FadeInUpProps extends FadeInProps {
 
 export default function FadeIn({
   children,
+  className = "",
+  innerClassName,
   delay = 0,
-  duration = 1,
-  power = 1,
+  duration = 0.5,
+  power = 20,
   ease = "easeInOut",
-  className,
 }: FadeInProps) {
+  const variants: Variants = {
+    hidden: { opacity: 0, y: power },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: power }}
-      transition={{ delay, duration, ease: ease }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={variants}
+      transition={{ duration, delay, ease }}
       className={className}
     >
-      {children}
+      <div className={innerClassName}>{children}</div>
     </motion.div>
   );
 }
@@ -37,7 +46,7 @@ export function FadeInMove({
   direction = "bottom",
   power = 20,
   ease = "easeInOut",
-  className,
+  className = "",
 }: FadeInUpProps) {
   const x = direction === "left" ? -power : direction === "right" ? power : 0;
   const y = direction === "top" ? -power : direction === "bottom" ? power : 0;
@@ -58,18 +67,18 @@ export function FadeInMove({
 
 export function FadeInScale({
   children,
+  className = "",
   delay = 0,
-  duration = 1,
+  duration = 0.5,
   power = 0.9,
   ease = "easeInOut",
-  className,
 }: FadeInProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: power }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: power }}
-      transition={{ delay, duration, ease: ease }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration, delay, ease }}
       className={className}
     >
       {children}

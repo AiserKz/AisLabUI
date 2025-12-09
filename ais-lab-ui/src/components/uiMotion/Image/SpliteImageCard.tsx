@@ -69,10 +69,7 @@ export default function SpliteImageCard({
   const center = (count - 1) / 2; // центральная карточка
 
   return (
-    <div
-      ref={ref}
-      className={`relative h-[400dvh] w-full ${className} overflow-clip`}
-    >
+    <div ref={ref} className={`relative h-[300dvh] w-full ${className} `}>
       <div className="sticky" style={{ top: `${top}px` }}>
         {/* Три части */}
         <motion.div

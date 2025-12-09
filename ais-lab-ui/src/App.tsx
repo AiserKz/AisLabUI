@@ -6,6 +6,7 @@ import Tests from "./pages/Tests";
 import Themes from "./pages/Themes";
 import NativeUi from "./pages/NativeUi";
 import Animations from "./pages/Animations";
+import ComponentView from "./pages/ComponentView";
 import Labs from "./pages/Labs";
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <Home />,
+      },
+      {
+        path: "/view/:type/:id",
+        element: <ComponentView />,
       },
     ],
   },

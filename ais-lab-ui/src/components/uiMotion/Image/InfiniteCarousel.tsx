@@ -7,6 +7,7 @@ interface InfinityCarouselProps extends Omit<BaseMotionProps, "ease"> {
   size?: number;
   ease?: "linear" | "ease-in-out" | "ease-in" | "ease-out";
   linearOpacity?: number;
+  linearClass?: string;
 }
 
 export default function InfinityCarousel({
@@ -19,6 +20,7 @@ export default function InfinityCarousel({
   loop = true,
   linearOpacity = 20,
   className = "",
+  linearClass = "to-base-100",
 }: InfinityCarouselProps) {
   return (
     <div
@@ -58,7 +60,7 @@ export default function InfinityCarousel({
         ))}
       </div>
       <div
-        className={`absolute to-base-100 from-60% from-transparent
+        className={`absolute ${linearClass} from-60% from-transparent
         ${vertical ? "bg-linear-to-t top-0" : "bg-linear-to-l left-0 "}`}
         style={{
           height: vertical ? `${linearOpacity}%` : "100%",
@@ -66,7 +68,7 @@ export default function InfinityCarousel({
         }}
       />
       <div
-        className={`absolute to-base-100 from-60% from-transparent
+        className={`absolute ${linearClass} from-60% from-transparent
         ${vertical ? "bg-linear-to-b bottom-0" : "bg-linear-to-r right-0 "}`}
         style={{
           height: vertical ? `${linearOpacity}%` : "100%",
