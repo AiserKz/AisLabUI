@@ -19,6 +19,7 @@ const IphoneMockup = lazy(() => import("@ui/Mockup/IphoneMockup"));
 
 const mediaItems: ShowcaseItem[] = [
   {
+    id: 29,
     title: "Avatar",
     description: "Аватары пользователей",
     category: "Медиа",
@@ -38,6 +39,7 @@ const mediaItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 30,
     title: "Avatar Placeholder",
     description: "Аватары с инициалами",
     category: "Медиа",
@@ -50,6 +52,7 @@ const mediaItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 31,
     title: "Carousel",
     description: "Карусель изображений",
     category: "Медиа",
@@ -62,6 +65,7 @@ const mediaItems: ShowcaseItem[] = [
     fallback: <div className="h-40 bg-base-200 animate-pulse" />,
   },
   {
+    id: 32,
     title: "Hover Gallery",
     description: "Галерея с эффектом при наведении",
     category: "Медиа",
@@ -83,6 +87,7 @@ const mediaItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 33,
     title: "Diff Image",
     description: "Сравнение изображений",
     category: "Медиа",
@@ -100,6 +105,7 @@ const mediaItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 34,
     title: "Iphone Mockup",
     description: "Мокап для мобильных приложений",
     category: "Медиа",

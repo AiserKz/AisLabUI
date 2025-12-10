@@ -1,6 +1,7 @@
 import { lazy } from "react";
 
 export type ShowcaseItem = {
+  id?: number;
   title: string;
   description: string;
   category: string;

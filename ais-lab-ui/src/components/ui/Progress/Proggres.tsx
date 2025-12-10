@@ -32,7 +32,7 @@ export default function Progress({
   return (
     <div className="m-0">
       {showLabel && (
-        <div className="flex justify-between text-xs text-base-content/60">
+        <div className="flex justify-between text-xs text-base-content/60 gap-4">
           <span>{label}</span>
           <span>{value || 0}%</span>
         </div>

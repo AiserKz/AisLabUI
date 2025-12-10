@@ -23,6 +23,7 @@ import type { ShowcaseItem } from ".";
 
 const inputs: ShowcaseItem[] = [
   {
+    id: 4,
     title: "Text Input",
     description: "Текстовое поле с иконкой",
     category: "Формы",
@@ -38,6 +39,7 @@ const inputs: ShowcaseItem[] = [
     ),
   },
   {
+    id: 5,
     title: "File Input",
     description: "Загрузка файлов",
     category: "Формы",
@@ -49,6 +51,7 @@ const inputs: ShowcaseItem[] = [
     ),
   },
   {
+    id: 6,
     title: "Checkbox",
     description: "Переключатель для выбора опций",
     category: "Формы",
@@ -56,6 +59,7 @@ const inputs: ShowcaseItem[] = [
     preview: () => <Checkbox label="Checkbox" variant="success" />,
   },
   {
+    id: 7,
     title: "Radio",
     description: "Радио-кнопка для выбора одного варианта",
     category: "Формы",
@@ -63,6 +67,7 @@ const inputs: ShowcaseItem[] = [
     preview: () => <Radio label="Radio" variant="primary" sizes="md" />,
   },
   {
+    id: 8,
     title: "Select",
     description: "Выпадающий список",
     category: "Формы",
@@ -80,6 +85,7 @@ const inputs: ShowcaseItem[] = [
     ),
   },
   {
+    id: 9,
     title: "Toggle",
     description: "Переключатель вкл/выкл",
     category: "Формы",
@@ -87,6 +93,7 @@ const inputs: ShowcaseItem[] = [
     preview: () => <Toggle label="Toggle" variant="primary" sizes="md" />,
   },
   {
+    id: 10,
     title: "Slider",
     description: "Слайдер для выбора значения",
     category: "Формы",
@@ -99,6 +106,7 @@ const inputs: ShowcaseItem[] = [
     ),
   },
   {
+    id: 11,
     title: "ThemeSwithcer",
     description: "Переключатель тем",
     category: "Формы",

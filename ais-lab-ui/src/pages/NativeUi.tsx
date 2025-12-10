@@ -1,7 +1,6 @@
 import React, { Suspense, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Divider, Loading } from "@ui/index";
-import { generateId } from "@/utils/id-helper";
 
 import TitlePage from "@/components/TitlePage";
 import ShowcaseCard from "@/components/ShowcaseCard";
@@ -43,33 +42,33 @@ const helpMap: Record<string, string> = {
 
 const ShowcaseItem = React.memo(function ShowcaseItem({ c }: { c: any }) {
   const PreviewComponent = c.preview;
+  const navigate = useNavigate();
 
   return (
-    <Link to={`/view/native/${generateId(c.title)}`} className="block h-full cursor-pointer hover:no-underline">
-      <ShowcaseCard
-        title={c.title}
-        description={c.description}
-        category={c.category}
-        className="h-full transition-transform hover:scale-[1.01]"
-        icon={c.icon}
-        preview={
-          <Suspense
-            fallback={
-              <Loading
-                className="h-120"
-                type="spinner"
-                size="xl"
-                variant="primary"
-              >
-                Загрузка...
-              </Loading>
-            }
-          >
-            <PreviewComponent />
-          </Suspense>
-        }
-      />
-    </Link>
+    <ShowcaseCard
+      title={c.title}
+      description={c.description}
+      category={c.category}
+      className="h-full transition-transform hover:scale-[1.01]"
+      icon={c.icon}
+      onClick={() => navigate(`/view/native/${c.id}`)}
+      preview={
+        <Suspense
+          fallback={
+            <Loading
+              className="h-120"
+              type="spinner"
+              size="xl"
+              variant="primary"
+            >
+              Загрузка...
+            </Loading>
+          }
+        >
+          <PreviewComponent />
+        </Suspense>
+      }
+    />
   );
 });
 
@@ -117,50 +116,60 @@ export default function NativeUi() {
           <div className="">
             {/* BUTTONS SECTION */}
             <Section id="buttons" className="my-12">
-               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <span className="w-2 h-8 bg-primary rounded-full"></span>
-                  Кнопки
-                  <span className="text-base-content/30 text-sm font-normal ml-auto">{buttons.length} items</span>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-primary rounded-full"></span>
+                Кнопки
+                <span className="text-base-content/30 text-sm font-normal ml-auto">
+                  {buttons.length} items
+                </span>
               </h2>
               {renderArray(buttons)}
             </Section>
 
             {/* INPUTS SECTION */}
             <Section id="inputs" className="my-12">
-               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <span className="w-2 h-8 bg-success rounded-full"></span>
-                  Поля ввода
-                  <span className="text-base-content/30 text-sm font-normal ml-auto">{inputs.length} items</span>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-success rounded-full"></span>
+                Поля ввода
+                <span className="text-base-content/30 text-sm font-normal ml-auto">
+                  {inputs.length} items
+                </span>
               </h2>
               {renderArray(inputs)}
             </Section>
 
             {/* CARDS SECTION */}
             <Section id="cards" className="my-12">
-               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <span className="w-2 h-8 bg-warning rounded-full"></span>
-                  Карточки
-                  <span className="text-base-content/30 text-sm font-normal ml-auto">{cards.length} items</span>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-warning rounded-full"></span>
+                Карточки
+                <span className="text-base-content/30 text-sm font-normal ml-auto">
+                  {cards.length} items
+                </span>
               </h2>
               {renderArray(cards)}
             </Section>
 
             {/* STATUS & FEEDBACK SECTION */}
             <Section id="status" className="my-12">
-               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <span className="w-2 h-8 bg-info rounded-full"></span>
-                  Статусы и обратная связь
-                  <span className="text-base-content/30 text-sm font-normal ml-auto">{statusItems.length} items</span>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-info rounded-full"></span>
+                Статусы и обратная связь
+                <span className="text-base-content/30 text-sm font-normal ml-auto">
+                  {statusItems.length} items
+                </span>
               </h2>
               {renderArray(statusItems)}
             </Section>
 
             {/* MEDIA SECTION */}
             <Section id="media" className="my-12">
-               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <span className="w-2 h-8 bg-error rounded-full"></span>
-                  Медиа
-                  <span className="text-base-content/30 text-sm font-normal ml-auto">{mediaItems.length} items</span>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-error rounded-full"></span>
+                Медиа
+                <span className="text-base-content/30 text-sm font-normal ml-auto">
+                  {mediaItems.length} items
+                </span>
               </h2>
               {renderArray(mediaItems)}
             </Section>

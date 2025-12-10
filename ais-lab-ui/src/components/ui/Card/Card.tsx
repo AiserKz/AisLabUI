@@ -31,8 +31,6 @@ const overlayVariants = {
   xl: "bg-black/50",
   "2xl": "bg-black/60",
   "3xl": "bg-black/70",
-  "4xl": "bg-black/80",
-  "5xl": "bg-black/90",
 };
 
 export function Card({

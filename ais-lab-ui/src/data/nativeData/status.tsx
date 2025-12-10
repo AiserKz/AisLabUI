@@ -27,6 +27,7 @@ import {
 
 const statusItems: ShowcaseItem[] = [
   {
+    id: 19,
     title: "Progress Bar",
     description: "Линейный индикатор прогресса",
     category: "Обратная связь",
@@ -41,6 +42,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 20,
     title: "Radial Progress",
     description: "Круговой индикатор прогресса",
     category: "Обратная связь",
@@ -53,6 +55,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 21,
     title: "Status Indicator",
     description: "Индикатор статуса",
     category: "Обратная связь",
@@ -68,6 +71,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 22,
     title: "Loading",
     description: "Индикатор загрузки",
     category: "Обратная связь",
@@ -84,6 +88,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 23,
     title: "Badge",
     description: "Маркеры и метки",
     category: "Обратная связь",
@@ -99,6 +104,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 24,
     title: "Tags",
     description: "Теги для категоризации",
     category: "Обратная связь",
@@ -114,6 +120,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 25,
     title: "Alert",
     description: "Уведомления и сообщения",
     category: "Обратная связь",
@@ -130,6 +137,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 26,
     title: "Tooltip",
     description: "Всплывающая подсказка",
     category: "Обратная связь",
@@ -148,6 +156,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 27,
     title: "Indicator",
     description: "Индикатор на элементе",
     category: "Обратная связь",
@@ -161,6 +170,7 @@ const statusItems: ShowcaseItem[] = [
     ),
   },
   {
+    id: 28,
     title: "Divider",
     description: "Разделитель",
     category: "Обратная связь",

@@ -18,6 +18,7 @@ const CodeMockup = lazy(() => import("@ui/Mockup/CodeMockup"));
 
 const cards: ShowcaseItem[] = [
   {
+    id: 12,
     title: "Standard Card",
     description: "Базовая карточка для контента",
     category: "Контейнеры",
@@ -30,6 +31,7 @@ const cards: ShowcaseItem[] = [
     ),
   },
   {
+    id: 13,
     title: "Glass Card",
     description: "Карточка с glass эффектом",
     category: "Контейнеры",
@@ -42,6 +44,7 @@ const cards: ShowcaseItem[] = [
     ),
   },
   {
+    id: 14,
     title: "3D Hover Card",
     description: "Карточка с 3D эффектом при наведении",
     category: "Контейнеры",
@@ -54,6 +57,7 @@ const cards: ShowcaseItem[] = [
     ),
   },
   {
+    id: 15,
     title: "Image Card",
     description: "Карточка с изображением",
     category: "Контейнеры",
@@ -65,6 +69,7 @@ const cards: ShowcaseItem[] = [
     ),
   },
   {
+    id: 16,
     title: "Accordion",
     description: "Раскрывающаяся панель",
     category: "Контейнеры",
@@ -78,6 +83,7 @@ const cards: ShowcaseItem[] = [
     ),
   },
   {
+    id: 17,
     title: "Modal",
     description: "Модальное окно",
     category: "Контейнеры",
@@ -103,6 +109,7 @@ const cards: ShowcaseItem[] = [
     ),
   },
   {
+    id: 18,
     title: "Code Mockup",
     description: "Мокап кода",
     category: "Контейнеры",

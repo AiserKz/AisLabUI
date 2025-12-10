@@ -30,7 +30,7 @@ export default function BorderBeam({
 }: BorderBeamProps) {
   if (disabled) return <div className={className}>{children}</div>;
 
-  const countLines = count;
+  const countLines = Number(count);
   const colors =
     colorCustom?.slice(0, countLines) ||
     Array(countLines).fill("var(--current-color)");

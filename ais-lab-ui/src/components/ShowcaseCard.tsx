@@ -9,6 +9,7 @@ interface ShowcaseCardProps {
   preview: ReactNode;
   category?: string;
   padding?: boolean;
+  onClick?: () => void;
   className?: string;
 }
 
@@ -28,6 +29,7 @@ export default function ShowcaseCard({
   preview,
   category,
   padding = true,
+  onClick,
   className,
 }: ShowcaseCardProps) {
   return (
@@ -55,7 +57,13 @@ export default function ShowcaseCard({
           <div className="absolute inset-0 bg-base-100/5 backdrop-blur-[1px]" />
 
           {/* Preview Content */}
-          <div className={padding ? "relative z-10 h-full flex items-center justify-center p-6" : "relative z-10 h-full flex items-center justify-center"}>
+          <div
+            className={
+              padding
+                ? "relative z-10 h-full flex items-center justify-center p-6"
+                : "relative z-10 h-full flex items-center justify-center"
+            }
+          >
             {preview}
           </div>
 
@@ -67,7 +75,7 @@ export default function ShowcaseCard({
         </div>
 
         {/* Content */}
-        <div className="card-body p-6">
+        <div className="card-body p-6 cursor-pointer" onClick={onClick}>
           <div className="flex space-x-3 items-start">
             <div className="flex items-center justify-center bg-base-200/60 rounded-field p-3">
               {Icon || <SparklesIcon />}

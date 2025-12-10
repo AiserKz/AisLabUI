@@ -5,7 +5,6 @@ interface AccordionProps {
   children: React.ReactNode;
   variant?: keyof typeof bgVariants;
   glass?: boolean;
-  rounded?: boolean;
   shadow?: boolean;
   only?: boolean;
   className?: string;
@@ -43,7 +42,6 @@ export default function Accordion({
   children,
   variant = "default",
   glass = false,
-  rounded = true,
   shadow = false,
   only = false,
   className = "",
@@ -57,7 +55,7 @@ export default function Accordion({
       className={`border collapse collapse-arrow overflow-hidden
         ${bgClass}
         ${borderVariants[variant]} 
-        ${rounded ? "rounded-lg" : ""} 
+ 
         ${shadow && `shadow-[0_0_15px] ${shadowColor[variant]}`} 
         ${className}
         `}

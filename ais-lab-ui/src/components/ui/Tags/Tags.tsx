@@ -11,6 +11,7 @@ const variants = {
   default: "hover:border-base-200 hover:shadow-base-200/20",
   primary: "hover:border-primary hover:shadow-primary/20",
   info: "hover:border-info hover:shadow-info/20",
+  accent: "hover:border-accent hover:shadow-accent/20",
   success: "hover:border-success hover:shadow-success/20",
   warning: "hover:border-warning hover:shadow-warning/20",
   error: "hover:border-error hover:shadow-error/20",

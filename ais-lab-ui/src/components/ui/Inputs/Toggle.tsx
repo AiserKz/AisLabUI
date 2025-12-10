@@ -38,7 +38,7 @@ export default function Toggle({
   ...props
 }: ToggleProps) {
   return (
-    <div className="flex space-x-2">
+    <div className="flex space-x-2 items-center">
       {!rightLabel && (
         <>
           {label && <span>{label}</span>}
@@ -48,7 +48,7 @@ export default function Toggle({
       <input
         type="checkbox"
         defaultChecked
-        className={`toggle ${variants[variant]} `}
+        className={`toggle ${variants[variant]} ${size[sizes]} ${className}`}
         {...props}
       />
 

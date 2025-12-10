@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Loading } from "@ui/index";
 import TitlePage from "@/components/TitlePage";
 import Section from "@/components/Section";
@@ -14,6 +14,7 @@ import { Play, Layers } from "lucide-react";
 const AnimationShowcaseItem = React.memo(function AnimationShowcaseItem({ item }: { item: any }) {
   const Component = item.component;
   const isVideo = !!item.video;
+  const navigate = useNavigate();
 
   const PreviewContent = () => (
     <div className="w-full h-full flex items-center justify-center">
@@ -45,16 +46,13 @@ const AnimationShowcaseItem = React.memo(function AnimationShowcaseItem({ item }
       className="h-full"
       preview={<PreviewContent />}
       padding={false}
+      onClick={() => navigate(`/view/animations/${item.id}`)}
     />
   );
 
   if (isVideo) return card;
 
-  return (
-    <Link to={`/view/animations/${item.id}`} className="block h-full cursor-pointer">
-      {card}
-    </Link>
-  );
+  return card;
 });
 
 export default function Animations() {

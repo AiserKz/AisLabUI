@@ -4,6 +4,7 @@ import { Button } from "@ui/index";
 
 const buttons: ShowcaseItem[] = [
   {
+    id: 1,
     title: "Primary Button",
     description: "Основная кнопка для главных действий",
     category: "Кнопки",
@@ -11,6 +12,7 @@ const buttons: ShowcaseItem[] = [
     icon: <MousePointerClickIcon className="text-warning" />,
   },
   {
+    id: 2,
     title: "Outlined Button",
     description: "Кнопка с прозрачным фоном",
     category: "Кнопки",
@@ -22,6 +24,7 @@ const buttons: ShowcaseItem[] = [
     icon: <MousePointerClickIcon className="text-warning" />,
   },
   {
+    id: 3,
     title: "Glass Button",
     description: "Кнопка с glass эффектом",
     category: "Кнопки",

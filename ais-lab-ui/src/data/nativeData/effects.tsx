@@ -14,6 +14,7 @@ const beamColors = ["#ff0000", "#00ff00", "#0000ff"];
 
 const effects: ShowcaseItem[] = [
   {
+    id: 35,
     title: "Counter",
     description: "Анимированный счетчик",
     category: "Эффекты",
@@ -26,6 +27,7 @@ const effects: ShowcaseItem[] = [
     ),
   },
   {
+    id: 36,
     title: "Text Rotate",
     description: "Вращение текста",
     category: "Эффекты",
@@ -39,6 +41,7 @@ const effects: ShowcaseItem[] = [
     ),
   },
   {
+    id: 37,
     title: "Border Beam",
     description: "Анимированная граница",
     category: "Эффекты",
@@ -51,6 +54,7 @@ const effects: ShowcaseItem[] = [
     fallback: <div className="p-4 font-bold bg-base-100">Border Beam</div>,
   },
   {
+    id: 38,
     title: "Shadow Beam",
     description: "Анимированная тень",
     category: "Эффекты",
@@ -65,6 +69,7 @@ const effects: ShowcaseItem[] = [
     ),
   },
   {
+    id: 39,
     title: "Background Dots",
     description: "Задний фон",
     category: "Эффекты",
@@ -84,6 +89,7 @@ const effects: ShowcaseItem[] = [
     fallback: <div className="h-20 w-full bg-base-200" />,
   },
   {
+    id: 40,
     title: "Background Grid",
     description: "Задний фон",
     category: "Эффекты",
@@ -103,6 +109,7 @@ const effects: ShowcaseItem[] = [
     fallback: <div className="h-20 w-full bg-base-200" />,
   },
   {
+    id: 41,
     title: "Background Custom",
     description: "Задний фон",
     category: "Эффекты",

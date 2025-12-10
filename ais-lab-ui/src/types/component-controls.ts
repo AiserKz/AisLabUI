@@ -11,26 +11,13 @@ export interface PropControl {
   defaultValue?: any;
 }
 
-export interface ComponentDataItem {
-  id: string; // Unique identifier (slug)
-  title: string;
-  description: string;
-  
-  // Motion component specific
+export interface ComponentControllProps {
+  id: number | string;
+  title?: string;
+  description?: string;
+  previewText?: string | React.ReactNode;
   component?: React.ComponentType<any>;
+  controllers?: PropControl[];
+  defaultProps?: Record<string, any>;
   video?: string;
-  
-  // Native component specific
-  preview?: React.ComponentType<any>; 
-  fallback?: React.ReactNode;
-  
-  // Common
-  props?: Record<string, any>; // Default props
-  controls?: PropControl[]; // Configuration controls
-  category?: string;
-  icon?: React.ReactNode;
-  
-  // For grouping
-  items?: ComponentDataItem[];
 }
-
