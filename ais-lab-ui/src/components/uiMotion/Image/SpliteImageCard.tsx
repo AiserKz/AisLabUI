@@ -62,7 +62,7 @@ export default function SpliteImageCard({
 
   const count = Math.max(2, Math.min(5, _count));
   // Тригеры прокрутки
-  const splitOffset = Math.max(0, progress - 0.2) * 70;
+  const splitOffset = Math.max(0, progress - 0.2) * 50;
   const scale = useTransform(rawProgress, [0, 0.2], [1.1, 1]);
   const rotateMotion = useTransform(rawProgress, [0.5, 1], [0, 180]);
 

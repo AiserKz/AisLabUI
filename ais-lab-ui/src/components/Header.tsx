@@ -24,8 +24,15 @@ export function Header() {
   );
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
+  const isMobile =
+    typeof window !== "undefined" ? window.innerWidth < 768 : false;
+
   const { scrollY } = useScroll();
-  const width = useTransform(scrollY, [0, 200], ["75%", "70%"]);
+  const width = useTransform(
+    scrollY,
+    [0, 200],
+    isMobile ? ["95%", "85%"] : ["75%", "70%"]
+  );
   const fade = useTransform(scrollY, [0, 200], [1, 0.92]);
   const offset = useTransform(scrollY, [0, 200], [0, -2]);
 
@@ -62,7 +69,7 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 flex pt-4 justify-center z-50">
       <motion.nav
         style={{ width: width, opacity: fade, y: offset }}
-        className="max-w-8xl w-[75%] bg-base-200 rounded-box border-t border-l border-base-content/20 backdrop-blur-md
+        className="max-w-8xl bg-base-200 rounded-box border-t border-l border-base-content/20 backdrop-blur-md
       hover:border-blue-400 hover:shadow-[-5px_-5px_10px] shadow-blue-400/30 transition-all duration-500 delay-100 "
       >
         <div className="flex items-center justify-between px-6 h-16">

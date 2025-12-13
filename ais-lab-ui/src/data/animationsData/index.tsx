@@ -7,28 +7,27 @@ import FadeIn from "../../components/uiMotion/Fade/FadeIn";
 import LetterGlitch from "../../components/uiMotion/BG/LetterGlitch";
 import { Float as TransformFloat } from "../../components/uiMotion/Transform/Transform";
 
-
 export const animationsData = [
   {
     id: "text",
     title: "Текст",
     items: [
       {
-        id: "blur-text",
+        id: 1,
         title: "Blur Text Scroll",
         video: "/video/motion/BlurTextScroll.mp4",
         component: BlurTextScrollAnimation,
         description: "Текст плавно становится четким при скролле.",
       },
       {
-        id: "counter-text",
+        id: 2,
         title: "Text Counter",
         video: "/video/motion/TextCounter.mp4",
         component: CounterTextAnimation,
         description: "Анимация счетчика чисел с настройкой скорости.",
       },
       {
-        id: "svg-text",
+        id: 3,
         title: "SVG Text Draw",
         video: "/video/motion/SvgText.mp4",
         component: SvgTextAnimation,
@@ -41,31 +40,32 @@ export const animationsData = [
     title: "Скролл",
     items: [
       {
-        id: "card-tilt",
+        id: 4,
         title: "Card Tilt",
         video: "/video/motion/CardTilt.mp4",
         description: "3D наклон карточки при скролле.",
       },
       {
-        id: "card-zoom",
+        id: 5,
         title: "Zoom to Scroll",
         video: "/video/motion/CardZoomToScroll.mp4",
         description: "Увеличение элемента при прокрутке страницы.",
       },
       {
-        id: "horizontal-sim",
+        id: 6,
         title: "Horizontal Scroll",
         video: "/video/motion/HorizontalScrollSim.mp4",
-        description: "Симуляция горизонтального скролла при вертикальной прокрутке.",
+        description:
+          "Симуляция горизонтального скролла при вертикальной прокрутке.",
       },
       {
-        id: "scroll-focus",
+        id: 7,
         title: "Focus Scroll",
         video: "/video/motion/ScrollFocus.mp4",
         description: "Фокусировка на элементе по центру экрана.",
       },
       {
-        id: "footer-reveal",
+        id: 8,
         title: "Footer Reveal",
         video: "/video/motion/FooterEnd.mp4",
         description: "Эффект появления футера из-под контента.",
@@ -77,19 +77,19 @@ export const animationsData = [
     title: "Карточки",
     items: [
       {
-        id: "four-cards",
+        id: 9,
         title: "Stack Cards",
         video: "/video/motion/FourCard.mp4",
         description: "Стопка карточек, раскрывающаяся при скролле.",
       },
       {
-        id: "split-image",
+        id: 10,
         title: "Split Image",
         video: "/video/motion/SplitImage.mp4",
         description: "Разделение изображения при наведении или скролле.",
       },
       {
-        id: "image-mask",
+        id: 11,
         title: "Image Mask",
         video: "/video/motion/ImageMask.mp4",
         description: "Маска изображения с курсором-фонариком.",
@@ -101,30 +101,82 @@ export const animationsData = [
     title: "Компоненты",
     items: [
       {
-        id: "fade-in",
+        id: 12,
         title: "Fade In",
         component: FadeIn,
         description: "Простое и плавное появление элемента.",
-        props: { children: "Hello World", innerClassName: "p-4 bg-primary text-primary-content rounded-box shadow-xl font-bold" },
+        props: {
+          children: "Hello World",
+          innerClassName:
+            "p-4 bg-primary text-primary-content rounded-box shadow-xl font-bold",
+        },
         controls: [
-          { name: "duration", label: "Duration", type: "number", min: 0.1, max: 5, step: 0.1, defaultValue: 0.5 },
-          { name: "delay", label: "Delay", type: "number", min: 0, max: 2, step: 0.1, defaultValue: 0 },
-          { name: "power", label: "Power (Distance)", type: "number", min: 0, max: 100, step: 5, defaultValue: 20 },
-          { name: "ease", label: "Ease", type: "select", options: ["linear", "easeIn", "easeOut", "easeInOut", "circIn", "circOut", "circInOut", "backIn", "backOut", "backInOut", "anticipate"], defaultValue: "easeInOut" }
-        ]
+          {
+            name: "duration",
+            label: "Duration",
+            type: "number",
+            min: 0.1,
+            max: 5,
+            step: 0.1,
+            defaultValue: 0.5,
+          },
+          {
+            name: "delay",
+            label: "Delay",
+            type: "number",
+            min: 0,
+            max: 2,
+            step: 0.1,
+            defaultValue: 0,
+          },
+          {
+            name: "power",
+            label: "Power (Distance)",
+            type: "number",
+            min: 0,
+            max: 100,
+            step: 5,
+            defaultValue: 20,
+          },
+          {
+            name: "ease",
+            label: "Ease",
+            type: "select",
+            options: [
+              "linear",
+              "easeIn",
+              "easeOut",
+              "easeInOut",
+              "circIn",
+              "circOut",
+              "circInOut",
+              "backIn",
+              "backOut",
+              "backInOut",
+              "anticipate",
+            ],
+            defaultValue: "easeInOut",
+          },
+        ],
       },
       {
-        id: "letter-glitch",
+        id: 13,
         title: "Letter Glitch",
         component: LetterGlitch,
         description: "Эффект глитча текста при наведении.",
       },
       {
-        id: "transform",
+        id: 14,
         title: "3D Float",
         component: TransformFloat,
         description: "3D трансформация и левитация элемента.",
-        props: { children: <div className="w-32 h-32 bg-secondary rounded-xl shadow-xl flex items-center justify-center text-secondary-content font-bold">Float</div> }
+        props: {
+          children: (
+            <div className="w-32 h-32 bg-secondary rounded-xl shadow-xl flex items-center justify-center text-secondary-content font-bold">
+              Float
+            </div>
+          ),
+        },
       },
     ],
   },
@@ -133,7 +185,7 @@ export const animationsData = [
     title: "Сложные",
     items: [
       {
-        id: "infinite-carousel",
+        id: 15,
         title: "Infinite Carousel",
         video: "/video/motion/InfinitiCarousel.mp4",
         description: "Бесконечная карусель логотипов или карточек.",

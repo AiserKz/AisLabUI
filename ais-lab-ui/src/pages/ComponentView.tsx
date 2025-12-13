@@ -1,4 +1,4 @@
-import { useState, Suspense, useMemo } from "react";
+import { useState, Suspense, useMemo, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, RefreshCw, Copy, Check, Settings } from "lucide-react";
 import PropControls from "@/components/PropControls";
@@ -23,7 +23,12 @@ export default function ComponentView() {
     }
   }, [type, id]);
 
-  useTitle(item?.title || "Component View");
+  const { setTitle } = useTitle("Component View");
+
+  useEffect(() => {
+    setTitle(item?.title || "Component View");
+  }, [item]);
+
   const [props, setProps] = useState<Record<string, any>>(
     item?.defaultProps || {}
   );
@@ -47,7 +52,10 @@ export default function ComponentView() {
     return (
       <div className="h-screen flex flex-col items-center justify-center">
         <h2 className="text-2xl font-bold">Компонент не найден</h2>
-        <Link to="/" className="btn btn-primary mt-4">
+        <Link
+          to={type === "animations" ? "/animate" : "/native"}
+          className="btn btn-primary mt-4"
+        >
           Go Home
         </Link>
       </div>
@@ -57,7 +65,7 @@ export default function ComponentView() {
   const Component = item.component;
 
   return (
-    <div className="flex flex-col h-screen overflow-clip bg-black text-base-content font-sans selection:bg-blue-500/30">
+    <div className="flex flex-col h-dvh bg-black text-base-content font-sans selection:bg-blue-500/30">
       {/* Header */}
       <header className="h-16 border-b border-white/5 flex items-center px-6 justify-between bg-base-100/80 backdrop-blur-xl  relative">
         <div className="flex items-center gap-4">
@@ -105,7 +113,7 @@ export default function ComponentView() {
       </header>
 
       {/* Main Content */}
-      <div className="flex flex-1 overflow-clip relative">
+      <div className="flex flex-1 overflow-clip relative ">
         <Background
           className="absolute inset-0 z-0 opacity-30 pointer-events-none"
           size={40}
@@ -115,10 +123,14 @@ export default function ComponentView() {
 
         {/* Preview Area */}
         <div className="flex-1 relative flex items-center justify-center p-8 overflow-clip z-10">
-          <div className="relative w-full max-w-5xl h-full max-h-[90%] flex items-center justify-center">
+          <div
+            className={`relative w-full max-w-5xl flex items-center justify-center
+               ${type === "animations" ? "h-[170dvh]" : "h-screen"} 
+               `}
+          >
             <div className="absolute inset-0 bg-base-100/30 backdrop-blur-3xl rounded-3xl border border-white/5 shadow-2xl"></div>
 
-            <div className="relative z-10 w-full h-full flex items-center justify-center overflow-clip p-12 custom-scrollbar">
+            <div className="relative z-10 w-full h-full flex items-center justify-start overflow-clip p-12 custom-scrollbar">
               <Suspense fallback={<Loading />}>
                 <div key={key} className="w-full flex justify-center ">
                   {Component ? (
@@ -137,7 +149,7 @@ export default function ComponentView() {
         </div>
 
         {/* Controls Sidebar */}
-        <div className="w-96 shrink-0 h-full border-l border-white/5 bg-base-100/80 backdrop-blur-xl relative z-20 shadow-[-10px_0_30px_rgba(0,0,0,0.5)]">
+        <div className="w-96 shrink-0 h-full max-h-screen border-l border-white/5 bg-base-100/80 backdrop-blur-xl relative z-20 shadow-[-10px_0_30px_rgba(0,0,0,0.5)]">
           {item.controllers ? (
             <PropControls
               controls={item.controllers}

@@ -5,14 +5,14 @@ interface TextAnimationCounterProps extends BaseViewProps {
 }
 
 export default function TextAnimationCounter({
-  text,
+  text = "Text",
   viewPercentage = 0,
   startPercentage = 0,
   className,
 }: TextAnimationCounterProps) {
   return (
     <div className={`text-center text-8xl motion-reveal-text ${className}`}>
-      {text.split("").map((char, index) => (
+      {text?.split("").map((char, index) => (
         <span
           key={index}
           className="inline-block motion-reveal-text-content"

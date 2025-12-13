@@ -4,7 +4,7 @@ export interface PropControl {
   name: string;
   label?: string;
   type: ControlType;
-  options?: string[]; // for 'select'
+  options?: string[] | number[]; // for 'select'
   min?: number; // for 'number'
   max?: number; // for 'number'
   step?: number; // for 'number'

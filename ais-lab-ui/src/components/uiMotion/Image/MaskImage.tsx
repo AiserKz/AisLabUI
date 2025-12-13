@@ -12,13 +12,12 @@ interface MaskImageProps {
 const variants = {
   blur: "blur-sm",
   brightness: "brightness-50",
-  saturate: "saturate-0",
   grayscale: "grayscale",
 };
 
 export default function MaskImage({
   src,
-  variant = "saturate",
+  variant = "grayscale",
   radius = 200,
   className,
 }: MaskImageProps) {

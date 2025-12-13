@@ -7,18 +7,6 @@ import Background from "@/components/ui/Bg/Background";
 import { Button } from "@/components/ui";
 
 import { AnimatePresence, motion } from "framer-motion";
-import FadeIn, {
-  FadeInMove,
-  FadeInScale,
-} from "@/components/uiMotion/Fade/FadeIn";
-import {
-  Bounce,
-  Flip,
-  Float,
-  Pulse,
-  Shake,
-} from "@/components/uiMotion/Transform/Transform";
-import LetterGlitch from "@/components/uiMotion/BG/LetterGlitch";
 
 import SpliteImageCard from "@/components/uiMotion/Image/SpliteImageCard";
 
@@ -81,7 +69,7 @@ export default function Tests() {
       options={{ autoRaf: false, smoothWheel: true, lerp: 0.03 }}
       ref={lenisRef}
     >
-      <div className="w-full justify-center flex">
+      <div className="w-full max-w-7xl mx-auto justify-center flex">
         <div className=" w-full">
           <div>
             <TitlePage title="Тесты" description="Тестовые компоненты" />
@@ -112,13 +100,7 @@ export default function Tests() {
           </div>
           <AnimatePresence>
             {dev ? (
-              <div className="pb-2000">
-                {!loading && (
-                  <div className="space-y-10 flex flex-col justify-center my-100">
-                    <SpliteImageCard src={images[10]} height={450} />
-                  </div>
-                )}
-              </div>
+              <div className="pb-0"></div>
             ) : (
               <motion.div
                 key="vitrina"
@@ -126,16 +108,11 @@ export default function Tests() {
                 animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
                 transition={{ duration: 0.3 }}
                 exit={{ opacity: 0, filter: "blur(10px)", x: 40 }}
-                className="mt-4 columns-1 md:columns-3 gap-4 pb-10 space-y-4"
+                className=""
               >
-                <UiCardsTest title="LetterGlitch">
-                  <LetterGlitch
-                    glitchColors={["#2b4539", "#61dca3", "#61b3dc"]}
-                    characters="AisLabUi"
-                    glitchSpeed={100}
-                    outerVignette
-                  />
-                </UiCardsTest>
+                <div className="space-y-10 flex flex-col justify-center my-100">
+                  <SpliteImageCard src={images[10]} height={450} />
+                </div>
 
                 <UiCardsTest
                   title="Background - Wave Ring"
