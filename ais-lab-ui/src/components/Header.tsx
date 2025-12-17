@@ -70,7 +70,7 @@ export function Header() {
       <motion.nav
         style={{ width: width, opacity: fade, y: offset }}
         className="max-w-8xl bg-base-200 rounded-box border-t border-l border-base-content/20 backdrop-blur-md
-      hover:border-blue-400 hover:shadow-[-5px_-5px_10px] shadow-blue-400/30 transition-all duration-500 delay-100 "
+      hover:border-primary hover:shadow-[-5px_-5px_10px] shadow-primary/30 transition-all duration-500 delay-100 "
       >
         <div className="flex items-center justify-between px-6 h-16">
           <div className="flex items-center gap-4 md:gap-8">
@@ -94,7 +94,7 @@ export function Header() {
                   className={`px-4 py-2 rounded-lg text-sm transition-all duration-200 cursor-pointer border 
                     ${
                       name === currentPage
-                        ? `bg-base-300 border-blue-400/50 shadow-[0_0_10px] shadow-blue-400/20 scale-105 `
+                        ? `bg-base-300 border-primary scale-105 `
                         : "hover:bg-base-content/15 text-base-content/80 border-transparent"
                     }`}
                 >

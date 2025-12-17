@@ -65,14 +65,14 @@ export default function ScrollLightPath({
 
   return (
     <>
-      <div className="absolute left-0 top-0 w-full h-full pointer-events-none">
+      <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-1 fadeIn">
         {/* PATH */}
         <svg
           viewBox="0 0 500 1200"
           preserveAspectRatio="none"
           style={{
             width: "95%",
-            height: "92%",
+            height: "90%",
             filter: `drop-shadow(0px 0px 15px var(--color-primary))`,
           }}
           className={`stroke-primary`}

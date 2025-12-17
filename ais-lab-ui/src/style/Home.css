@@ -1,5 +1,11 @@
 /* Home.css - Landing Page Animations */
 
+.fadeIn {
+  animation: fadeIn 2s ease-in-out both;
+  animation-delay: 2s;
+  will-change: opacity;
+}
+
 /* 1. Hero Section Animations */
 .hero-title {
   background: linear-gradient(to right, #ffffff 0%, #a5b4fc 100%);
@@ -24,16 +30,18 @@
   animation: height-reveal 2s ease-in-out both;
   animation-delay: 1s;
   opacity: 0.8;
+  overflow: hidden;
+  max-height: 0;
 }
 
 @keyframes height-reveal {
   from {
-    color: transparent;
-    height: 0;
+    max-height: 0;
+    opacity: 0;
   }
   to {
-    color: var(--color-base-content);
-    height: 7.5rem;
+    max-height: 200px;
+    opacity: 0.8;
   }
 }
 
