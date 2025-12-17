@@ -75,12 +75,12 @@ export function Header() {
         <div className="flex items-center justify-between px-6 h-16">
           <div className="flex items-center gap-4 md:gap-8">
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-2 cursor-pointer group"
               role="button"
               onClick={() => navigate("/")}
             >
-              <div className="p-1.5 bg-linear-120 from-blue-400 to-indigo-600 rounded-xl">
-                <BoxesIcon className="w-8 h-8 text-white" />
+              <div className="p-2 rounded-xl select-none pointer-events-none group-hover:scale-110 transition-transform duration-500">
+                <img src="/Logo.png" alt="logo" className="w-9 h-9" />
               </div>
               <span className="text-lg">AisLabUI</span>
             </div>
@@ -94,7 +94,7 @@ export function Header() {
                   className={`px-4 py-2 rounded-lg text-sm transition-all duration-200 cursor-pointer border 
                     ${
                       name === currentPage
-                        ? `bg-base-300 border-blue-400/50 shadow-[0_0_10px] shadow-blue-400/20 scale-105 translate-y-1`
+                        ? `bg-base-300 border-blue-400/50 shadow-[0_0_10px] shadow-blue-400/20 scale-105 `
                         : "hover:bg-base-content/15 text-base-content/80 border-transparent"
                     }`}
                 >

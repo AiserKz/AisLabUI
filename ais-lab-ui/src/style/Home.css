@@ -7,6 +7,7 @@
   background-clip: text;
   color: transparent;
   animation: hero-float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes hero-float {
@@ -19,8 +20,50 @@
   }
 }
 
+.hero-description {
+  animation: height-reveal 2s ease-in-out both;
+  animation-delay: 1s;
+  opacity: 0.8;
+}
+
+@keyframes height-reveal {
+  from {
+    color: transparent;
+    height: 0;
+  }
+  to {
+    color: var(--color-base-content);
+    height: 7.5rem;
+  }
+}
+
 .hero-scroll-indicator {
   animation: bounce 2s infinite;
+}
+.soft-edge::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    var(--color-base-200) 100%
+  );
+  content: "";
+  position: absolute;
+  top: -100px;
+  width: 100%;
+  height: 100px;
+}
+
+.soft-edge::before {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0) 0%,
+    var(--color-base-200) 100%
+  );
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  width: 100%;
+  height: 100px;
 }
 
 @keyframes bounce {
@@ -39,35 +82,160 @@
   }
 }
 
-/* 2. Scroll-Driven Text Highlight (About Section) */
-.scroll-text-highlight {
-  color: rgba(0, 0, 0, 0);
-  background: linear-gradient(
-    to right,
-    var(--color-base-content) 50%,
-    transparent 50%
-  );
-  background-size: 200% 100%;
-  background-position-x: 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  display: inline;
-
-  animation: text-fill linear both;
-  animation-timeline: view();
-  animation-range: entry 10% cover 80%;
+.scroll-zoom-animation {
+  height: 200dvh;
+  animation: zoom-animation linear both;
+  animation-timeline: view(20% 60%);
 }
 
-@keyframes text-fill {
+@keyframes zoom-animation {
+  from {
+    transform: scale(1);
+  }
   to {
-    background-position-x: 0%;
-    color: var(--color-base-content);
+    transform: scale(1);
+  }
+}
+
+.animate-border-pulse {
+  animation: border-pulse 6s ease-in-out infinite;
+  will-change: border-color;
+}
+
+@keyframes border-pulse {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-primary);
+  }
+}
+
+/* 2. Scroll-Driven Text Highlight (About Section) */
+.scroll-text-highlight {
+  position: relative;
+  background-image: linear-gradient(
+    to right,
+    var(--color-base-content) 0%,
+    var(--color-base-content) 50%,
+    transparent 50%,
+    transparent 100%
+  );
+
+  background-size: 200% 100%;
+  background-position: 100% 0;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+  display: inline;
+
+  animation: text-reveal linear both;
+  animation-timeline: view();
+  animation-range: entry 100% cover 100%;
+}
+/* .scroll-text-highlight::after {
+  content: "";
+  position: absolute;
+  right: -0.15em;
+  bottom: 0.05em;
+
+  width: 0.08em;
+  height: 1em;
+
+  background: var(--color-base-content);
+
+  opacity: 0;
+
+  animation: caret-show linear both, caret-blink 1s steps(1) infinite;
+  animation-timeline: view(), auto;
+  animation-range: cover 100% cover 100%, auto;
+} */
+
+@keyframes text-reveal {
+  to {
+    background-position: 0% 0;
+  }
+}
+
+@keyframes caret-show {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* card-show-carousel */
+
+.card-show-carousel {
+  animation: card-show linear both;
+  animation-timeline: view();
+  animation-range: entry 50% cover 90%;
+  perspective: 1200px;
+}
+
+@keyframes card-show {
+  from {
+    transform: translate3d(120%, 0, 500px);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.card-carousel-item {
+  transform-style: preserve-3d;
+  will-change: transform;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 8em;
+  height: 10em;
+  font-size: 3rem;
+  text-align: center;
+
+  animation: card-pop linear both;
+  animation-timeline: view();
+}
+.card-carousel-item:nth-child(1) {
+  animation-range: entry 40% cover 30%;
+}
+
+.card-carousel-item:nth-child(2) {
+  animation-range: entry 50% cover 40%;
+}
+
+.card-carousel-item:nth-child(3) {
+  animation-range: entry 60% cover 50%;
+}
+@keyframes card-pop {
+  from {
+    transform: translateZ(-400px) rotateY(45deg) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateZ(0) rotateY(0deg) scale(1);
+    opacity: 1;
   }
 }
 
 /* 3. Feature Cards Scroll Reveal */
 .feature-card {
   opacity: 0;
+
   transform: translateY(50px) scale(0.9);
   animation: feature-reveal linear both;
   animation-timeline: view();
@@ -81,21 +249,36 @@
   }
 }
 
+.feature-video {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.6s ease-out, filter 1s ease-out 0.3s;
+
+  filter: saturate(0);
+}
+
+.feature-video:hover {
+  opacity: 1;
+  filter: saturate(1);
+}
+
 /* 4. Parallax Background Elements */
 .parallax-bg-shape {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
   z-index: 0;
-  animation: shape-float 10s ease-in-out infinite alternate;
+  animation: shape-float 30s ease-in-out infinite alternate;
+  animation-delay: 2s;
 }
 
 @keyframes shape-float {
   0% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0);
   }
   100% {
-    transform: translate(30px, 30px) rotate(10deg);
+    transform: translate(70vw, 20vh);
   }
 }
 
@@ -119,36 +302,21 @@
   }
 }
 
-/* 6. 3D Component Demo Section */
-.component-demo-perspective {
-  perspective: 1000px;
-  transform-style: preserve-3d;
+/* WaveFloat */
+
+.animate-wave {
+  width: 200%;
+  animation: waveMove var(--wave-duration, 20s) var(--wave-delay, 0s)
+    ease-in-out infinite both;
+  will-change: transform;
 }
 
-.component-card-3d {
-  transform-style: preserve-3d;
-  animation: component-fly-in linear both;
-  animation-timeline: view();
-  animation-range: entry 0% cover 40%;
-}
-
-@keyframes component-fly-in {
-  from {
-    opacity: 0;
-    transform: translateZ(-500px) rotateX(45deg) translateY(100px);
+@keyframes waveMove {
+  0%,
+  100% {
+    transform: translateX(0);
   }
-  to {
-    opacity: 1;
-    transform: translateZ(0) rotateX(0deg) translateY(0);
+  50% {
+    transform: translateX(-50%);
   }
-}
-
-.component-float-delay-1 {
-  animation-delay: 0.1s;
-}
-.component-float-delay-2 {
-  animation-delay: 0.2s;
-}
-.component-float-delay-3 {
-  animation-delay: 0.3s;
 }
