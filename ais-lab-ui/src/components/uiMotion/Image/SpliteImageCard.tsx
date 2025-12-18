@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 function mapProgress(raw: number, start: number, end: number) {
   return Math.min(1, Math.max(0, (raw - start) / (end - start)));
@@ -32,45 +32,62 @@ export default function SpliteImageCard({
   item5,
 }: SpliteImageCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-
-  const [progress, setProgress] = useState<number>(0);
   const rawProgress = useMotionValue(0);
   const items = [item1, item2, item3, item4, item5];
 
   useEffect(() => {
+    let ticking = false; // флаг, чтобы ограничить обновления до одного на кадр
+
     function handleScroll() {
       if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
 
-      const viewportH = window.innerHeight;
-      const containerH = rect.height;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = ref.current!.getBoundingClientRect();
+          const viewportH = window.innerHeight;
+          const containerH = rect.height;
+          const animationRange = containerH - viewportH;
 
-      const animationRange = containerH - viewportH;
+          const raw = Math.min(1, Math.max(0, -rect.top / animationRange));
+          const p = mapProgress(raw, 0, 0.7);
+          rawProgress.set(p);
 
-      const raw = Math.min(1, Math.max(0, -rect.top / animationRange));
-      const p = mapProgress(raw, 0, 0.7); // от 0% до 80%
-      rawProgress.set(p);
-      setProgress(p);
+          ticking = false; // разрешаем следующее обновление
+        });
+        ticking = true; // пока ждём requestAnimationFrame, новые скроллы игнорируем
+      }
     }
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleScroll(); // вызов сразу для корректного состояния
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      // console.log("Изображение загружено заранее");
+    };
+  }, [src]);
 
   const getItem = (i: number) => items[i];
 
   const count = Math.max(2, Math.min(5, _count));
   // Тригеры прокрутки
-  const splitOffset = Math.max(0, progress - 0.2) * 50;
+  const splitOffset = useTransform(rawProgress, (p) => Math.max(0, p) * 50);
   const scale = useTransform(rawProgress, [0, 0.2], [1.1, 1]);
   const rotateMotion = useTransform(rawProgress, [0.5, 1], [0, 180]);
+  const isSplit = useTransform(splitOffset, (so) => so > 10);
 
   const center = (count - 1) / 2; // центральная карточка
 
   return (
     <div ref={ref} className={`relative h-[300dvh] w-full ${className} `}>
-      <div className="sticky" style={{ top: `${top}px` }}>
+      <div className="sticky" style={{ top: `${top}px`, perspective: 1000 }}>
         {/* Три части */}
         <motion.div
           className="absolute inset-0 flex items-start justify-center transition-all duration-500 ease-linear"
@@ -78,20 +95,26 @@ export default function SpliteImageCard({
         >
           <div className="flex">
             {Array.from({ length: count }).map((_, i) => {
-              const styleBorder =
-                splitOffset > 10
-                  ? "var(--radius-box)"
-                  : i === 0
-                  ? "var(--radius-box) 0 0 var(--radius-box)"
-                  : i === count - 1
-                  ? "0 var(--radius-box) var(--radius-box) 0"
-                  : "0";
-              const offsetX = Math.round((i - center) * splitOffset);
+              const borderRadius = useTransform(isSplit, (split) => {
+                if (split) return "var(--radius-box)";
+                if (i === 0) return "var(--radius-box) 0 0 var(--radius-box)";
+                if (i === count - 1)
+                  return "0 var(--radius-box) var(--radius-box) 0";
+                return i === center ? "0" : "0"; // центральная карточка без border-radius
+              });
+              const offsetX = useTransform(splitOffset, (so) =>
+                Math.round((i - center) * so)
+              );
+
+              const backOffsetX = useTransform(splitOffset, (so) =>
+                Math.round(-(i - center) * so)
+              );
 
               const bgPositionX = `${(i * 100) / (count - 1)}%`;
               const bgSize = `${count * 100}% auto`;
 
               const cardWidth = height / count + height * 0.4;
+              const transition = `border-radius 0.5s ease-in-out`;
 
               return (
                 <motion.div
@@ -103,33 +126,38 @@ export default function SpliteImageCard({
                   }}
                   className="relative"
                 >
-                  <div
-                    className=" bg-cover bg-center transition-all duration-300 object-cover"
+                  <motion.div
+                    className=" bg-cover bg-center object-cover"
                     style={{
                       backgroundImage: `url(${src})`,
                       width: cardWidth,
                       height,
                       backgroundPosition: `${bgPositionX} 0px`,
                       backgroundSize: bgSize,
-                      transform: `translateX(${offsetX}px)`,
+                      x: offsetX,
                       backfaceVisibility: "hidden",
-                      borderRadius: styleBorder,
+                      borderRadius: borderRadius,
+                      willChange: "transform",
+                      transition: transition,
                     }}
                   />
-                  <div
-                    className="absolute inset-0 flex items-center justify-center transition-all duration-300  backdrop-blur-sm"
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center backdrop-blur-sm"
                     style={{
                       width: cardWidth,
                       height,
-                      transform: `rotateY(180deg) translateX(${offsetX}px)`,
+                      x: backOffsetX,
                       backfaceVisibility: "hidden",
-                      borderRadius: styleBorder,
+                      rotateY: 180,
+                      borderRadius: borderRadius,
+                      willChange: "transform",
+                      transition: transition,
                     }}
                   >
                     {getItem(i) || (
                       <p className="text-5xl font-bold">{i + 1}</p>
                     )}
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}

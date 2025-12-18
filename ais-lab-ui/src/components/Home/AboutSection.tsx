@@ -57,7 +57,7 @@ export default function AboutSection() {
 
         {/* Split Image Card */}
         <SpliteImageCard
-          src="/card-bg.webp"
+          src="/card-bg50.webp"
           item1={
             <div
               className="h-full w-full flex flex-col justify-start p-6 space-y-5 relative border border-info/30 bg-base-200/70"
