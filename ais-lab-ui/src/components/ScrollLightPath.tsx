@@ -77,8 +77,26 @@ export default function ScrollLightPath({
           }}
           className={`stroke-primary`}
         >
+          <defs>
+            <linearGradient id="fadeGradient" x1={0} y1={0} x2={0} y2={1}>
+              <stop offset="0%" stopColor="white" stopOpacity="0" />
+              <stop offset="8%" stopColor="white" stopOpacity="1" />
+              <stop offset="90%" stopColor="white" stopOpacity="1" />
+              <stop offset="100%" stopColor="white" stopOpacity="0" />
+            </linearGradient>
+            <mask id="fadeMask">
+              <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="100%"
+                fill="url(#fadeGradient)"
+              />
+            </mask>
+          </defs>
           <motion.path
             ref={pathRaf}
+            mask="url(#fadeMask)"
             d={
               "M187.753 1.71814C187.753 1.71814 -50.7471 143.218 12.7531 223.718C76.2534 304.218 500.753 357.218 491.253 475.218C481.753 593.218 156.253 981.218 218.253 1102.22C280.253 1223.22 224.253 1919.72 174.253 1963.22"
             }

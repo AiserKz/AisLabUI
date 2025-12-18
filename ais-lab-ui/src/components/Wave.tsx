@@ -47,7 +47,7 @@ export default function Wave({
   return (
     <div
       className={`
-      absolute left-0 w-full overflow-hidden 
+      absolute left-0 w-full overflow-hidden
       ${position === "top" ? "top-0" : "bottom-0"}
       ${flipX && "scale-x-[-1]"}
       ${flipY && "scale-y-[-1]"}

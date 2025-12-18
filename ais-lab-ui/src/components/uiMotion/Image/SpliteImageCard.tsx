@@ -117,7 +117,7 @@ export default function SpliteImageCard({
                     }}
                   />
                   <div
-                    className="absolute inset-0 bg-base-300 flex items-center justify-center transition-all duration-300"
+                    className="absolute inset-0 flex items-center justify-center transition-all duration-300  backdrop-blur-sm"
                     style={{
                       width: cardWidth,
                       height,
