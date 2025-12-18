@@ -63,14 +63,15 @@ export default function ComponentView() {
   }
 
   const Component = item.component;
+  const isAnimated = type === "animations";
 
   return (
-    <div className="flex flex-col h-dvh bg-black text-base-content font-sans selection:bg-blue-500/30">
+    <div className="flex flex-col h-dvh text-base-content font-sans selection:bg-blue-500/30">
       {/* Header */}
-      <header className="h-16 border-b border-white/5 flex items-center px-6 justify-between bg-base-100/80 backdrop-blur-xl  relative">
+      <header className="h-16 border-b border-white/5 flex items-center px-6 justify-between bg-base-100/80 backdrop-blur-xl relative">
         <div className="flex items-center gap-4">
           <Link
-            to={type === "animations" ? "/animate" : "/native"}
+            to={isAnimated ? "/animate" : "/native"}
             className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 text-base-content/60 hover:text-white transition-all border border-transparent hover:border-white/5"
           >
             <ArrowLeft size={20} />
@@ -125,10 +126,12 @@ export default function ComponentView() {
         <div className="flex-1 relative flex items-center justify-center p-8 overflow-clip z-10">
           <div
             className={`relative w-full max-w-5xl flex items-center justify-center
-               ${type === "animations" ? "h-[170dvh]" : "h-screen"} 
+               ${isAnimated ? "h-[170dvh]" : "h-screen"} 
                `}
           >
-            <div className="absolute inset-0 bg-base-100/30 backdrop-blur-3xl rounded-3xl border border-white/5 shadow-2xl"></div>
+            {isAnimated && (
+              <div className="absolute inset-0 bg-base-100/30 backdrop-blur-3xl rounded-3xl border border-white/5 shadow-2xl" />
+            )}
 
             <div className="relative z-10 w-full h-full flex items-center justify-start overflow-clip p-12 custom-scrollbar">
               <Suspense fallback={<Loading />}>
@@ -149,7 +152,7 @@ export default function ComponentView() {
         </div>
 
         {/* Controls Sidebar */}
-        <div className="w-96 shrink-0 h-full max-h-screen border-l border-white/5 bg-base-100/80 backdrop-blur-xl relative z-20 shadow-[-10px_0_30px_rgba(0,0,0,0.5)]">
+        <div className="w-96 shrink-0 h-full max-h-screen border-l rounded-box border-white/5 bg-base-100/80 backdrop-blur-xl relative z-20 shadow-[-10px_0_30px_rgba(0,0,0,0.5)]">
           {item.controllers ? (
             <PropControls
               controls={item.controllers}

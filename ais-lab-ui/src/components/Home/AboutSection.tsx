@@ -7,7 +7,6 @@ export default function AboutSection() {
     <section className="py-32 relative pb-100 ">
       {/* Декоративные фоновые элементы */}
       <div className="absolute top-20 left-[5%] w-72 h-72 bg-info/8 rounded-full blur-xl pointer-events-none" />
-      <div className="absolute bottom-40 right-[10%] w-80 h-80 bg-accent/8 rounded-full blur-xl pointer-events-none" />
 
       {/* Плавающие декоративные точки */}
       <motion.div

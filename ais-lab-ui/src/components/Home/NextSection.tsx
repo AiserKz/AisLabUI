@@ -1,12 +1,59 @@
 import { motion, MotionValue, useTransform } from "framer-motion";
-import { Code, Layers, Terminal, Zap } from "lucide-react";
+import {
+  Code,
+  Layers,
+  Terminal,
+  Zap,
+  Palette,
+  Sparkles,
+  Box,
+  ArrowRight,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+
+// Данные для карточек модулей
+const modules = [
+  {
+    id: "native",
+    title: "NativeUi",
+    description: "Базовые компоненты",
+    icon: Box,
+    color: "primary",
+    bgGradient: "from-primary/20 via-primary/10 to-transparent",
+    borderColor: "border-primary/20 hover:border-primary/60",
+    particleColor: "bg-primary/30",
+    link: "/native",
+  },
+  {
+    id: "motion",
+    title: "MotionUi",
+    description: "Анимации и эффекты",
+    icon: Sparkles,
+    color: "info",
+    bgGradient: "from-info/20 via-info/10 to-transparent",
+    borderColor: "border-info/20 hover:border-info/60",
+    particleColor: "bg-info/30",
+    link: "/motion",
+  },
+  {
+    id: "theme",
+    title: "Theme",
+    description: "Темы и стили",
+    icon: Palette,
+    color: "warning",
+    bgGradient: "from-warning/20 via-warning/10 to-transparent",
+    borderColor: "border-warning/20 hover:border-warning/60",
+    particleColor: "bg-warning/30",
+    link: "/theme",
+  },
+];
 
 export default function NextSection({
   scrollProgress,
 }: {
   scrollProgress: MotionValue;
 }) {
-  const overlayY = useTransform(scrollProgress, [0, 0.3], ["100%", "0%"]);
+  const overlayY = useTransform(scrollProgress, [-0.1, 0.2], ["100%", "0%"]);
   return (
     <motion.section
       style={{ y: overlayY, willChange: "transform" }}
@@ -15,15 +62,14 @@ export default function NextSection({
               soft-edge
                flex items-center justify-start text-6xl font-black flex-col space-y-40"
     >
-      {/* Декоративные фоновые элементы - упрощены */}
-      <div className="absolute top-[10%] right-[10%] w-96 h-96 bg-primary/10 rounded-full blur-lg pointer-events-none" />
+      {/* Декоративные фоновые элементы */}
       <div className="absolute top-[40%] left-[5%] w-80 h-80 bg-info/10 rounded-full blur-lg pointer-events-none" />
 
       <div className="relative h-[150dvh] mt-200 ">
         {/* Плавающая иконка Code слева */}
         <div className="absolute -left-100">
           <motion.div
-            className="bg-purple-400 w-40 h-40 rounded-box flex items-center justify-center shadow-xl shadow-purple-400/20"
+            className="bg-purple-400 w-40 h-40 rounded-box flex items-center justify-center "
             animate={{ y: [0, 20, 0], rotate: [0, 10, 0, -10, 0] }}
             transition={{
               duration: 5,
@@ -38,7 +84,7 @@ export default function NextSection({
         {/* Плавающая иконка Zap справа */}
         <div className="absolute -right-80 top-20">
           <motion.div
-            className="bg-yellow-400 w-32 h-32 rounded-box flex items-center justify-center shadow-xl shadow-yellow-400/20"
+            className="bg-yellow-400 w-32 h-32 rounded-box flex items-center justify-center"
             animate={{ y: [0, -15, 0], rotate: [0, -8, 0, 8, 0] }}
             transition={{
               duration: 4,
@@ -54,7 +100,7 @@ export default function NextSection({
         {/* Плавающая иконка Layers */}
         <div className="absolute -left-60 top-80">
           <motion.div
-            className="bg-blue-400 w-24 h-24 rounded-box flex items-center justify-center shadow-xl shadow-blue-400/20"
+            className="bg-blue-400 w-24 h-24 rounded-box flex items-center justify-center"
             animate={{
               y: [0, 12, 0],
               x: [0, 8, 0],
@@ -74,7 +120,7 @@ export default function NextSection({
         {/* Плавающая иконка Terminal справа снизу */}
         <div className="absolute -right-50 top-100">
           <motion.div
-            className="bg-green-400 w-28 h-28 rounded-box flex items-center justify-center shadow-xl shadow-green-400/20"
+            className="bg-green-400 w-28 h-28 rounded-box flex items-center justify-center"
             animate={{
               y: [0, -10, 0],
               scale: [1, 1.05, 1],
@@ -115,9 +161,9 @@ export default function NextSection({
         </div>
       </div>
 
-      <div className="h-[200vh] w-full relative">
+      <div className="h-[150vh] w-full relative">
         {/* Заголовок для карусели */}
-        <div className="sticky top-10 text-center mb-8 z-10">
+        <div className="sticky top-20 text-center mb-8 z-10">
           <motion.h3
             className="text-sm font-bold tracking-widest text-primary uppercase mb-4"
             initial={{ opacity: 0, y: -20 }}
@@ -138,66 +184,118 @@ export default function NextSection({
           </motion.p>
         </div>
 
-        <div className=" flex items-center justify-center gap-6  card-show-carousel sticky top-40">
-          <div className="bg-primary rounded-box card-carousel-item overflow-clip group">
-            <span className="relative z-10 drop-shadow-lg transition-transform group-hover:scale-110">
-              NativeUi
-            </span>
-            <span className="absolute bottom-4 left-4 right-4 text-xs text-white/70 font-normal z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-              Базовые компоненты
-            </span>
-            <span className="absolute feature-video">
-              <video
-                src="https://play.vsthemes.org/fhd/56/72856.webm"
-                className="w-full h-full object-cover "
-                muted
-                loop
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => e.currentTarget.pause()}
-              ></video>
-            </span>
-          </div>
-          <div className="bg-info rounded-box card-carousel-item group overflow-clip">
-            <span className="relative z-10 drop-shadow-lg transition-transform group-hover:scale-110">
-              MotionUi
-            </span>
-            <span className="absolute bottom-4 left-4 right-4 text-xs text-white/70 font-normal z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-              Анимации и эффекты
-            </span>
-            <span className="absolute feature-video">
-              <video
-                src="https://cdn.pixabay.com/video/2024/03/26/205733-927672950_large.mp4"
-                className="w-full h-full object-cover "
-                muted
-                loop
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => e.currentTarget.pause()}
-              ></video>
-            </span>
-          </div>
-          <div className="bg-error rounded-box card-carousel-item group overflow-clip">
-            <span className="relative z-10 drop-shadow-lg transition-transform group-hover:scale-110">
-              Theme
-            </span>
-            <span className="absolute bottom-4 left-4 right-4 text-xs text-white/70 font-normal z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-              Темы и стили
-            </span>
-            <span className="absolute feature-video">
-              <video
-                src="https://cdn.pixabay.com/video/2024/12/19/247733_large.mp4"
-                className="w-full h-full object-cover "
-                muted
-                loop
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => e.currentTarget.pause()}
-              ></video>
-            </span>
-          </div>
+        {/* Новые легкие карточки модулей */}
+        <div className="flex items-center justify-center gap-8 sticky top-50 px-4 pb-10">
+          {modules.map((module, index) => {
+            const IconComponent = module.icon;
+            return (
+              <motion.div
+                key={module.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Link
+                  to={module.link}
+                  className={`group relative block w-72 h-96 rounded-3xl overflow-hidden 
+                    border-2 ${module.borderColor} bg-base-100/80 backdrop-blur-sm
+                    hover:scale-105 hover:shadow-2xl hover:shadow-${module.color}/20
+                    transition-all duration-500 cursor-pointer`}
+                >
+                  {/* Градиентный фон */}
+                  <div
+                    className={`absolute inset-0 bg-linear-to-br ${module.bgGradient} 
+                    opacity-50 group-hover:opacity-80 transition-opacity duration-500`}
+                  />
+
+                  {/* Анимированные частицы на фоне */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    {[...Array(6)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className={`absolute w-2 h-2 ${module.particleColor} rounded-full`}
+                        style={{
+                          left: `${15 + i * Math.random() * 40}%`,
+                          top: `${20 + (i % 3) * Math.random() * 40}%`,
+                        }}
+                        animate={{
+                          y: [0, -20, 0],
+                          opacity: [0.3, 0.7, 0.3],
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                          duration: 3 + i * 0.5,
+                          repeat: Infinity,
+                          delay: i * 0.3,
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Иконка */}
+                  <div className="absolute top-12 left-1/2 -translate-x-1/2">
+                    <motion.div
+                      className={`w-24 h-24 rounded-2xl bg-${module.color}/10 border border-${module.color}/30
+                        flex items-center justify-center group-hover:scale-130 
+                        transition-all duration-500`}
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      <IconComponent
+                        className={`w-12 h-12 text-${module.color}`}
+                      />
+                    </motion.div>
+                  </div>
+
+                  {/* Контент */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <h4 className="text-3xl font-bold mb-2 group-hover:scale-105 transition-transform">
+                      {module.title}
+                    </h4>
+                    <p className="text-base font-normal text-base-content/60 mb-4">
+                      {module.description}
+                    </p>
+
+                    {/* Кнопка */}
+                    <div
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                      bg-${module.color}/10 border border-${module.color}/30 text-sm font-medium
+                      group-hover:bg-${module.color}/20 transition-colors`}
+                    >
+                      <span className="text-base-content/80">Перейти</span>
+                      <ArrowRight
+                        className={`w-4 h-4 text-${module.color} group-hover:translate-x-1 transition-transform`}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Декоративные углы */}
+                  <div
+                    className={`absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-${module.color}/30 rounded-tl-lg 
+                    opacity-0 group-hover:opacity-100 transition-opacity`}
+                  />
+                  <div
+                    className={`absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-${module.color}/30 rounded-tr-lg 
+                    opacity-0 group-hover:opacity-100 transition-opacity`}
+                  />
+                  <div
+                    className={`absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-${module.color}/30 rounded-bl-lg 
+                    opacity-0 group-hover:opacity-100 transition-opacity`}
+                  />
+                  <div
+                    className={`absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-${module.color}/30 rounded-br-lg 
+                    opacity-0 group-hover:opacity-100 transition-opacity`}
+                  />
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Подсказка под каруселью */}
+        {/* Подсказка под карточками */}
         <motion.div
-          className="sticky top-[80vh] text-center"
+          className="sticky top-160 text-center mt-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -205,7 +303,7 @@ export default function NextSection({
         >
           <p className="text-base text-base-content/40 font-normal flex items-center justify-center gap-2">
             <span className="inline-block w-1 h-1 bg-base-content/40 rounded-full animate-pulse" />
-            Наведите на карточку для предпросмотра
+            Выберите модуль для начала работы
             <span className="inline-block w-1 h-1 bg-base-content/40 rounded-full animate-pulse" />
           </p>
         </motion.div>

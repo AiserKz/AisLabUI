@@ -1,22 +1,28 @@
 /* Home.css - Landing Page Animations */
 
 .fadeIn {
-  animation: fadeIn 2s ease-in-out both;
+  animation: fadeIn 1.5s ease-in-out both;
   animation-delay: 2s;
   will-change: opacity;
 }
 
 /* 1. Hero Section Animations */
-.hero-title {
-  background: linear-gradient(to right, #ffffff 0%, #a5b4fc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: hero-float 6s ease-in-out infinite;
-  will-change: transform;
+
+.hero-title-animate {
+  animation: svg-float 6s ease-in-out infinite;
 }
 
-@keyframes hero-float {
+.hero-title-animate path {
+  animation: svg-draw 4s ease-in-out both;
+
+  fill: none;
+  stroke: #a5b4fc;
+  stroke-width: 2px;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+}
+
+@keyframes svg-float {
   0%,
   100% {
     transform: translateY(0);
@@ -26,9 +32,29 @@
   }
 }
 
+@keyframes svg-draw {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 120;
+    stroke-dasharray: 100;
+  }
+
+  60% {
+    opacity: 1;
+    fill: transparent;
+  }
+
+  100% {
+    fill: var(--color-base-content);
+    stroke-dashoffset: 10;
+    stroke-dasharray: 20;
+    stroke-width: 0;
+  }
+}
+
 .hero-description {
   animation: height-reveal 2s ease-in-out both;
-  animation-delay: 1s;
+  animation-delay: 3s;
   opacity: 0.8;
   overflow: hidden;
   max-height: 0;
@@ -106,7 +132,8 @@
 }
 
 .animate-border-pulse {
-  animation: border-pulse 6s ease-in-out infinite;
+  border: 1px solid transparent;
+  animation: border-pulse 4s ease-in-out infinite;
   will-change: border-color;
 }
 
@@ -144,23 +171,6 @@
   animation-timeline: view();
   animation-range: entry 100% cover 100%;
 }
-/* .scroll-text-highlight::after {
-  content: "";
-  position: absolute;
-  right: -0.15em;
-  bottom: 0.05em;
-
-  width: 0.08em;
-  height: 1em;
-
-  background: var(--color-base-content);
-
-  opacity: 0;
-
-  animation: caret-show linear both, caret-blink 1s steps(1) infinite;
-  animation-timeline: view(), auto;
-  animation-range: cover 100% cover 100%, auto;
-} */
 
 @keyframes text-reveal {
   to {
@@ -182,61 +192,6 @@
   50.01%,
   100% {
     opacity: 0;
-  }
-}
-
-/* card-show-carousel */
-
-.card-show-carousel {
-  animation: card-show linear both;
-  animation-timeline: view();
-  animation-range: entry 50% cover 90%;
-  perspective: 1200px;
-}
-
-@keyframes card-show {
-  from {
-    transform: translate3d(120%, 0, 500px);
-  }
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-.card-carousel-item {
-  transform-style: preserve-3d;
-  will-change: transform;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 8em;
-  height: 10em;
-  font-size: 3rem;
-  text-align: center;
-
-  animation: card-pop linear both;
-  animation-timeline: view();
-}
-.card-carousel-item:nth-child(1) {
-  animation-range: entry 40% cover 30%;
-}
-
-.card-carousel-item:nth-child(2) {
-  animation-range: entry 50% cover 40%;
-}
-
-.card-carousel-item:nth-child(3) {
-  animation-range: entry 60% cover 50%;
-}
-@keyframes card-pop {
-  from {
-    transform: translateZ(-400px) rotateY(45deg) scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: translateZ(0) rotateY(0deg) scale(1);
-    opacity: 1;
   }
 }
 

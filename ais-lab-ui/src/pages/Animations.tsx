@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import { useNavigate } from "react-router-dom";
 import { Loading } from "@ui/index";
 import TitlePage from "@/components/TitlePage";
 import Section from "@/components/Section";
@@ -17,7 +16,6 @@ const AnimationShowcaseItem = React.memo(function AnimationShowcaseItem({
 }) {
   const Component = item.component;
   const isVideo = !!item.video;
-  const navigate = useNavigate();
 
   const PreviewContent = () => (
     <div className="w-full h-full flex items-center justify-center">
@@ -55,7 +53,7 @@ const AnimationShowcaseItem = React.memo(function AnimationShowcaseItem({
       className="h-full"
       preview={<PreviewContent />}
       padding={false}
-      onClick={() => navigate(`/view/animations/${item.id}`)}
+      to={`/view/animations/${item.id}`}
     />
   );
 

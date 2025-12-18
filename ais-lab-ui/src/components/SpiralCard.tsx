@@ -34,11 +34,11 @@ function SpiralCard({
 
   const scale = useTransform(t, [-0.3, 0, 1, 2], [0.6, 1, 1, 0.6]);
   const opacity = useTransform(t, [-0.4, -0.1, 1, 3], [0, 1, 1, 0.1]);
-  const zIndex = useTransform(t, [-0.4, 0.2], [-5, 10]);
+  const zIndex = useTransform(t, [-0.4, 0.2], [1, 10]);
 
   return (
     <motion.div
-      className="absolute w-82 h-54 border rounded-box bg-primary shadow-xl flex items-center justify-center font-semibold"
+      className="absolute rounded-box shadow-xl flex items-center justify-center"
       style={{
         transformStyle: "preserve-3d",
         translateX: x,

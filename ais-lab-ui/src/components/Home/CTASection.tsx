@@ -65,16 +65,28 @@ export default function CTASection() {
             Присоединяйтесь к будущему UI-разработки уже сегодня.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-              <Link
-                to="/native"
-                className="btn btn-primary btn-lg px-12 shadow-primary/40 shadow-[0_0_0px_0px] hover:shadow-[0_0_10px_4px] hover:shadow-primary/40 transition-shadow duration-600"
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Link to="/native" className="group relative">
+              <motion.div
+                className="relative px-8 py-4 rounded-box bg-base-200 font-bold text-lg
+                  overflow-hidden cursor-pointer shadow-[0_0_20px] shadow-transparent hover:shadow-primary/50 transition-shadow duration-500"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Смотреть компоненты
-                <ArrowRight className="ml-2" />
-              </Link>
-            </motion.div>
+                {/* Контент кнопки */}
+                <span className="relative flex items-center gap-3 z-1">
+                  <span>Начать</span>
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.span>
+                </span>
+
+                <div className="top-0 -right-5 absolute bg-primary/70 w-5 h-full z-0 group-hover:w-[130%] transition-all duration-700 ease-in-out delay-100"></div>
+              </motion.div>
+            </Link>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <a
                 href="https://github.com/AiserKz/AisLabUI"

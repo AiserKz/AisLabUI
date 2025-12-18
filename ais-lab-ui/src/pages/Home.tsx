@@ -4,10 +4,11 @@ import CTASection from "@/components/Home/CTASection";
 import FeatureSection from "@/components/Home/FeatureSection";
 import HeroSection from "@/components/Home/HeroSection";
 import NextSection from "@/components/Home/NextSection";
+import ScrollBarCustom from "@/components/ScrollBarCustom";
 import ScrollLightPath from "@/components/ScrollLightPath";
 
 import "@/style/Home.css";
-import { motion, useMotionValue } from "framer-motion";
+import { useMotionValue } from "framer-motion";
 import { ReactLenis, useLenis, type LenisRef } from "lenis/react";
 
 import { useEffect, useRef } from "react";
@@ -28,17 +29,23 @@ export default function Home() {
 
   const section1 = useRef({ start: 0, range: 0 });
   const section2 = useRef({ start: 0, range: 0 });
+
   useEffect(() => {
     const measureSection = (
       ref: React.RefObject<HTMLDivElement | null>,
       section: any
     ) => {
-      if (!ref.current) return; // обязательно проверяем
+      if (!ref.current) return;
       section.start = ref.current.offsetTop;
       section.range = ref.current.offsetHeight - window.innerHeight;
     };
 
-    // Инициализация сразу
+    const onResize = () => {
+      measureSection(containerRef, section1.current);
+      measureSection(containerComponentRef, section2.current);
+    };
+
+    // Инициализация
     measureSection(containerRef, section1.current);
     measureSection(containerComponentRef, section2.current);
 
@@ -52,17 +59,11 @@ export default function Home() {
     if (containerComponentRef.current)
       ro.observe(containerComponentRef.current);
 
-    window.addEventListener("resize", () => {
-      measureSection(containerRef, section1.current);
-      measureSection(containerComponentRef, section2.current);
-    });
+    window.addEventListener("resize", onResize);
 
     return () => {
       ro.disconnect();
-      window.removeEventListener("resize", () => {
-        measureSection(containerRef, section1.current);
-        measureSection(containerComponentRef, section2.current);
-      });
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
@@ -75,7 +76,6 @@ export default function Home() {
     scrollProgress.set(calcProgress(scroll, s1.start, s1.range));
 
     scrollY.set(calcProgress(scroll, s2.start, s2.range));
-    console.log(calcProgress(scroll, s2.start, s2.range));
   });
 
   return (
@@ -86,6 +86,9 @@ export default function Home() {
     >
       <div className="min-h-screen overflow-x-clip bg-base-100 text-base-content">
         <ScrollLightPath scrollY={currentScrollY} />
+
+        {/* Scroll Bar */}
+        <ScrollBarCustom scrollY={currentScrollY} disableNativeScrollbar />
 
         <div ref={containerRef} className="relative h-[600vh]">
           {/* 1. Hero Section */}
