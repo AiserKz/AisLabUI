@@ -38,7 +38,7 @@ export default function ComponentDemoSection({
       <svg
         aria-hidden="true"
         focusable="false"
-        className="absolute left-0 top-0 h-[95%]  w-24 md:w-94 pointer-events-none"
+        className="absolute left-0 top-0 h-[95%] w-24 md:w-94 pointer-events-none"
         viewBox="0 0 100 1000"
         preserveAspectRatio="none"
         fill="none"
@@ -121,32 +121,6 @@ export default function ComponentDemoSection({
         />
       </svg>
 
-      {/* Дополнительные тени для глубины пещеры */}
-      <div className="absolute left-0 top-0 h-full w-16 bg-linear-to-r from-base-300/50 to-transparent pointer-events-none z-5" />
-      <div className="absolute right-0 top-0 h-full w-16 bg-linear-to-l from-base-300/50 to-transparent pointer-events-none z-5" />
-
-      {/* Плавающие декоративные элементы по краям */}
-      <motion.div
-        className="absolute top-40 left-[30%] w-16 h-16 border-2 border-primary/15 rounded-2xl"
-        animate={{ rotate: [0, 90, 0], y: [0, -8, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute top-60 right-[40%] w-10 h-10 border border-secondary/20 rounded-full"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-[40%] left-[20%] w-6 h-6 bg-primary/10 rounded-lg"
-        animate={{ y: [0, 12, 0], rotate: [0, 45, 0] }}
-        transition={{ duration: 5, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-[35%] right-[30%] w-12 h-12 border border-accent/15 rounded-xl"
-        animate={{ rotate: [0, -45, 0], x: [0, 6, 0] }}
-        transition={{ duration: 7, repeat: Infinity }}
-      />
-
       <div className="container mx-auto px-4 h-[500dvh] relative z-10">
         {/* Улучшенный заголовок */}
         <motion.div
@@ -157,7 +131,7 @@ export default function ComponentDemoSection({
           viewport={{ once: true }}
         >
           {/* Фон заголовка с градиентом */}
-          <div className="absolute inset-0 bg-base-200/10 backdrop-blur-xs to-transparent rounded-box -z-10" />
+          <div className="absolute inset-0 bg-base-200/10  to-transparent rounded-box -z-10" />
 
           {/* Иконка над заголовком */}
           <motion.div

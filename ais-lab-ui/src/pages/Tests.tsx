@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-import UiCardsTest from "@/components/UiCardsTest";
 import TitlePage from "@/components/TitlePage";
 
 import { Button } from "@/components/ui";

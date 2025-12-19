@@ -4,39 +4,57 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+import type { LenisRef } from "lenis/react";
 
 import { useEffect, useRef, useState } from "react";
 
 interface ScrollBarCustomProps {
   scrollY: MotionValue;
+  lenisRef?: React.RefObject<LenisRef | null>;
   disableNativeScrollbar?: boolean;
 }
 
 export default function ScrollBarCustom({
   scrollY,
+  lenisRef,
   disableNativeScrollbar,
 }: ScrollBarCustomProps) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [trackSize, setTrackSize] = useState(0);
-  const [scrollRange, setScrollRange] = useState(1);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const trackSize = useRef<number>(0);
+  const scrollRange = useRef<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
   const thumbHeight = 60;
 
   // Трансформации для позиции
-  const thumbY = useTransform(scrollY, [0, scrollRange], [0, trackSize]);
-
+  const thumbY = useTransform(scrollY, (v) =>
+    Math.min(
+      trackSize.current,
+      Math.max(0, (v / scrollRange.current) * trackSize.current)
+    )
+  );
   // Процент прокрутки
-  const scrollPercent = useTransform(scrollY, [0, scrollRange], [0, 100]);
+  const scrollPercent = useTransform(
+    scrollY,
+    [0, scrollRange.current],
+    [0, 100]
+  );
   const displayPercent = useMotionValue(0);
 
   // Обновляем процент
   useEffect(() => {
+    let last = -1;
+
     const unsubscribe = scrollPercent.on("change", (v) => {
-      displayPercent.set(Math.round(v));
+      const next = Math.floor(v);
+      if (next !== last) {
+        last = next;
+        displayPercent.set(next);
+      }
     });
+
     return unsubscribe;
-  }, [scrollPercent, displayPercent]);
+  }, [scrollPercent]);
 
   // Скрытие нативного скроллбара
   useEffect(() => {
@@ -56,11 +74,13 @@ export default function ScrollBarCustom({
   // Измерение размеров
   useEffect(() => {
     const measure = () => {
-      setScrollRange(
-        Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)
+      scrollRange.current = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        1
       );
+
       if (trackRef.current) {
-        setTrackSize(trackRef.current.offsetHeight - thumbHeight);
+        trackSize.current = trackRef.current.offsetHeight - thumbHeight;
       }
     };
     measure();
@@ -74,25 +94,19 @@ export default function ScrollBarCustom({
 
     const rect = trackRef.current.getBoundingClientRect();
     const clickY = e.clientY - rect.top - thumbHeight / 2;
-    const percentage = Math.max(0, Math.min(1, clickY / trackSize));
-    const targetScroll = percentage * scrollRange;
+    const percentage = Math.max(0, Math.min(1, clickY / trackSize.current));
+    const targetScroll = percentage * scrollRange.current;
     scrollToSmooth(targetScroll);
   };
 
   // Плавный скролл для клика
   const scrollToSmooth = (position: number) => {
-    window.scrollTo({
-      top: position,
-      behavior: "smooth",
-    });
+    lenisRef?.current?.lenis?.scrollTo(position, { immediate: false });
   };
 
   // Мгновенный скролл для drag
   const scrollToInstant = (position: number) => {
-    window.scrollTo({
-      top: position,
-      behavior: "auto",
-    });
+    lenisRef?.current?.lenis?.scrollTo(position, { immediate: true });
   };
 
   // Drag логика
@@ -109,8 +123,8 @@ export default function ScrollBarCustom({
 
     const rect = trackRef.current.getBoundingClientRect();
     const dragY = e.clientY - rect.top - thumbHeight / 2;
-    const percentage = Math.max(0, Math.min(1, dragY / trackSize));
-    const targetScroll = percentage * scrollRange;
+    const percentage = Math.max(0, Math.min(1, dragY / trackSize.current));
+    const targetScroll = percentage * scrollRange.current;
 
     scrollToInstant(targetScroll);
   };
@@ -125,17 +139,9 @@ export default function ScrollBarCustom({
       ref={trackRef}
       className="fixed right-0 md:right-8 bottom-20 top-20 w-4 z-40 cursor-pointer group"
       onClick={handleTrackClick}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
     >
       {/* Трек */}
-      <motion.div
-        className="absolute inset-0 bg-base-content/10 rounded-full"
-        animate={{
-          opacity: isHovering || isDragging ? 0.4 : 0.15,
-        }}
-        transition={{ duration: 0.2 }}
-      />
+      <div className="absolute inset-0 bg-base-content/10 rounded-full group-hover:opacity-70 opacity-10 transition-opacity duration-200" />
 
       {/* Thumb */}
       <motion.div
@@ -145,12 +151,11 @@ export default function ScrollBarCustom({
           y: thumbY,
         }}
         animate={{
-          opacity: isDragging || isHovering ? 1 : 0.7,
-          scale: isDragging ? 1.15 : isHovering ? 1.08 : 1,
-          boxShadow:
-            isDragging || isHovering
-              ? "0 0 15px var(--color-primary)"
-              : "0 0 5px var(--color-primary)",
+          opacity: isDragging ? 1 : 0.7,
+          scale: isDragging ? 1.15 : 1,
+          boxShadow: isDragging
+            ? "0 0 15px var(--color-primary)"
+            : "0 0 5px var(--color-primary)",
         }}
         transition={{ duration: 0.15 }}
         onPointerDown={handleDragStart}
@@ -169,11 +174,11 @@ export default function ScrollBarCustom({
 
       {/* Процент */}
       <motion.div
-        className="absolute right-7 text-xs font-mono whitespace-nowrap pointer-events-none"
+        className="absolute right-7 text-xs font-mono whitespace-nowrap pointer-events-none "
         style={{ y: thumbY }}
         animate={{
-          opacity: isHovering || isDragging ? 0.8 : 0.3,
-          x: isHovering || isDragging ? 0 : 5,
+          opacity: isDragging ? 0.8 : 0.3,
+          x: isDragging ? 0 : 5,
         }}
         transition={{ duration: 0.2 }}
       >

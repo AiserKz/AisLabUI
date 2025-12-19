@@ -88,7 +88,11 @@ export default function Home() {
         <ScrollLightPath scrollY={currentScrollY} />
 
         {/* Scroll Bar */}
-        <ScrollBarCustom scrollY={currentScrollY} disableNativeScrollbar />
+        <ScrollBarCustom
+          scrollY={currentScrollY}
+          lenisRef={lenisRef}
+          disableNativeScrollbar
+        />
 
         <div ref={containerRef} className="relative h-[600vh]">
           {/* 1. Hero Section */}
