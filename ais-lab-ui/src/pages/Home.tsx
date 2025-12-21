@@ -8,6 +8,7 @@ import ScrollBarCustom from "@/components/ScrollBarCustom";
 import ScrollLightPath from "@/components/ScrollLightPath";
 
 import "@/style/Home.css";
+import useIsMobile from "@/utils/hooks/useIsMobile";
 import { useMotionValue } from "framer-motion";
 import { ReactLenis, useLenis, type LenisRef } from "lenis/react";
 
@@ -20,6 +21,7 @@ function calcProgress(scroll: number, start: number, range: number) {
 }
 
 export default function Home() {
+  const isMobile = useIsMobile();
   const lenisRef = useRef<LenisRef | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const containerComponentRef = useRef<HTMLDivElement>(null);
@@ -81,31 +83,38 @@ export default function Home() {
   return (
     <ReactLenis
       root
-      options={{ autoRaf: true, smoothWheel: true, lerp: 0.03 }}
+      options={{ autoRaf: true, smoothWheel: !isMobile, lerp: 0.03 }}
       ref={lenisRef}
     >
       <div className="min-h-screen overflow-x-clip bg-base-100 text-base-content">
-        <ScrollLightPath scrollY={currentScrollY} />
-
         {/* Scroll Bar */}
-        <ScrollBarCustom
-          scrollY={currentScrollY}
-          lenisRef={lenisRef}
-          disableNativeScrollbar
-        />
+        {!isMobile && (
+          <>
+            <ScrollLightPath scrollY={currentScrollY} />
+            <ScrollBarCustom
+              scrollY={currentScrollY}
+              lenisRef={lenisRef}
+              disableNativeScrollbar
+            />
+          </>
+        )}
 
         <div ref={containerRef} className="relative h-[600vh]">
           {/* 1. Hero Section */}
           <HeroSection scrollProgress={scrollProgress} />
           {/* Next Section */}
-          <NextSection scrollProgress={scrollProgress} />
+          <NextSection scrollProgress={scrollProgress} isMobile={isMobile} />
         </div>
 
         {/* 2. About Section (Split → Flip → Explain) */}
-        <AboutSection />
+        <AboutSection isMobile={isMobile} />
 
         {/* 3. 3D Component Demo Section */}
-        <ComponentDemoSection ref={containerComponentRef} scrollY={scrollY} />
+        <ComponentDemoSection
+          ref={containerComponentRef}
+          scrollY={scrollY}
+          isMobile={isMobile}
+        />
 
         {/* 4. Features Section (Scroll Reveal) */}
         <FeatureSection />

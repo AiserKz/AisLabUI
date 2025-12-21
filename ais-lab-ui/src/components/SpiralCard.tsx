@@ -38,7 +38,7 @@ function SpiralCard({
 
   return (
     <motion.div
-      className="absolute rounded-box shadow-xl flex items-center justify-center"
+      className="absolute rounded-box flex items-center justify-center will-change-transform"
       style={{
         transformStyle: "preserve-3d",
         translateX: x,

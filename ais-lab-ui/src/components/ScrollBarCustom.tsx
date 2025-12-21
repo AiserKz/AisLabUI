@@ -26,19 +26,14 @@ export default function ScrollBarCustom({
 
   const thumbHeight = 60;
 
+  const scrollProgress = useTransform(scrollY, () =>
+    scrollRange.current > 0 ? scrollY.get() / scrollRange.current : 0
+  );
+
   // Трансформации для позиции
-  const thumbY = useTransform(scrollY, (v) =>
-    Math.min(
-      trackSize.current,
-      Math.max(0, (v / scrollRange.current) * trackSize.current)
-    )
-  );
+  const thumbY = useTransform(scrollProgress, (v) => v * trackSize.current);
   // Процент прокрутки
-  const scrollPercent = useTransform(
-    scrollY,
-    [0, scrollRange.current],
-    [0, 100]
-  );
+  const scrollPercent = useTransform(scrollProgress, (p) => p * 100);
   const displayPercent = useMotionValue(0);
 
   // Обновляем процент
@@ -90,7 +85,7 @@ export default function ScrollBarCustom({
 
   // Клик на трек для навигации
   const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!trackRef.current) return;
+    if (!trackRef.current || isDragging) return;
 
     const rect = trackRef.current.getBoundingClientRect();
     const clickY = e.clientY - rect.top - thumbHeight / 2;
@@ -141,7 +136,12 @@ export default function ScrollBarCustom({
       onClick={handleTrackClick}
     >
       {/* Трек */}
-      <div className="absolute inset-0 bg-base-content/10 rounded-full group-hover:opacity-70 opacity-10 transition-opacity duration-200" />
+      <div
+        className="absolute inset-0 bg-base-content/10 rounded-full group-hover:opacity-40 opacity-10 transition-opacity duration-200"
+        style={{
+          opacity: isDragging ? 0.7 : undefined,
+        }}
+      />
 
       {/* Thumb */}
       <motion.div
@@ -149,13 +149,14 @@ export default function ScrollBarCustom({
         style={{
           height: thumbHeight,
           y: thumbY,
+          boxShadow: isDragging
+            ? "0 0 15px var(--color-primary)"
+            : "0 0 5px var(--color-primary)",
+          willChange: isDragging ? "transfrom" : "auto",
         }}
         animate={{
           opacity: isDragging ? 1 : 0.7,
           scale: isDragging ? 1.15 : 1,
-          boxShadow: isDragging
-            ? "0 0 15px var(--color-primary)"
-            : "0 0 5px var(--color-primary)",
         }}
         transition={{ duration: 0.15 }}
         onPointerDown={handleDragStart}
@@ -174,7 +175,7 @@ export default function ScrollBarCustom({
 
       {/* Процент */}
       <motion.div
-        className="absolute right-7 text-xs font-mono whitespace-nowrap pointer-events-none "
+        className="absolute right-7 text-xs font-mono whitespace-nowrap pointer-events-none"
         style={{ y: thumbY }}
         animate={{
           opacity: isDragging ? 0.8 : 0.3,

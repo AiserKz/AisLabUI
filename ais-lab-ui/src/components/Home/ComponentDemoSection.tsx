@@ -19,26 +19,28 @@ const viewComponents = [
 export default function ComponentDemoSection({
   scrollY,
   ref,
+  isMobile = false,
 }: {
   scrollY: MotionValue;
   ref: React.RefObject<HTMLDivElement | null>;
+  isMobile?: boolean;
 }) {
   return (
-    <section className="py-32 overflow-clip relative" ref={ref}>
+    <section className="py-32 overflow-clip relative h-fit" ref={ref}>
       <div className="absolute inset-0 bg-base-200" />
       <Wave
         position="top"
         flipY
         colorClass="fill-base-100"
         className="w-full"
-        animation
+        animation={!isMobile}
       />
 
-      {/* SVG Волна слева - эффект пещеры */}
+      {/* SVG Волна слева эффект пещеры */}
       <svg
         aria-hidden="true"
         focusable="false"
-        className="absolute left-0 top-0 h-[95%] w-24 md:w-94 pointer-events-none"
+        className="absolute left-0 top-0 h-[95%] w-24 md:w-94 pointer-events-none hidden md:block"
         viewBox="0 0 100 1000"
         preserveAspectRatio="none"
         fill="none"
@@ -79,11 +81,11 @@ export default function ComponentDemoSection({
         />
       </svg>
 
-      {/* SVG Волна справа - эффект пещеры */}
+      {/* SVG Волна справа эффект пещеры */}
       <svg
         aria-hidden="true"
         focusable="false"
-        className="absolute right-0 top-0 h-[95%] w-24 md:w-92 pointer-events-none z-10"
+        className="absolute right-0 top-0 h-[95%] w-24 md:w-92 pointer-events-none z-10 hidden md:block"
         viewBox="0 0 100 1000"
         preserveAspectRatio="none"
         fill="none"
@@ -121,10 +123,10 @@ export default function ComponentDemoSection({
         />
       </svg>
 
-      <div className="container mx-auto px-4 h-[500dvh] relative z-10">
+      <div className="container mx-auto px-4 h-fit md:h-[400dvh]  relative z-10">
         {/* Улучшенный заголовок */}
         <motion.div
-          className="text-center mb-16 relative"
+          className="text-center mb-16 relative backdrop-blur-xs"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -136,7 +138,8 @@ export default function ComponentDemoSection({
           {/* Иконка над заголовком */}
           <motion.div
             className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 mb-6"
-            animate={{ y: [0, -4, 0] }}
+            whileInView={{ y: [0, -4, 0] }}
+            viewport={{ once: true }}
             transition={{ duration: 3, repeat: Infinity }}
           >
             <Layers className="w-7 h-7 text-primary" />
@@ -168,52 +171,75 @@ export default function ComponentDemoSection({
           </div>
         </motion.div>
 
-        <div className="sticky top-50">
+        <div className="md:sticky top-50 md:top-50 ">
           <div
-            className="relative h-screen flex items-start justify-center "
-            style={{ perspective: "1600px" }}
+            className="relative min-h-screen h-full flex items-start justify-center flex-wrap gap-3"
+            style={{ perspective: isMobile ? "0px" : "1600px" }}
           >
-            {viewComponents.map((component, i) => (
-              <SpiralCard
-                radius={300}
-                key={i}
-                index={i + 1}
-                progress={scrollY}
-                speed={5}
-              >
-                <div className="relative w-84 h-54 group">
-                  {/* Улучшенный title блок */}
-                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-10">
-                    <div
-                      className="flex items-center gap-2 px-4 py-2 bg-base-100 rounded-full border border-base-content/10 shadow-lg 
-                    group-hover:scale-105 group-hover:-translate-y-2 transition-transform duration-300"
-                    >
-                      <span className="w-2 h-2 bg-primary rounded-full" />
-                      <h4 className="text-lg font-semibold whitespace-nowrap">
-                        {component.name}
-                      </h4>
-                    </div>
-                  </div>
-
-                  {/* Карточка с изображением */}
-                  <div className="absolute inset-0 overflow-clip w-full h-full rounded-box border border-base-content/10 shadow-xl group-hover:shadow-2xl group-hover:border-primary/30 transition-all duration-300">
+            {viewComponents.map((component, i) =>
+              isMobile ? (
+                <div
+                  key={i}
+                  className=" rounded-xl overflow-hidden border border-base-content/15 shadow-md bg-base-100 flex flex-col transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+                >
+                  {/* Изображение */}
+                  <div className="flex-1 overflow-hidden rounded-t-xl">
                     <img
                       src={component.image}
                       alt={component.name}
-                      className="object-cover w-full h-full object-center scale-150 group-hover:scale-[1.55] transition-transform duration-500"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                     />
-                    {/* Оверлей при ховере */}
-                    <div className="absolute inset-0 bg-linear-to-t from-base-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
-                  {/* Декоративные уголки */}
-                  <div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-primary/30 rounded-tl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute -top-1 -right-1 w-3 h-3 border-r-2 border-t-2 border-primary/30 rounded-tr opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l-2 border-b-2 border-primary/30 rounded-bl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute -bottom-1 -right-1 w-3 h-3 border-r-2 border-b-2 border-primary/30 rounded-br opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {/* Нижняя часть с названием */}
+                  <div className="px-4 py-2 bg-base-100 flex items-center justify-center">
+                    <span className="text-lg font-semibold text-base-content">
+                      {component.name}
+                    </span>
+                  </div>
                 </div>
-              </SpiralCard>
-            ))}
+              ) : (
+                <SpiralCard
+                  radius={isMobile ? 220 : 300}
+                  key={i}
+                  index={i + 1}
+                  progress={scrollY}
+                  speed={5}
+                >
+                  <div className="relative w-64 h-44 md:w-84 md:h-54 group">
+                    {/* Улучшенный title блок */}
+                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-10">
+                      <div
+                        className="flex items-center gap-2 px-4 py-2 bg-base-100 rounded-full border border-base-content/10 
+                    group-hover:scale-105 group-hover:-translate-y-2 transition-transform duration-300"
+                      >
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <h4 className="text-lg font-semibold whitespace-nowrap">
+                          {component.name}
+                        </h4>
+                      </div>
+                    </div>
+
+                    {/* Карточка с изображением */}
+                    <div className="absolute inset-0 overflow-clip w-full h-full rounded-box border border-base-content/10 shadow-primary/20 group-hover:shadow-xl group-hover:border-primary/30 transition-all duration-300">
+                      <img
+                        src={component.image}
+                        alt={component.name}
+                        className="object-cover w-full h-full object-center transform-gpu group-hover:scale-[1.55] transition-transform duration-500"
+                      />
+                      {/* Оверлей при ховере */}
+                      <div className="absolute inset-0 bg-linear-to-t from-base-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+
+                    {/* Декоративные уголки */}
+                    <div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-primary/30 rounded-tl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 border-r-2 border-t-2 border-primary/30 rounded-tr opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l-2 border-b-2 border-primary/30 rounded-bl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute -bottom-1 -right-1 w-3 h-3 border-r-2 border-b-2 border-primary/30 rounded-br opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </SpiralCard>
+              )
+            )}
           </div>
         </div>
       </div>

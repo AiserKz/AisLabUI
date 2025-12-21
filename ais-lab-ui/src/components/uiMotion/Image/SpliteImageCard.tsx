@@ -90,7 +90,7 @@ export default function SpliteImageCard({
       <div className="sticky" style={{ top: `${top}px`, perspective: 1000 }}>
         {/* Три части */}
         <motion.div
-          className="absolute inset-0 flex items-start justify-center transition-all duration-500 ease-linear"
+          className="absolute inset-0 flex items-start justify-center transition-all duration-500 ease-linear "
           style={{ scale }}
         >
           <div className="flex">
@@ -124,7 +124,7 @@ export default function SpliteImageCard({
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
                   }}
-                  className="relative"
+                  className="relative "
                 >
                   <motion.div
                     className=" bg-cover bg-center object-cover"
@@ -142,7 +142,7 @@ export default function SpliteImageCard({
                     }}
                   />
                   <motion.div
-                    className="absolute inset-0 flex items-center justify-center backdrop-blur-sm"
+                    className="absolute inset-0 flex items-center justify-center"
                     style={{
                       width: cardWidth,
                       height,

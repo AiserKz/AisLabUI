@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeSwithcer } from "./ThemeSwithcer";
 import useTitle from "../utils/hooks/useTitle";
 import { useScroll, useTransform, motion } from "motion/react";
+import useIsMobile from "@/utils/hooks/useIsMobile";
 
 const pages: Record<string, string> = {
   "/": "Главная",
@@ -24,8 +25,7 @@ export function Header() {
   );
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
-  const isMobile =
-    typeof window !== "undefined" ? window.innerWidth < 768 : false;
+  const isMobile = useIsMobile();
 
   const { scrollY } = useScroll();
   const width = useTransform(

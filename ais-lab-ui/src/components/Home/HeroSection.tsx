@@ -3,11 +3,14 @@ import { ArrowRight, Github, Zap, Box, Palette, Code } from "lucide-react";
 import { Link } from "react-router-dom";
 import TextLabelSvg from "../TextLabelSvg";
 import { BorderBeam } from "../ui";
+import { FloatingDecoration } from "../FloatingDecoration";
 
 export default function HeroSection({
   scrollProgress,
+  isMobile = false,
 }: {
   scrollProgress: MotionValue;
+  isMobile?: boolean;
 }) {
   const heroScale = useTransform(scrollProgress, [0, 0.7], [1, 0.92]);
   const heroOpacity = useTransform(scrollProgress, [0.2, 0.7], [1, 0.6]);
@@ -22,47 +25,82 @@ export default function HeroSection({
       <div className="absolute bottom-[25%] right-[15%] w-56 h-56 bg-primary/8 rounded-full blur-2xl pointer-events-none" />
 
       {/* Геометрические фигуры - организованы симметрично */}
-      <motion.div
-        className="absolute top-32 left-[8%] w-14 h-14 border-2 border-primary/15 rounded-2xl"
-        animate={{ rotate: [0, 180, 360], y: [0, -8, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      <FloatingDecoration
+        className="absolute top-[45%] left-[8%] w-14 h-14 border-2 border-primary/15 rounded-2xl"
+        duration={15}
+        loop
+        variants={{
+          visible: { y: [0, -8, 0], rotate: [0, 180, 360] },
+        }}
+        disable={isMobile}
       />
-      <motion.div
+      <FloatingDecoration
         className="absolute top-32 right-[8%] w-14 h-14 border-2 border-info/15 rounded-2xl"
-        animate={{ rotate: [360, 180, 0], y: [0, -8, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        duration={15}
+        loop
+        variants={{
+          visible: { rotate: [360, 180, 0], y: [0, -8, 0] },
+        }}
+        disable={isMobile}
       />
-      <motion.div
-        className="absolute bottom-[30%] left-[6%] w-10 h-10 border border-secondary/20 rounded-full"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity }}
+      <FloatingDecoration
+        className="absolute top-[65%] left-[6%] w-10 h-10 border border-primary/40 rounded-full"
+        duration={4}
+        loop
+        variants={{
+          visible: { scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] },
+        }}
+        disable={isMobile}
       />
-      <motion.div
-        className="absolute bottom-[30%] right-[6%] w-10 h-10 border border-accent/20 rounded-full"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+      <FloatingDecoration
+        className="absolute top-[50%] right-[6%] w-10 h-10 border border-accent/40 rounded-full"
+        duration={4}
+        loop
+        variants={{
+          visible: { scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] },
+        }}
+        disable={isMobile}
       />
 
       {/* Плавающие точки - симметрично */}
-      <motion.div
+      <FloatingDecoration
         className="absolute top-48 left-[18%] w-2 h-2 bg-primary/50 rounded-full"
-        animate={{ y: [0, -15, 0], opacity: [0.4, 0.8, 0.4] }}
-        transition={{ duration: 3, repeat: Infinity }}
+        duration={3}
+        loop
+        variants={{
+          visible: { y: [0, -15, 0], opacity: [0.4, 0.8, 0.4] },
+        }}
+        disable={isMobile}
       />
-      <motion.div
+      <FloatingDecoration
         className="absolute top-48 right-[18%] w-2 h-2 bg-info/50 rounded-full"
-        animate={{ y: [0, -15, 0], opacity: [0.4, 0.8, 0.4] }}
-        transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+        duration={3}
+        delay={1.5}
+        loop
+        variants={{
+          visible: { y: [0, -15, 0], opacity: [0.4, 0.8, 0.4] },
+        }}
+        disable={isMobile}
       />
-      <motion.div
-        className="absolute top-72 left-[12%] w-3 h-3 bg-secondary/40 rounded-full"
-        animate={{ y: [0, 12, 0], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+      <FloatingDecoration
+        className="absolute top-[30%] left-[12%] w-3 h-3 bg-primary/40 rounded-full"
+        duration={4}
+        delay={0.5}
+        loop
+        variants={{
+          visible: { y: [0, 12, 0], opacity: [0.3, 0.6, 0.3] },
+        }}
+        disable={isMobile}
       />
-      <motion.div
-        className="absolute top-72 right-[12%] w-3 h-3 bg-accent/40 rounded-full"
-        animate={{ y: [0, 12, 0], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+      <FloatingDecoration
+        className="absolute top-[35%] right-[12%] w-3 h-3 bg-accent/40 rounded-full"
+        duration={4}
+        delay={2}
+        loop
+        variants={{
+          visible: { y: [0, 12, 0], opacity: [0.3, 0.6, 0.3] },
+        }}
+        disable={isMobile}
       />
 
       <motion.div
@@ -88,8 +126,8 @@ export default function HeroSection({
           </div>
 
           {/* Заголовок*/}
-          <div className="w-full flex items-start justify-center py-5">
-            <div className="w-1/2 hero-title-animate">
+          <div className="w-full flex items-start justify-center py-10 md:py-5">
+            <div className="w-full md:w-1/2 hero-title-animate">
               <TextLabelSvg />
             </div>
           </div>
@@ -97,7 +135,7 @@ export default function HeroSection({
           {/* Структурированное описание */}
           <div className="max-w-2xl mx-auto space-y-4 hero-description ">
             <p className="text-xl md:text-2xl leading-relaxed text-base-content/80">
-              Премиальная библиотека компонентов
+              Библиотека готовых компонентов
             </p>
             <p className="text-base md:text-lg text-base-content/60 leading-relaxed">
               Расширяем возможности{" "}
@@ -108,7 +146,7 @@ export default function HeroSection({
           </div>
 
           {/* Мини-статистика */}
-          <div className="flex items-center justify-center gap-6 pt-2">
+          <div className="flex items-center justify-center gap-2 md:gap-4 pt-2">
             <div className="flex items-center gap-2 text-sm text-base-content/50">
               <Box className="w-4 h-4 text-primary" />
               <span>50+ компонентов</span>
@@ -195,25 +233,40 @@ export default function HeroSection({
           className="mt-16 relative max-w-4xl mx-auto perspective-1000"
         >
           {/* Декоративные углы */}
-          <motion.div
+          <FloatingDecoration
             className="absolute -top-3 -left-3 w-6 h-6 border-l-2 border-t-2 border-primary/40 rounded-tl-lg"
-            animate={{ opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            duration={2}
+            loop
+            variants={{
+              visible: { opacity: [0.4, 0.7, 0.4] },
+            }}
           />
-          <motion.div
+          <FloatingDecoration
             className="absolute -top-3 -right-3 w-6 h-6 border-r-2 border-t-2 border-info/40 rounded-tr-lg"
-            animate={{ opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+            duration={2}
+            delay={0.5}
+            loop
+            variants={{
+              visible: { opacity: [0.4, 0.7, 0.4] },
+            }}
           />
-          <motion.div
+          <FloatingDecoration
             className="absolute -bottom-3 -left-3 w-6 h-6 border-l-2 border-b-2 border-info/40 rounded-bl-lg"
-            animate={{ opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+            duration={2}
+            delay={1}
+            loop
+            variants={{
+              visible: { opacity: [0.4, 0.7, 0.4] },
+            }}
           />
-          <motion.div
+          <FloatingDecoration
             className="absolute -bottom-3 -right-3 w-6 h-6 border-r-2 border-b-2 border-primary/40 rounded-br-lg"
-            animate={{ opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+            duration={2}
+            delay={1.5}
+            loop
+            variants={{
+              visible: { opacity: [0.4, 0.7, 0.4] },
+            }}
           />
 
           <div

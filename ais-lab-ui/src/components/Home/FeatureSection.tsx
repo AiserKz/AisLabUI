@@ -2,27 +2,48 @@ import { motion } from "framer-motion";
 import FeatureCard from "../FeatureCard";
 import { Code, Layers, Zap } from "lucide-react";
 import Wave from "../Wave";
+import { FloatingDecoration } from "../FloatingDecoration";
 
 export default function FeatureSection() {
   return (
     <section className="py-44 relative overflow-clip z-10 bg-base-200">
-      <div className="bg-linear-60 from-primary/30 to-primary/80 w-full h-full absolute top-0 "></div>
+      <div className="bg-linear-60 from-primary/30 to-primary/80 w-full h-full absolute top-0"></div>
 
       {/* Плавающие декоративные элементы */}
-      <motion.div
+      <FloatingDecoration
         className="absolute top-32 left-[10%] w-20 h-20 border-2 border-white/20 rounded-2xl"
-        animate={{ rotate: [0, 90, 0], y: [0, -10, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
+        duration={8}
+        loop
+        variants={{
+          visible: {
+            rotate: [0, 90, 0],
+            y: [0, -10, 0],
+          },
+        }}
       />
-      <motion.div
-        className="absolute bottom-40 right-[15%] w-16 h-16 border-2 border-white/15 rounded-full"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ duration: 5, repeat: Infinity }}
+
+      <FloatingDecoration
+        className="absolute bottom-40 right-[15%] w-16 h-16 border-2 border-white/40 rounded-full"
+        duration={5}
+        loop
+        variants={{
+          visible: {
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
+          },
+        }}
       />
-      <motion.div
+
+      <FloatingDecoration
         className="absolute top-1/2 left-[5%] w-8 h-8 bg-white/10 rounded-lg"
-        animate={{ y: [0, 20, 0], rotate: [0, 45, 0] }}
-        transition={{ duration: 6, repeat: Infinity }}
+        duration={6}
+        loop
+        variants={{
+          visible: {
+            y: [0, 20, 0],
+            rotate: [0, 45, 0],
+          },
+        }}
       />
 
       <Wave delay={0} position="top" flipY animation />
@@ -44,7 +65,7 @@ export default function FeatureSection() {
           </p>
 
           {/* Статистика */}
-          <div className="flex items-center justify-center gap-8 mt-10">
+          <div className="flex items-center justify-center gap-2 md:gap-6 mt-10">
             <motion.div
               className="text-center"
               initial={{ opacity: 0, scale: 0.8 }}
