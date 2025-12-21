@@ -12,7 +12,7 @@ import useIsMobile from "@/utils/hooks/useIsMobile";
 import { useMotionValue } from "framer-motion";
 import { ReactLenis, useLenis, type LenisRef } from "lenis/react";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Fragment } from "react";
 
 function calcProgress(scroll: number, start: number, range: number) {
   if (range <= 0) return 0;
@@ -89,14 +89,14 @@ export default function Home() {
       <div className="min-h-screen overflow-x-clip bg-base-100 text-base-content">
         {/* Scroll Bar */}
         {!isMobile && (
-          <>
+          <Fragment>
             <ScrollLightPath scrollY={currentScrollY} />
             <ScrollBarCustom
               scrollY={currentScrollY}
               lenisRef={lenisRef}
               disableNativeScrollbar
             />
-          </>
+          </Fragment>
         )}
 
         <div ref={containerRef} className="relative h-[600vh]">

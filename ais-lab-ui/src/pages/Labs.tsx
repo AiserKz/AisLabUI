@@ -25,7 +25,7 @@ export default function Labs() {
       options={{ autoRaf: false, smoothWheel: true, lerp: 0.03 }}
       ref={lenisRef}
     >
-      <div className="w-full justify-center flex">
+      <div className="w-full justify-center flex overflow-clip">
         <div className="max-w-7xl w-full">
           <TitlePage title="Labs" description="Экспериментальные компоненты" />
           <ComingSoon
