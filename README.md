@@ -118,3 +118,10 @@ export default function App() {
 ## 📄 License
 
 MIT License. Built on top of [daisyUI](https://daisyui.com/).
+
+---
+
+## 📞 Contact
+
+You can contact me TG: https://t.me/aisblack.
+Email: aibekmiribekov0217@gmail.com
