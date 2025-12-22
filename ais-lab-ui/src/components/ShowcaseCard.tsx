@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { SparklesIcon } from "lucide-react";
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface ShowcaseCardProps {
   icon?: ReactNode;
@@ -9,7 +10,8 @@ interface ShowcaseCardProps {
   preview: ReactNode;
   category?: string;
   padding?: boolean;
-  onClick?: () => void;
+
+  to?: string;
   className?: string;
 }
 
@@ -29,7 +31,8 @@ export default function ShowcaseCard({
   preview,
   category,
   padding = true,
-  onClick,
+
+  to,
   className,
 }: ShowcaseCardProps) {
   return (
@@ -75,7 +78,7 @@ export default function ShowcaseCard({
         </div>
 
         {/* Content */}
-        <div className="card-body p-6 cursor-pointer" onClick={onClick}>
+        <Link to={to || "#"} className="card-body p-6 cursor-pointer">
           <div className="flex space-x-3 items-start">
             <div className="flex items-center justify-center bg-base-200/60 rounded-field p-3">
               {Icon || <SparklesIcon />}
@@ -91,7 +94,7 @@ export default function ShowcaseCard({
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-info via-primary to-primary opacity-0 group-hover:opacity-100 transition-all duration-300" />
-        </div>
+        </Link>
       </div>
     </div>
   );

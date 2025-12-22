@@ -41,7 +41,7 @@
   --size-field: 0.25rem;
   --border: 1px;
   --depth: 1;
-  --noise: 1;
+  --noise: 0;
 }
 
 h1,
@@ -59,14 +59,8 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-html::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
 html {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  scrollbar-color: var(--color-primary) var(--color-base-100);
 }
 
 .hide-scrollbar {

@@ -1,0 +1,357 @@
+/* 1. masked-image */
+.masked-image {
+  position: relative;
+  display: inline-block;
+}
+
+.masked-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  filter: none;
+  -webkit-mask-image: radial-gradient(
+    circle var(--radius) at var(--x) var(--y),
+    rgba(0, 0, 0, 1
+     ) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--radius) at var(--x) var(--y),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+}
+/* end masked-image */
+/* 2. motion-carousel */
+.motion-carousel {
+  overflow: hidden;
+
+  gap: 1em;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.motion-carousel-content-horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  padding-right: 1em;
+}
+
+.motion-carousel-content-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-bottom: 1em;
+}
+
+.motion-carousel-item {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@keyframes infinite-move-horizontal {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes infinite-move-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* end motion-carousel */
+
+/* 3. Text svg */
+
+.motion-text-svg {
+  animation: textContainer linear both;
+}
+
+@keyframes textContainer {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+.motion-text-svg path {
+  fill: transparent;
+  stroke: var(--color-base-content);
+  stroke-width: 7px;
+
+  filter: var(--filter-svg);
+
+  animation: svgAnimation both;
+  animation-timeline: var(--view-option);
+}
+
+@keyframes svgAnimation {
+  0% {
+    stroke-dashoffset: 120;
+    stroke-dasharray: 100;
+  }
+
+  60% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: var(--color-base-content);
+    stroke-dashoffset: 10;
+    stroke-dasharray: 10;
+    stroke-width: 0;
+  }
+}
+/* end Text svg */
+
+/* 4. Reveal text */
+.motion-reveal-text {
+  display: inline-flex;
+  gap: 0.05em;
+}
+
+.motion-reveal-text-content {
+  display: inline-block;
+  opacity: 0;
+
+  animation: revel-animation both;
+
+  animation-duration: 2s;
+}
+
+@keyframes revel-animation {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px) scale(1.2);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(10px) scale(0.9);
+    filter: blur(5px);
+  }
+}
+
+/* end Reveal text */
+
+/* 5. Blur to Focus Text */
+.motion-blur-focus {
+  text-align: center;
+  animation: motion-blur-focus-animation linear both;
+}
+
+@keyframes motion-blur-focus-animation {
+  from {
+    filter: blur(20px);
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  to {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* end Blur to Focus Text */
+
+/* 6. Perspective Tilt Scroll */
+.motion-perspective-tilt-card {
+  --perspective-value: 1000px;
+  perspective: var(--perspective-value);
+  animation: motion-tilt-scroll linear both;
+}
+
+@keyframes motion-tilt-scroll {
+  from {
+    transform: perspective(var(--perspective-value)) rotateX(100deg);
+  }
+  50% {
+    transform: perspective(var(--perspective-value)) rotateX(0deg);
+  }
+  to {
+    transform: perspective(var(--perspective-value)) rotateX(-45deg);
+  }
+}
+/* end Perspective Tilt Scroll */
+
+/* 7. Horizontal Scroll Simulation */
+.motion-horizontal-scroll-sim {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: motion-horizontal-move linear both;
+  animation-timeline: view();
+}
+
+@keyframes motion-horizontal-move {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+/* end Horizontal Scroll Simulation */
+
+/* 8. Zoom in on scroll */
+
+.motion-zoom-card {
+  animation: motion-zoomInScroll linear both;
+  transform-origin: center;
+  z-index: 10;
+}
+
+@keyframes motion-zoomInScroll {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(5);
+  }
+  100% {
+    transform: scale(5);
+  }
+}
+
+/* 9. Stack card Four */
+
+.motion-stack-card-container {
+  position: relative;
+  width: 100%;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.motion-stack-card {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: motion-spread linear both;
+  animation-timeline: view();
+  animation-range: entry var(--cardStack-startPercentage) cover
+    var(--cardStack-viewPercentage);
+  transform-origin: center 150%;
+}
+
+@keyframes motion-spread {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(var(--target-x)) translateY(var(--target-y))
+      rotate(var(--target-r));
+  }
+}
+
+.motion-stack-card:nth-child(1) {
+  --target-x: -260px;
+  --target-r: -15deg;
+  --target-y: 20px;
+  z-index: 1;
+}
+
+.motion-stack-card:nth-child(2) {
+  --target-x: -90px;
+  --target-r: -5deg;
+  --target-y: -10px;
+  z-index: 2;
+}
+
+.motion-stack-card:nth-child(3) {
+  --target-x: 90px;
+  --target-r: 5deg;
+  --target-y: -10px;
+  z-index: 2;
+}
+
+.motion-stack-card:nth-child(4) {
+  --target-x: 260px;
+  --target-r: 15deg;
+  --target-y: 20px;
+  z-index: 1;
+}
+
+/* end Stack card Four */
+
+/* 10. BlurTextInScroll */
+
+.motion-blur-in-scroll {
+  animation: motion-blurFade linear both;
+  animation-timeline: view(
+    var(--blurInScroll-viewPercentage) var(--blurInScroll-startPercentage)
+  );
+}
+@keyframes motion-blurFade {
+  0% {
+    filter: blur(10px);
+  }
+  35%,
+  45% {
+    filter: blur(0px);
+  }
+
+  90% {
+    filter: blur(10px);
+  }
+
+  100% {
+    filter: blur(5px);
+  }
+}
+/* end BlurTextInScroll */
+
+/* 11. FooterScollScale */
+
+.motion-footer-content {
+  position: sticky;
+
+  border-radius: 100% 100%;
+  animation: expandFooter linear both;
+  color: transparent;
+}
+
+@keyframes expandFooter {
+  0% {
+    border-radius: 100% 100% 0 0 / 200% 200% 0 0;
+    color: transparent;
+  }
+  50% {
+    width: 100%;
+    border-radius: 0% 0%;
+    color: transparent;
+  }
+  100% {
+    width: 100%;
+    border-radius: 0% 0%;
+    color: var(--color-base-content);
+  }
+}
+/* end FooterScollScale */

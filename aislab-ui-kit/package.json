@@ -1,0 +1,26 @@
+{
+  "name": "@aislab/ui-kit",
+  "version": "0.1.1",
+  "type": "module",
+  "bin": {
+    "aislab-ui": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "templates",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ui",
+    "tailwind",
+    "daisyui",
+    "framer-motion",
+    "cli"
+  ],
+  "author": "Aiser",
+  "license": "MIT",
+  "description": "Source-based UI kit built on top of Tailwind CSS and daisyUI"
+}

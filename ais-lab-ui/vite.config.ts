@@ -5,6 +5,9 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    host: true,
+  },
   resolve: {
     alias: {
       "@ui": path.resolve(__dirname, "src/components/ui"),
