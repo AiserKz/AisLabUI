@@ -16,7 +16,8 @@
 </p>
 
 ---
-
+### Npm [@aislab/ui-kit](https://www.npmjs.com/package/@aislab/ui-kit)
+---
 ## 🇷🇺 Русский (Russian)
 
 **Source-based UI Kit, построенный на базе Tailwind CSS и daisyUI.**  
