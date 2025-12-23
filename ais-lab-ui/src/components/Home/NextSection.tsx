@@ -73,69 +73,72 @@ export default function NextSection({
       <div className="absolute top-[40%] left-[5%] w-80 h-80 bg-info/10 rounded-full blur-lg pointer-events-none" />
 
       <div className="relative h-[150dvh] mt-200 ">
-        {/* Плавающая иконка Code слева */}
-        <div className="absolute -left-100">
-          <FloatingDecoration
-            className="bg-purple-400 w-40 h-40 rounded-box flex items-center justify-center shadow-lg shadow-purple-400/40"
-            duration={5}
-            loop
-            variants={{
-              visible: { y: [0, 20, 0], rotate: [0, 10, 0, -10, 0] },
-            }}
-          >
-            <Code className="w-20 h-20" />
-          </FloatingDecoration>
-        </div>
+        {!isMobile && (
+          <div>
+            {/* Плавающая иконка Code слева */}
+            <div className="absolute -left-1/3 hidden md:block">
+              <FloatingDecoration
+                className="bg-purple-400 w-40 h-40 rounded-box flex items-center justify-center shadow-lg shadow-purple-400/40"
+                duration={5}
+                loop
+                variants={{
+                  visible: { y: [0, 20, 0], rotate: [0, 10, 0, -10, 0] },
+                }}
+              >
+                <Code className="w-20 h-20" />
+              </FloatingDecoration>
+            </div>
 
-        {/* Плавающая иконка Zap справа */}
-        <div className="absolute -right-80 top-20">
-          <FloatingDecoration
-            className="bg-yellow-400 w-32 h-32 rounded-box flex items-center justify-center shadow-lg shadow-yellow-400/40"
-            duration={4}
-            delay={0.5}
-            loop
-            variants={{
-              visible: { y: [0, -15, 0], rotate: [0, -8, 0, 8, 0] },
-            }}
-          >
-            <Zap className="w-16 h-16" />
-          </FloatingDecoration>
-        </div>
+            {/* Плавающая иконка Zap справа */}
+            <div className="absolute -right-80 top-20 hidden md:block">
+              <FloatingDecoration
+                className="bg-yellow-400 w-32 h-32 rounded-box flex items-center justify-center shadow-lg shadow-yellow-400/40"
+                duration={4}
+                delay={0.5}
+                loop
+                variants={{
+                  visible: { y: [0, -15, 0], rotate: [0, -8, 0, 8, 0] },
+                }}
+              >
+                <Zap className="w-16 h-16" />
+              </FloatingDecoration>
+            </div>
 
-        {/* Плавающая иконка Layers */}
-        <div className="absolute -left-60 top-80">
-          <FloatingDecoration
-            className="bg-blue-400 w-24 h-24 rounded-box flex items-center justify-center shadow-lg shadow-blue-400/40"
-            duration={6}
-            delay={1}
-            loop
-            variants={{
-              visible: {
-                y: [0, 12, 0],
-                x: [0, 8, 0],
-                rotate: [0, 5, 0, -5, 0],
-              },
-            }}
-          >
-            <Layers className="w-12 h-12" />
-          </FloatingDecoration>
-        </div>
+            {/* Плавающая иконка Layers */}
+            <div className="absolute -left-60 top-80 hidden md:block">
+              <FloatingDecoration
+                className="bg-blue-400 w-24 h-24 rounded-box flex items-center justify-center shadow-lg shadow-blue-400/40"
+                duration={6}
+                delay={1}
+                loop
+                variants={{
+                  visible: {
+                    y: [0, 12, 0],
+                    x: [0, 8, 0],
+                    rotate: [0, 5, 0, -5, 0],
+                  },
+                }}
+              >
+                <Layers className="w-12 h-12" />
+              </FloatingDecoration>
+            </div>
 
-        {/* Плавающая иконка Terminal справа снизу */}
-        <div className="absolute -right-50 top-100">
-          <FloatingDecoration
-            className="bg-green-400 w-28 h-28 rounded-box flex items-center justify-center shadow-lg shadow-green-400/40"
-            duration={3}
-            delay={0.8}
-            loop
-            variants={{
-              visible: { y: [0, -10, 0], scale: [1, 1.05, 1] },
-            }}
-          >
-            <Terminal className="w-14 h-14" />
-          </FloatingDecoration>
-        </div>
-
+            {/* Плавающая иконка Terminal справа снизу */}
+            <div className="absolute -right-50 top-100 hidden md:block">
+              <FloatingDecoration
+                className="bg-green-400 w-28 h-28 rounded-box flex items-center justify-center shadow-lg shadow-green-400/40"
+                duration={3}
+                delay={0.8}
+                loop
+                variants={{
+                  visible: { y: [0, -10, 0], scale: [1, 1.05, 1] },
+                }}
+              >
+                <Terminal className="w-14 h-14" />
+              </FloatingDecoration>
+            </div>
+          </div>
+        )}
         <div className="containe mx-auto px-4 max-w-4xl sticky top-40">
           <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-8">
             О проекте
@@ -211,27 +214,26 @@ export default function NextSection({
 
                   {/* Анимированные частицы на фоне */}
                   <div className="absolute inset-0 overflow-hidden">
-                    {!isMobile &&
-                      [...Array(6)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className={`absolute w-2 h-2 ${module.particleColor} rounded-full`}
-                          style={{
-                            left: `${15 + i * Math.random() * 40}%`,
-                            top: `${20 + (i % 3) * Math.random() * 40}%`,
-                          }}
-                          animate={{
-                            y: [0, -20, 0],
-                            opacity: [0.3, 0.7, 0.3],
-                            scale: [1, 1.2, 1],
-                          }}
-                          transition={{
-                            duration: 3 + i * 0.5,
-                            repeat: Infinity,
-                            delay: i * 0.3,
-                          }}
-                        />
-                      ))}
+                    {[...Array(6)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className={`absolute w-2 h-2 ${module.particleColor} rounded-full`}
+                        style={{
+                          left: `${15 + i * Math.random() * 40}%`,
+                          top: `${20 + (i % 3) * Math.random() * 40}%`,
+                        }}
+                        animate={{
+                          y: [0, -20, 0],
+                          opacity: [0.3, 0.7, 0.3],
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                          duration: 3 + i * 0.5,
+                          repeat: Infinity,
+                          delay: i * 0.3,
+                        }}
+                      />
+                    ))}
                   </div>
 
                   {/* Иконка */}

@@ -27,6 +27,8 @@ const AnimationShowcaseItem = React.memo(function AnimationShowcaseItem({
           muted
           playsInline
           className="w-full h-full object-cover"
+          // onMouseEnter={(e) => e.currentTarget.play()}
+          // onMouseLeave={(e) => e.currentTarget.pause()}
         />
       ) : (
         <div className="w-full h-full flex items-center justify-center p-4">
