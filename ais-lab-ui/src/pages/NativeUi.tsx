@@ -1,5 +1,4 @@
 import React, { Suspense, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { Divider, Loading } from "@ui/index";
 
 import TitlePage from "@/components/TitlePage";
@@ -42,7 +41,6 @@ const helpMap: Record<string, string> = {
 
 const ShowcaseItem = React.memo(function ShowcaseItem({ c }: { c: any }) {
   const PreviewComponent = c.preview;
-  const navigate = useNavigate();
 
   return (
     <ShowcaseCard
@@ -51,7 +49,7 @@ const ShowcaseItem = React.memo(function ShowcaseItem({ c }: { c: any }) {
       category={c.category}
       className="h-full transition-transform hover:scale-[1.01]"
       icon={c.icon}
-      onClick={() => navigate(`/view/native/${c.id}`)}
+      to={`/view/native/${c.id}`}
       preview={
         <Suspense
           fallback={

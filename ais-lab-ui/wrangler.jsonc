@@ -1,0 +1,8 @@
+{
+  "name": "aislabui",
+  "compatibility_date": "2025-12-23",
+  "main": "src/index.ts",
+  "assets": {
+    "directory": "./dist"
+  }
+}

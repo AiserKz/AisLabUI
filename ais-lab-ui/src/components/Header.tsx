@@ -5,14 +5,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeSwithcer } from "./ThemeSwithcer";
 import useTitle from "../utils/hooks/useTitle";
 import { useScroll, useTransform, motion } from "motion/react";
+import useIsMobile from "@/utils/hooks/useIsMobile";
 
 const pages: Record<string, string> = {
   "/": "Главная",
-  "/labs": "Эксперименты",
-  "/animate": "Анимации",
   "/native": "Native UI",
+  "/animate": "Анимации",
   "/theme": "Темы",
-  "/tests": "Тесты",
+  "/labs": "Эксперименты",
+  // "/tests": "Тесты",
 };
 
 export function Header() {
@@ -24,8 +25,7 @@ export function Header() {
   );
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
-  const isMobile =
-    typeof window !== "undefined" ? window.innerWidth < 768 : false;
+  const isMobile = useIsMobile();
 
   const { scrollY } = useScroll();
   const width = useTransform(
@@ -65,22 +65,28 @@ export function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [mobileOpen]);
 
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value == "test" && location.pathname !== "/tests") {
+      navigate("/tests");
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 flex pt-4 justify-center z-50">
       <motion.nav
         style={{ width: width, opacity: fade, y: offset }}
         className="max-w-8xl bg-base-200 rounded-box border-t border-l border-base-content/20 backdrop-blur-md
-      hover:border-blue-400 hover:shadow-[-5px_-5px_10px] shadow-blue-400/30 transition-all duration-500 delay-100 "
+      hover:border-primary hover:shadow-[-5px_-5px_10px] shadow-primary/30 transition-all duration-500 delay-100 overflow-clip"
       >
         <div className="flex items-center justify-between px-6 h-16">
           <div className="flex items-center gap-4 md:gap-8">
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-2 cursor-pointer group"
               role="button"
               onClick={() => navigate("/")}
             >
-              <div className="p-1.5 bg-linear-120 from-blue-400 to-indigo-600 rounded-xl">
-                <BoxesIcon className="w-8 h-8 text-white" />
+              <div className="p-2 rounded-xl select-none pointer-events-none group-hover:scale-110 transition-transform duration-500">
+                <img src="/Logo.png" alt="logo" className="w-9 h-9" />
               </div>
               <span className="text-lg">AisLabUI</span>
             </div>
@@ -94,7 +100,7 @@ export function Header() {
                   className={`px-4 py-2 rounded-lg text-sm transition-all duration-200 cursor-pointer border 
                     ${
                       name === currentPage
-                        ? `bg-base-300 border-blue-400/50 shadow-[0_0_10px] shadow-blue-400/20 scale-105 translate-y-1`
+                        ? `bg-base-300 border-primary scale-105 `
                         : "hover:bg-base-content/15 text-base-content/80 border-transparent"
                     }`}
                 >
@@ -106,21 +112,22 @@ export function Header() {
 
           {/* правая сторона */}
           <div className="flex items-center gap-3">
-            <div className="relative hidden sm:block">
+            <div className="relative hidden sm:flex justify-end">
               <SearchCode className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-base-content/30" />
               <input
+                onChange={onChangeSearch}
                 type="text"
                 placeholder="Поиск компонентов..."
-                className="pl-10 pr-4 py-2 w-64 bg-white/5 border border-white/10 rounded-lg text-sm placeholder:text-base-content/30 focus:outline-none 
+                className="pl-10 pr-4 py-2 w-full bg-white/5 border border-white/10 rounded-lg text-sm placeholder:text-base-content/30 focus:outline-none 
                 focus:ring-1 focus:ring-blue-400 transition-all duration-200"
               />
             </div>
 
-            <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-3 ">
               <ThemeSwithcer />
-              <button className="p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:border-white/20">
+              {/* <button className="p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:border-white/20">
                 <Settings className="w-4 h-4" />
-              </button>
+              </button> */}
             </div>
 
             {/* Mobile hamburger */}
