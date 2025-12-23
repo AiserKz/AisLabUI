@@ -6,6 +6,7 @@ Source-based UI kit built on top of Tailwind CSS and daisyUI.
 
 - Tailwind CSS
 - daisyUI
+- Framer Motion (only motion components)
 
 ## Usage
 
